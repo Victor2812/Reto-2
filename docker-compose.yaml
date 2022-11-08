@@ -8,6 +8,7 @@ services:
       MYSQL_PASSWORD: Jm12345
     volumes:
       - db_data:/var/lib/mysql
+      - ./docker/aerbide.sql:/docker-entrypoint-initdb.d/sl_dump_file.sql
 
   web:
     build:
