@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db
--- Tiempo de generación: 08-11-2022 a las 11:13:15
+-- Tiempo de generación: 08-11-2022 a las 12:56:22
 -- Versión del servidor: 10.9.3-MariaDB-1:10.9.3+maria~ubu2204
 -- Versión de PHP: 8.0.25
 
@@ -156,7 +156,7 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `date` date NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp(),
   `points` int(11) NOT NULL DEFAULT 0,
   `job` varchar(64) DEFAULT NULL,
   `passwd` varchar(255) NOT NULL
