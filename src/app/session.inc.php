@@ -78,6 +78,7 @@ class SessionManager {
     // privilegios dentro de la aplicación.
     /**
      * Cambia el ID de la sesión sin eliminar la antigua
+     * @deprecated No funciona correctamente
      */
     public function regenerate() {
         // Crear la sesión nueva
@@ -108,7 +109,7 @@ class SessionManager {
      */
 
     public function get(string $key): mixed {
-        return $_SESSION[$key];
+        return array_key_exists($key, $_SESSION) ? $_SESSION[$key] : null;
     }
 
     /**
@@ -148,9 +149,9 @@ class SessionManager {
      */
     public function authenticate(UserEntity|null $user) {
         if ($user != null && is_int($user->getId())) {
-            $this->set('_uid', $user->getId(), true);
+            $this->set('_uid', $user->getId()); // debería ser crítico, pero está bug
         } else {
-            $this->del('_uid', true);
+            $this->del('_uid');                 // debería ser crítico, pero está bug
         }
     }
 

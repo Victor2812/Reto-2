@@ -8,4 +8,10 @@ echo "Hola mundo<br/>";
 
 include "views/login.view.php";
 
-print_r($session->isAuthenticated());
+if (!$session->isAuthenticated()) {
+    echo 'No estas autenticado';
+    $session->authenticate(UserRepository::getUserById(6));
+} else {
+    echo 'Ya estás autenticado';
+    $session->authenticate(null);
+}
