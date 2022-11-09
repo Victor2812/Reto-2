@@ -13,12 +13,18 @@ class SessionManager {
      */
     const RENEW_TIME =  15 * 60; // 15 mins
 
+    /**
+     * @var UserEntity|null
+    */
+    private $currentUser;
+
     public function __construct() {
         session_start();
 
         // comprobar expiración de la sesión
         $this->check_destroyed();
         $this->check_session_gc();
+        $this->get_current_user();
     }
 
     private function check_destroyed() {
@@ -60,13 +66,20 @@ class SessionManager {
         }
     }
 
+    private function get_current_user() {
+        $id = $this->get('_uid'); // User ID
+        if (is_int($id)) {
+            $this->currentUser = UserRepository::getUserById($id);
+        }
+    }
+
 
     // Se utiliza por motivos de seguridad sobre todo en el cambio de
     // privilegios dentro de la aplicación.
     /**
      * Cambia el ID de la sesión sin eliminar la antigua
      */
-    function regenerate() {
+    public function regenerate() {
         // Crear la sesión nueva
         $new_id = session_create_id();
         $this->set('_new_session', $new_id);
@@ -94,7 +107,7 @@ class SessionManager {
      * @return mixed El valor de la variable
      */
 
-    function get(string $key): mixed {
+    public function get(string $key): mixed {
         return $_SESSION[$key];
     }
 
@@ -104,7 +117,7 @@ class SessionManager {
      * @param mixed $value El valor de la variable
      * @param bool $critical Si la variable es crítica
      */
-    function set(string $key, mixed $value, bool $critical = false) {
+    public function set(string $key, mixed $value, bool $critical = false) {
         // Si los datos son criticos, cambiar de sesión y actualizar los datos en la nueva
         if ($critical) $this->regenerate();
         $_SESSION[$key] = $value;
@@ -112,10 +125,41 @@ class SessionManager {
 
     /**
      * Elimina una variable de la sesión
-     * @param $key El nombre de la variable
+     * @param string $key El nombre de la variable
+     * @param bool $critical Si la variable es crítica
      */
-    function del(string $key) {
+    public function del(string $key, bool $critical = false) {
+        // Si los datos son criticos, cambiar de sesión y actualizar los datos en la nueva
+        if ($critical) $this->regenerate();
         unset($_SESSION[$key]);
+    }
+
+    /**
+     * Obtiene el usuario actual
+     * @return UserEntity|null Usuario actual
+     */
+    public function getCurrentUser(): UserEntity|null {
+        return $this->currentUser;
+    }
+
+    /**
+     * Establece el usuario actual
+     * @param UserEntity|null $user Usuario actual
+     */
+    public function authenticate(UserEntity|null $user) {
+        if ($user != null && is_int($user->getId())) {
+            $this->set('_uid', $user->getId(), true);
+        } else {
+            $this->del('_uid', true);
+        }
+    }
+
+    /**
+     * Comprueba si el usuario está autenticado
+     * @return bool Si el usuario está autenticado o no
+     */
+    public function isAuthenticated(): bool {
+        return $this->currentUser != null;
     }
 }
 

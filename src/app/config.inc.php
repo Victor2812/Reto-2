@@ -27,3 +27,10 @@ ini_set('session.cookie_samesite',  'Strict');
 /*
     Configuración de la aplicación
 */
+
+define('DB_HOST', 'db');
+define('DB_NAME', 'aerbide');
+define('DB_USER', 'aerbide');
+define('DB_PASS', 'Jm12345');
+
+define('LOGIN_ROUTE', '');
