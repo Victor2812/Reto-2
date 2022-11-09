@@ -1,7 +1,7 @@
 <?php
 
 abstract class UserRepository {
-    public static function createNewUser(string $name, string $surname, string $job, string $passwd): UserEntity|null {
+    public static function createNewUser(string $username, string $name, string $surname, string $job, string $passwd): UserEntity|null {
         global $db;
 
         $sql = "INSERT INTO users (name, surname, job, passwd) VALUES (:name, :surname, :job, :passwd)";
@@ -38,6 +38,7 @@ abstract class UserRepository {
         if (($data = $statement->fetch())) {
             return new UserEntity(
                 $data['id'],
+                $data['username'],
                 $data['name'],
                 $data['surname'],
                 $data['image'],
@@ -55,20 +56,21 @@ abstract class UserRepository {
      * Obtiene un usuario por su nombre
      * @param string $name Nombre del usuario
      */
-    public static function getUserByName(string $name): UserEntity|null {
+    public static function getUserByUsername(string $username): UserEntity|null {
         global $db;
 
-        $sql = 'SELECT * FROM users WHERE name = :name';
+        $sql = 'SELECT * FROM users WHERE username = :name';
 
         $statement = $db->prepare($sql);
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         $statement->execute([
-            ':name' => $name
+            ':name' => $username
         ]);
 
         if (($data = $statement->fetch())) {
             return new UserEntity(
                 $data['id'],
+                $data['username'],
                 $data['name'],
                 $data['surname'],
                 $data['image'],

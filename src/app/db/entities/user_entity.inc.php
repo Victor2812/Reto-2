@@ -10,6 +10,11 @@ class UserEntity {
     /**
      * @var string
      */
+    private $username;
+    
+    /**
+     * @var string
+     */
     private $name;
 
     /**
@@ -42,9 +47,10 @@ class UserEntity {
      */
     private $passwd;
 
-    public function __construct(int $id, string $name, string|null $surname, string|null $image,
+    public function __construct(int $id, string $username, string $name, string|null $surname, string|null $image,
         int $date, int $points, string|null $job, string $passwd) {
             $this->id = $id;
+            $this->username = $username;
             $this->name = $name;
             $this->surname = $surname;
             $this->image = $image;
@@ -63,6 +69,22 @@ class UserEntity {
      */
     public function getId(): int {
         return $this->id;
+    }
+
+    /**
+     * Obtiene el nombre de usuario
+     * @return string Nombre de usuario
+     */
+    public function getUsername(): string {
+        return $this->username;
+    }
+
+    /**
+     * Establece el nombre de usuario
+     * @param string $newName Nombre de usuario
+     */
+    public function setUsername($newName) {
+        $this->username = $newName;
     }
 
     /**
