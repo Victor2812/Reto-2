@@ -1,12 +1,13 @@
 <?php
 
 abstract class UserRepository {
-    public static function createNewUser(string $username, string $name, string $surname, string $job, string $passwd): UserEntity|null {
+    public static function createNewUser(string $username, string $name, string|null $surname, string|null $job, string $passwd): UserEntity|null {
         global $db;
 
-        $sql = "INSERT INTO users (name, surname, job, passwd) VALUES (:name, :surname, :job, :passwd)";
+        $sql = "INSERT INTO users (username, name, surname, job, passwd) VALUES (:uname, :name, :surname, :job, :passwd)";
         $statement = $db->prepare($sql);
         $statement->execute([
+            ':uname' => $username,
             ':name' => $name,
             ':surname' => $surname,
             ':job' => $job,
