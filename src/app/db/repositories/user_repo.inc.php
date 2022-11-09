@@ -102,4 +102,34 @@ abstract class UserRepository {
             'id' =>         $user->getId()
         ]);
     }
+
+    public static function getFollowersCount(UserEntity $user) {
+        global $db;
+
+        $sql = 'SELECT count(source) FROM followers WHERE destination = :id';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            'id' => $user->getId()
+        ]);
+
+        $data = $statement->fetch();
+
+        return $data;
+    }
+
+    public static function getFollowingCount(UserEntity $user) {
+        global $db;
+
+        $sql = 'SELECT count(destination) FROM followers WHERE source = :id';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            'id' => $user->getId()
+        ]);
+
+        $data = $statement->fetch();
+
+        return $data;
+    }
 }
