@@ -33,4 +33,4 @@ define('DB_NAME', 'aerbide');
 define('DB_USER', 'aerbide');
 define('DB_PASS', 'Jm12345');
 
-define('LOGIN_ROUTE', '');
+define('LOGIN_ROUTE', '/login.php');
