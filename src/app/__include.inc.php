@@ -5,4 +5,4 @@
     archivos de la aplicación.
 */
 
-echo "Include de datos<br/>";
+//echo "Include de datos<br/>";

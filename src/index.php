@@ -4,6 +4,6 @@
 require_once "app/__include.inc.php";
 
 
-echo "Hola mundo<br/>";
+//echo "Hola mundo<br/>";
 
 include "views/login.view.php";

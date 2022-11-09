@@ -1,0 +1,110 @@
+:root {
+    --azul-oscuro: #05059d;
+    --azul-marino: #0158f8;
+    --azul-claro: #00a2db;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*PC login screen*/
+
+body {
+    background-color: var(--azul-oscuro);
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: larger;
+}
+
+.logo > img {
+    max-width: 60%;
+}
+
+.txt {
+    color: var(--azul-marino);
+    font-size: x-large;
+    font-weight: bold;
+    margin: 1em 0;
+}
+
+.contenedor_login {
+    background-image: url("../images/shape-desktop-login.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    overflow: hidden;
+    width: 70%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.registrarse {
+    display: flex;
+    justify-content:center;
+}
+
+.icon {
+    height: 50px;
+    background-color: white;
+    height: calc();
+}
+
+input[type="submit"] {
+    background-color: var(--azul-oscuro);
+    color: white;
+    font-size: large;
+}
+
+.formulario_login, input {
+    padding: .5em;
+    width: 50%;
+    appearance: none;
+    margin: 1em;
+}
+
+a {
+    color: var(--azul-oscuro);
+}
+
+/*Mobile login screen*/
+@media screen and (max-width: 768px) {
+    body {
+        background-color: pink;
+        color: white;
+    }
+
+    .contenedor_login {
+        background-image: none;
+        width: 85%;
+        height: 100vh;
+        justify-content: center;
+        background-color: var(--azul-oscuro);
+    }
+    
+    #contenedor > div {
+        padding: 2em;
+    }
+    
+    .logo {
+        background-image: url("../images/shape-movil-login.svg");
+        background-size: contain;
+        background-color: white;
+        overflow: hidden;
+    }
+
+    a {
+        color: white;
+    }
+
+    input[type="submit"] {
+        background-color: white;
+        color: var(--azul-oscuro);
+        padding: .5em;
+    }
+}
