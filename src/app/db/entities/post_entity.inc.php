@@ -47,38 +47,74 @@ class PostEntity {
             $this->author = $author;
     }
 
+    /**
+     * Obtiene el ID del post
+     * @return int ID
+     */
     public function getId(): int {
         return $this->id;
     }
 
+    /**
+     * Obtiene el título del post
+     * @return string Título
+     */
     public function getTitle(): string {
         return $this->title;
     }
 
+    /**
+     * Establece el título del post
+     * @param string $title Título
+     */
     public function setTitle(string $title) {
         $this->title = $title;
     }
 
+    /**
+     * Obtiene el texto del post
+     * @return string Texto
+     */
     public function getText(): string {
         return $this->text;
     }
 
+    /**
+     * Establece el texto del post
+     * @param string $text Texto
+     */
     public function setText(string $text) {
         $this->text = $text;
     }
 
+    /**
+     * Obtiene la categoría del post
+     * @return int Categoría
+     */
     public function getCategory(): int {
         return $this->categroy;
     }
 
+    /**
+     * Establece la categoría del post
+     * @param int $category Categoría
+     */
     public function setCategory(int $category) {
         $this->category = $category;
     }
 
+    /**
+     * Obtiene la fecha de creación del post
+     * @return DateTime Fecha
+     */
     public function getCreationDate(): DateTime {
         return $this->date;
     }
 
+    /**
+     * Obtiene el autor del post
+     * @return UserEntity Usuario
+     */
     public function getAuthor(): UserEntity {
         return $this->author;
     }
