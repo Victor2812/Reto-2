@@ -12,36 +12,30 @@ class UserEntity {
      */
     private $name;
 
-    
     /**
      * @var string
      */
     private $surname;
-
     
     /**
      * @var string
      */
     private $image;
 
-    
     /**
      * @var DateTime
      */
     private $date;
 
-    
     /**
      * @var int
      */
     private $points;
 
-    
     /**
      * @var string
      */
     private $job;
-
     
     /**
      * @var string
