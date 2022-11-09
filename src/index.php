@@ -8,10 +8,11 @@ echo "Hola mundo<br/>";
 
 include "views/login.view.php";
 
-if (!$session->isAuthenticated()) {
-    echo 'No estas autenticado';
-    $session->authenticate(UserRepository::getUserById(6));
+if ($user = UserRepository::getUserByUsername('gaizkx')) {
+    if (!$session->isAuthenticated()) {
+        $session->authenticate($user);
+    }
+    echo 'Estás autenticado';
 } else {
-    echo 'Ya estás autenticado';
-    $session->authenticate(null);
+    UserRepository::createNewUser('gaizkx', 'Gaizka', 'Guerrero', null, 'Jm12345');
 }
