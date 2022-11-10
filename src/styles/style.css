@@ -1,0 +1,119 @@
+:root {
+    --color-dark-blue: #05059d;
+    --color-medium-blue: #0158f8;
+    --color-light-blue: #00a2db;
+
+    --color-search-blue: #679bfb;
+
+    --color-light-grey: #f2f2f2;
+    --color-dark-grey: #b5b5b5;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    width: 100%;
+}
+
+header img.logo {
+    display: block;
+    max-width: 60%;
+
+    padding: 1.25rem 0;
+    margin: 0 auto;
+}
+
+header .navigation {
+    background-color: var(--color-medium-blue);
+    color: white;
+    display: flex;
+
+    flex-direction: column-reverse;
+    justify-content: space-between;
+
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+}
+
+header .navigation nav {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .navigation nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+header .navigation nav ul li a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header .navigation nav ul li a:hover,
+header .navigation nav ul li.selected a {
+    text-decoration: underline;
+}
+
+header .navigation .rightnav {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+}
+header .navigation .rightnav .search {
+    flex-grow: 1;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+header .navigation .rightnav .search input[type=text] {
+    background-color: var(--color-search-blue);
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+}
+
+header .navigation .rightnav .user button {
+    background: none;
+    border: none;
+    padding-left: 0.5rem;
+}
+
+header .navigation .rightnav .user button svg {
+    width: 2rem;
+    height: 2rem;
+    color: white;
+}
+
+@media screen and (min-width: 900px) {
+    header img.logo {
+        max-width: 35rem;
+    }
+
+    header .navigation {
+        flex-direction: row;
+    }
+
+    header .navigation nav {
+        margin-top: 0;
+        justify-content: flex-start;
+    }
+
+    header .navigation nav ul li {
+        padding-right: 2rem;
+    }
+}
