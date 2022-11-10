@@ -25,14 +25,16 @@
                     <div class="in">
                         <input type="text" placeholder="Usuario" id="log_user">
                     </div>
-                    <img src="../images/uncheck-blue.svg" alt="uncheck" class="icon" id="log_user_ck">
+                    <div class="icon">
+                        <?php include "images/uncheck.svg"; ?>
+                    </div>
                 </div>
                 <div class="login">
                     <label for=""><img src="../images/password-blue.svg" alt="svg_pass" class="icon"></label>
                     <div class="in">
                         <input type="text" placeholder="Password" id="log_pass">
                     </div>
-                    <img src="../images/uncheck-blue.svg" alt="uncheck" class="icon" id="log_pass_ck">
+                    <object data="../images/uncheck.svg" class="icon" id="log_pass_ck"></object>
                 </div>
                 <div class="registrarse">
                     <a href="">¿No tienes cuenta?</a>

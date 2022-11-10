@@ -36,7 +36,7 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     overflow: hidden;
-    width: 70%;
+    width: 65%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -55,6 +55,21 @@ body {
 
 .login .in {
     width: 40%;
+}
+
+.login .in input[type="text"] {
+    width: 70%;
+    background: transparent;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    color: var(--azul-oscuro);
+}
+
+.login .in input[type="text"]::placeholder {
+    color: var(--azul-marino);
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
 .login .in::after {
@@ -82,13 +97,15 @@ body {
 
 .icon {
     height: 40px;
-    background-color: white;
+    color: black;
+    fill: currentColor;
 }
 
 input[type="submit"] {
     background-color: var(--azul-oscuro);
     color: white;
     font-size: large;
+    font-weight: bold;
     border-radius: 50px;
     -moz-border-radius: 50px;
     -webkit-border-radius: 50px;
@@ -130,6 +147,10 @@ input[type="submit"]:hover {
         color: white;
     }
 
+    .icon {
+        color: #ffffff;
+    }
+
     .registrarse > a:hover {
         color: var(--azul-oscuro);
     }
@@ -157,7 +178,25 @@ input[type="submit"]:hover {
     }
 
     input[type="submit"]:hover {
-        background-color: var(--azul-oscuro);
+        background-color: var(--azul-marino);
         color: white;
     }
+
+    .login .in::after {
+        content: '';
+        background-color: white;
+        position: absolute;
+        height: .5rem;
+        width: 60%;
+        left: 20%;
+        bottom: 0;
+    }
+
+    .login .in input[type="text"]::placeholder {
+        color: white;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
 }
+
+/*Register screen desktop version*/
