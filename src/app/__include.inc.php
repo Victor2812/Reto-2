@@ -5,4 +5,7 @@
     archivos de la aplicación.
 */
 
-//echo "Include de datos<br/>";
+require_once "config.inc.php";
+require_once "db/__include.inc.php";
+require_once "session.inc.php";
+require_once "utils.inc.php";

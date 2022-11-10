@@ -18,6 +18,8 @@ services:
       - 8080:80
     volumes:
       - ./src:/var/www/html
+    depends_on:
+      - db
 
   phpmyadmin:
     image: phpmyadmin
