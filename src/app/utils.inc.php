@@ -25,3 +25,19 @@ function needs_authentication() {
         redirect(LOGIN_ROUTE);
     }
 }
+
+/**
+ * Incluye las views a la página
+ * @param array $views Lista de views a incluir
+ */
+function include_views(array $views) {
+    echo '<!DOCTYPE html><html lang="es"><head>';
+    include "views/partials/meta.html";
+    echo '</head><body>';
+
+    foreach ($views as $view) {
+        include $view;
+    }
+
+    echo '</body></html>';
+}
