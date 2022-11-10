@@ -20,13 +20,19 @@
                 <div class="txt">
                     <p>Inicia sesión con tu cuenta</p>
                 </div>
-                <div class="log">
+                <div class="login">
                     <label for=""><img src="../images/user-blue.svg" alt="svg_user" class="icon"></label>
-                    <input type="text" placeholder="Usuario">
+                    <div class="in">
+                        <input type="text" placeholder="Usuario" id="log_user">
+                    </div>
+                    <img src="../images/uncheck-blue.svg" alt="uncheck" class="icon" id="log_user_ck">
                 </div>
-                <div class="log">
+                <div class="login">
                     <label for=""><img src="../images/password-blue.svg" alt="svg_pass" class="icon"></label>
-                    <input type="text" placeholder="Password">
+                    <div class="in">
+                        <input type="text" placeholder="Password" id="log_pass">
+                    </div>
+                    <img src="../images/uncheck-blue.svg" alt="uncheck" class="icon" id="log_pass_ck">
                 </div>
                 <div class="registrarse">
                     <a href="">¿No tienes cuenta?</a>
@@ -37,6 +43,24 @@
             </form>
         </div>
     </div>
+    <script>
+        //document.getElementById("enviar").addEventListener('click', validar);
+
+        let nom = document.getElementById("log_user");
+        let pass = document.getElementById("log_pass");
+        let num_ck = document.getElementById("log_user_ck");
+        let pass_ck = document.getElementById("log_pass_ck");
+
+        //validations
+        let regExNom = new RegExp("^[A-Z]{1}[a-z]+$");
+        let regExPass = new RegExp("[A-Za-z0-9]+$");
+
+        //fuction activates when lost focus on the inputs of the form
+        nom.addEventListener('onBlur', validar);
+
+
+
+    </script>
 </body>
 </html>
 
