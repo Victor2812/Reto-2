@@ -87,7 +87,25 @@ abstract class PostRepository {
         return null;
     }
 
-    // obtener posts paginados
+    public static function getLastPosts(int $offset = 0, int $limit = 15): array {
+        global $db;
+
+        $sql = "SELECT * FROM posts ORDER BY creation_date DESC LIMIT $offset, $limit;";
+
+        $posts = [];
+
+        $statement = $db->prepare($sql);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute();
+
+        while (($data = $statement->fetch())) {
+            if ($p = self::getPostFromData($data)) {
+                $posts[] = $p;
+            }
+        }
+
+        return $posts;
+    }
 
     // actualizar
 }

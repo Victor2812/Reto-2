@@ -61,7 +61,7 @@ abstract class TagRepository {
 
         $tags = [];
 
-        $sql = 'SELECT * FROM tags t, tagged g WHERE t.id = g.tag AND g.post = :post';
+        $sql = 'SELECT t.* FROM tags t, tagged g WHERE t.id = g.tag AND g.post = :post';
         $statement = $db->prepare($sql);
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         $statement->execute([
