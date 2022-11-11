@@ -54,15 +54,13 @@
                         </div>
                     </div>
                     <div class="check_accept">
-                        <div>
-                            <input type="checkbox" name="ck_condition" class="checkbox">
-                        </div>                      
-                        <div>
-                            <label for="">Acepto que mis datos sean incluidos en la base de datos</label>
+                        <div class="checkbox">
+                            <input type="checkbox" name="ck_condition" id="ck_registro">
+                            <label for="ck_registro">Acepto que mis datos sean incluidos en la base de datos</label>
                         </div>
                     </div>
                     <div class="register">
-                        <input type="submit" class="checkbox" name="register" value="Regístrate">
+                        <input type="submit" name="register" value="Regístrate">
                     </div>
                     <div class="init_sesion">
                         <button class="iniciar">Iniciar sesión</button>
