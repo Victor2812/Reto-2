@@ -164,4 +164,51 @@ abstract class PostRepository {
             ]);
         }
     }
+
+    public static function getUserBookmarkedPosts(UserEntity $user): array {
+        global $db;
+
+        $posts = [];
+
+        $sql = 'SELECT p.* FROM posts p, bookmarks b WHERE b.user = :user AND p.id = b.post';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':user' =>         $user->getId()
+        ]);
+
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        while (($data = $statement->fetch())) {
+            if ($post = self::getPostFromData($data)) {
+                $posts[] = $post;
+            }
+        }
+
+        return $posts;
+    }
+
+    public static function addPostToUserBookmark(PostEntity $post, UserEntity $user) {
+        global $db;
+
+        // Esta sentencia actualiza el bookmark, y si ya existe, no hace nada
+        $sql = 'INSERT INTO bookmarks (user, post) VALUES (:user, :post) ON DUPLICATE KEY UPDATE post=:post';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':user' =>          $user->getId(),
+            ':post' =>          $post->getId()
+        ]);
+    }
+
+    public static function removeBookmarkedPost(PostEntity $post, UserEntity $user) {
+        global $db;
+
+        $sql = 'DELETE FROM bookmarks WHERE user=:user AND post=:post';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':user' =>          $user->getId(),
+            ':post' =>          $post->getId()
+        ]);
+    }
 }
