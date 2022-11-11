@@ -19,7 +19,7 @@ class PostEntity {
 
     /**
      * TODO
-     * @var int
+     * @var CategoryEntity
      */
     private $category;
 
@@ -38,7 +38,7 @@ class PostEntity {
      */
     private $tags;
 
-    public function __construct(int $id, string $title, string $text, int $category,
+    public function __construct(int $id, string $title, string $text, CategoryEntity $category,
         int $date, UserEntity $author, array $tags) {
 
             $this->id = $id;
@@ -95,17 +95,17 @@ class PostEntity {
 
     /**
      * Obtiene la categoría del post
-     * @return int Categoría
+     * @return CategoryEntity Categoría
      */
-    public function getCategory(): int {
+    public function getCategory(): CategoryEntity {
         return $this->categroy;
     }
 
     /**
      * Establece la categoría del post
-     * @param int $category Categoría
+     * @param CategoryEntity $category Categoría
      */
-    public function setCategory(int $category) {
+    public function setCategory(CategoryEntity $category) {
         $this->category = $category;
     }
 

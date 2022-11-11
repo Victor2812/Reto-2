@@ -56,6 +56,29 @@ abstract class TagRepository {
         return null;
     }
 
+    public static function getTagsByPostId(int $postId): array {
+        global $db;
+
+        $tags = [];
+
+        $sql = 'SELECT * FROM tags t, tagged g WHERE t.id = g.tag AND g.post = :post';
+        $statement = $db->prepare($sql);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute([
+            ':post' => $postId
+        ]);
+
+        while (($data = $statement->fetch())) {
+            $tags[] = new TagEntity(
+                intval($data['id']),
+                $data['name'],
+                intval($data['counter'])
+            );
+        }
+        
+        return $tags;
+    }
+
     public static function update(TagEntity $tag) {
         global $db;
 

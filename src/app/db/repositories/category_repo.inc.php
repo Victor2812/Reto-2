@@ -1,7 +1,7 @@
 <?php
 
 
-abstract class CategoryRepo {
+abstract class CategoryRepository {
     /**
      * Obtener una categoría por su Id
      * @param int $id Id de la categoría
