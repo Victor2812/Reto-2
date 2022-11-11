@@ -41,3 +41,11 @@ function include_views(array $views) {
 
     echo '</body></html>';
 }
+
+function current_file() {
+    return $_SERVER['SCRIPT_NAME'];
+}
+
+function get_method() {
+    return $_SERVER['REQUEST_METHOD'];
+}
