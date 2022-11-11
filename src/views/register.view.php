@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="register">
-                        <input type="submit" name="register" value="Regístrate">
+                        <input type="submit" class="checkbox" name="register" value="Regístrate">
                     </div>
                     <div class="init_sesion">
                         <button class="iniciar">Iniciar sesión</button>
