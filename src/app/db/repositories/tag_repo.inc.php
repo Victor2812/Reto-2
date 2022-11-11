@@ -56,6 +56,19 @@ abstract class TagRepository {
         return null;
     }
 
+    public static function update(TagEntity $tag) {
+        global $db;
+
+        $sql = 'UPDATE tags SET name=:name, counter=:counter WHERE id = :id';
+    
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            'name' =>       $tag->getName(),
+            'counter' =>    $tag->getCounter(),
+            'id' =>         $tag->getId()
+        ]);
+    }
+
     /**
      * Comprueba si una etiqueta existe
      * @return bool

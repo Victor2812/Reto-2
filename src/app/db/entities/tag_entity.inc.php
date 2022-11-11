@@ -36,7 +36,7 @@ class TagEntity {
      * @return string Nombre
      */
     public function getName(): string {
-        return $this->title;
+        return $this->name;
     }
 
     /**
@@ -60,6 +60,9 @@ class TagEntity {
      * @param int $counter Valor
      */
     public function addCounter(int $counter) {
-        $this->counter += $counter;
+        // Una etiqueta no puede usarse menos de 0 veces
+        if ($this->counter + $counter >= 0) {
+            $this->counter += $counter;
+        }
     }
 }
