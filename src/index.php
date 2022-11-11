@@ -3,6 +3,6 @@
 require_once "app/__include.inc.php";
 
 include_views([
-    "views/login.view.php"
+    "views/register.view.php"
 ]);
 ?>
