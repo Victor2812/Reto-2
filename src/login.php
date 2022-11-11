@@ -2,6 +2,11 @@
 // Esta sentencia es obligatoria en cada archivo PHP de entrada (no views)
 require_once "app/__include.inc.php";
 
+// Un usuario autenticado no puede acceder a esta página
+if ($session->isAuthenticated()) {
+    redirect('/index.php');
+}
+
 if (get_method() == 'POST') {
 
     // comprobar si los datos existen para evitar posibles errores
