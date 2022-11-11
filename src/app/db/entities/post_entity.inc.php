@@ -33,8 +33,13 @@ class PostEntity {
      */
     private $author;
 
+    /**
+     * @var array
+     */
+    private $tags;
+
     public function __construct(int $id, string $title, string $text, int $category,
-        int $date, UserEntity $author) {
+        int $date, UserEntity $author, array $tags) {
 
             $this->id = $id;
             $this->title = $title;
@@ -45,6 +50,7 @@ class PostEntity {
             $this->date->setTimeStamp($date);
 
             $this->author = $author;
+            $this->tags = $tags;
     }
 
     /**
@@ -117,6 +123,22 @@ class PostEntity {
      */
     public function getAuthor(): UserEntity {
         return $this->author;
+    }
+
+    /**
+     * Obtiene las tags de la entidad
+     * @return array
+     */
+    public function getTags(): array {
+        return $this->tags;
+    }
+
+    /**
+     * Establece las tags del post
+     * @param array $tags Tags
+     */
+    public function setTags(array $tags) {
+        $this->tags = $tags;
     }
 }
 
