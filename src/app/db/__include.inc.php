@@ -17,6 +17,7 @@ require_once "entities/user_entity.inc.php";
 require_once "entities/tag_entity.inc.php";
 require_once "entities/category_entity.inc.php";
 require_once "entities/post_entity.inc.php";
+require_once "entities/comment_entity.inc.php";
 
 
 // Incluir repositorios
@@ -24,3 +25,9 @@ require_once "repositories/user_repo.inc.php";
 require_once "repositories/tag_repo.inc.php";
 require_once "repositories/category_repo.inc.php";
 require_once "repositories/post_repo.inc.php";
+require_once "repositories/comment_repo.inc.php";
+
+/*
+En algunos repositorios sería una buena idea utilizar alguna forma de memoización
+para obtimizar el pedido de datos a la BBDD y no crear demasiadas solicitudes duplicadas
+*/
