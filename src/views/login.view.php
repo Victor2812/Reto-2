@@ -53,9 +53,3 @@
     </div>
 </body>
 </html>
-
-<?php
-
-    //echo "View del login<br/>";
-
-?>
