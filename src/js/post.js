@@ -3,7 +3,7 @@ const LAST_POST_URL = '/post_api.php';
 window.onload = () => {
     let cantidadCargada = 0;
 
-    async function obtenerUltimosPosts() {
+    async function getLastPostsData() {
         let res = await fetch(LAST_POST_URL + `?method=lastPosts&offset=${cantidadCargada}`);
         if (res.ok) {
             try {
@@ -13,7 +13,7 @@ window.onload = () => {
         return [];
     }
 
-    function maquetarPost(title, user, userUrl, category, date, favs, comments) {
+    function mockupSmallPost(title, user, userUrl, category, date, favs, comments) {
         let post = document.createElement('div');
         post.classList.add('small-post');
 
@@ -37,15 +37,15 @@ window.onload = () => {
         content.appendChild(post);
     }
 
-    async function obtenerMasPosts() {
-        let datos = await obtenerUltimosPosts();
+    async function addSmallPosts() {
+        let datos = await getLastPostsData();
 
         datos.forEach(post => {
-            maquetarPost(post.title, post.author, post.author_url, post.category, post.date, post.favs, post.comments);
+            mockupSmallPost(post.title, post.author, post.author_url, post.category, post.date, post.favs, post.comments);
             cantidadCargada += 1;
         });
     }
 
     //primera ejecucion
-    obtenerMasPosts();
+    addSmallPosts();
 }
