@@ -153,7 +153,7 @@ class UserEntity {
 
     /**
      * Establece los puntos del usuario
-     * @return int $newPoints Puntos
+     * @param int $newPoints Puntos
      */
     public function setPoints(int $newPoints) {
         $this->points = $newPoints;
@@ -161,7 +161,7 @@ class UserEntity {
 
     /**
      * Añade puntos al usuario
-     * @return int $points Puntos a añadir
+     * @param int $points Puntos a añadir
      */
     public function addPoints(int $points) {
         $this->points += $points;

@@ -104,7 +104,7 @@ class SessionManager {
 
     /**
      * Obtiene una variable de la sesión
-     * @param $key El nombre de la variable
+     * @param string $key El nombre de la variable
      * @return mixed El valor de la variable
      */
 
