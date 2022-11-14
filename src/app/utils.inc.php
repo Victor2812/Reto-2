@@ -49,3 +49,16 @@ function current_file() {
 function get_method() {
     return $_SERVER['REQUEST_METHOD'];
 }
+
+/**
+ * Comprueba que los nombres de los parámetros estén en el post
+ * @param array $names Nombres
+ */
+function check_post_data(array $names) {
+    foreach ($names as $name) {
+        if (!isset($_POST[$name])) {
+            return false;
+        }
+    }
+    return true;
+}

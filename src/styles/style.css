@@ -204,14 +204,14 @@ header .navigation .rightnav .user button svg {
                     /* UPLOAD FILE */
 /* ------------------------------------------------- */
 
-input[type="file"] {
+/*input[type="file"] {
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
     overflow: hidden;
     position: absolute;
     z-index: -1;
-}
+}*/
 
 label[for="new-post-upload"] {
     background-color: grey;
