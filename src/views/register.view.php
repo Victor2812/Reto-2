@@ -13,7 +13,7 @@
                                 <?php include "img/user.svg" ?>
                             </div>
                             <div class="in">
-                                <input type="text" placeholder="Username" id="log_username" name="username">
+                                <input type="text" placeholder="Username" id="log_username" name="reg_username">
                             </div>
                             <div class="icon">
                                 <?php include "img/uncheck.svg" ?>
@@ -24,7 +24,7 @@
                                 <?php include "img/user.svg" ?>
                             </div>
                             <div class="in">
-                                <input type="text" placeholder="Name" id="log_user" name="name">
+                                <input type="text" placeholder="Name" id="log_user" name="reg_name">
                             </div>
                             <div class="icon">
                                 <?php include "img/uncheck.svg" ?>
@@ -35,7 +35,7 @@
                                 <?php include "img/password.svg" ?>
                             </div>
                             <div class="in">
-                                <input type="password" placeholder="Password" id="log_pass" name="pass">
+                                <input type="password" placeholder="Password" id="log_pass" name="reg_pass">
                             </div>
                             <div class="icon">
                                 <?php include "img/uncheck.svg" ?>
@@ -46,7 +46,7 @@
                                 <?php include "img/password.svg" ?>
                             </div>
                             <div class="in">
-                                <input type="password" placeholder="Repeat password" id="re_log_pass" name="re_pass">
+                                <input type="password" placeholder="Repeat password" id="rp_log_pass" name="reg_rp_pass">
                             </div>
                             <div class="icon">
                                 <?php include "img/uncheck.svg" ?>
