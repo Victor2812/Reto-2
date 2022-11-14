@@ -148,7 +148,6 @@ header .navigation .rightnav .user button svg {
     background-color: var(--color-light-grey);
 }
 
-
 .content-new-post aside.sidebar-right {
     background-color: white;
     grid-area: rig;
@@ -160,7 +159,11 @@ header .navigation .rightnav .user button svg {
     grid-area: main;
 }
 
-
+.new-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
 
 .new-post-form label {
     display: block;
@@ -172,9 +175,34 @@ header .navigation .rightnav .user button svg {
     width: 100%;
     box-shadow: 0;
     background: transparent;
-    border: 0.2rem solid var(--color-light-grey);
+    border: 0.15rem solid lightgrey;
     margin-bottom: 1rem;
 }
+
+.new-post-form input[type="text"] {
+    height: 2.1rem;
+    font-family: 'Roboto';
+    color: grey;
+    padding: 1rem;
+}
+
+.new-post-form textarea {
+    padding: 1rem;
+    font-family: 'Roboto';
+    color: grey;
+}
+
+.new-post-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+
+
+/* ------------------------------------------------- */
+                    /* UPLOAD FILE */
+/* ------------------------------------------------- */
 
 input[type="file"] {
     width: 0.1px;
@@ -196,12 +224,52 @@ label[for="new-post-upload"] {
     margin: 0;
     color: white;
     transition: all 0.1s ease-in;
+    width: fit-content;
 }
 
 label[for="new-post-upload"] svg{
     width: 1rem;
     margin-right: 0.5rem;
 }
+
+/* ------------------------------------------------- */
+                    /* SELECT CATEGORY */
+/* ------------------------------------------------- */
+
+.select-category {
+    border: 0.15rem solid lightgrey;
+    height: 2.1rem;
+    overflow: hidden;
+    width: 16rem;
+    position:relative;
+}
+select {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    padding-left: 0.5rem;
+    padding-bottom: 0.35rem;
+    height: 2.1rem;
+    width: 16rem;
+}
+select:focus{ outline: none;}
+
+.select-category::after{
+    content:"\025be";
+    display:table-cell;
+    padding-top:7px;
+    text-align:center;
+    width:30px;
+    height:30px;
+    background-color: lightgrey;
+    position:absolute;
+    top:0;
+    right:0px;	
+    pointer-events: none;
+    color: white;
+}
+
+
 
 
 
