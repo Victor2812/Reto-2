@@ -128,21 +128,22 @@ header .navigation .rightnav .user button svg {
 
 .login-wrapper {
     background-color: var(--color-dark-blue);
+    height: 100vh;
     display: flex;
     justify-content: center;
     font-family: 'Roboto', sans-serif;
     font-size: larger;
+    height: 100vh;
 }
 
 .login-container .logo > img  {
     max-width: 60%;
 }
 
-.login-container p {
+.login-container .form-login .txt > p {
     color: var(--color-medium-blue);
     font-size: x-large;
     font-weight: bold;
-    margin: 1em 0;
 }
 
 .login-container {
@@ -165,7 +166,6 @@ header .navigation .rightnav .user button svg {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 1em;
 }
 
 .login-container .login .in {
@@ -237,7 +237,7 @@ header .navigation .rightnav .user button svg {
     padding: .5em;
     width: 40%;
     appearance: none;
-    margin: 2em;
+    margin: 1.5em;
 }
 
 /*Mobile login screen*/
@@ -250,7 +250,7 @@ header .navigation .rightnav .user button svg {
         background-color: var(--color-medium-blue);
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 40%, 60%;
+        grid-template-rows: repeat(2, auto);
         grid-template-areas: 
         "logo"
         "form";
@@ -336,8 +336,6 @@ header .navigation .rightnav .user button svg {
     font-size: large;
     font-weight: bold;
     color: var(--color-dark-blue);
-    margin-bottom: .5rem;
-    margin-top: 0;
 }
 
 .iniciar:hover {
@@ -348,6 +346,7 @@ header .navigation .rightnav .user button svg {
 .check_accept {
     display: inline-block;
     width: 70%;
+    margin-top: .6em;
  }
  
  .check_accept .checkbox  label {

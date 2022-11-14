@@ -26,7 +26,18 @@
                                 <?php include "img/user.svg" ?>
                             </div>
                             <div class="in">
-                                <input type="text" placeholder="Usuario" id="log_user">
+                                <input type="text" placeholder="Username" id="log_user">
+                            </div>
+                            <div class="icon">
+                                <?php include "img/uncheck.svg" ?>
+                            </div>
+                        </div>
+                        <div class="login">
+                            <div class="icon">
+                                <?php include "img/user.svg" ?>
+                            </div>
+                            <div class="in">
+                                <input type="text" placeholder="Name" id="log_user">
                             </div>
                             <div class="icon">
                                 <?php include "img/uncheck.svg" ?>
