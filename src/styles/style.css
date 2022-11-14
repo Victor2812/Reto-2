@@ -172,7 +172,8 @@ header .navigation .rightnav .user button svg {
     width: 40%;
 }
 
-.login-container .login .in input[type="text"] {
+.login-container .login .in input[type="text"],
+.login-container .login .in input[type="password"] {
     width: 70%;
     background: transparent;
     border: none;
@@ -181,7 +182,8 @@ header .navigation .rightnav .user button svg {
     color: var(--color-dark-blue);
 }
 
-.login-container .login .in input[type="text"]::placeholder {
+.login-container .login .in input[type="text"]::placeholder,
+.login-container .login .in input[type="password"]::placeholder {
     color: var(--color-medium-blue);
     font-weight: bold;
     letter-spacing: 2px;
@@ -304,13 +306,91 @@ header .navigation .rightnav .user button svg {
         bottom: 0;
     }
 
-    .login-container .login .in input[type="text"] {
+    .login-container .login .in input[type="text"],
+    .login-container .login .in input[type="password"]{
         color: white;
     }
 
-    .login-container .login .in input[type="text"]::placeholder {
+
+    .login-container .login .in input[type="text"]::placeholder,
+    .login-container .login .in input[type="password"]::placeholder {
         color: white;
         font-weight: bold;
         letter-spacing: 2px;
+    }
+}
+
+/*Register view unique classes*/
+.init_sesion .iniciar {
+    background-color: white;
+
+}
+
+.iniciar {
+    width: 40%;
+    padding: .5em;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border: 4px solid var(--color-dark-blue);
+    font-size: large;
+    font-weight: bold;
+    color: var(--color-dark-blue);
+    margin-bottom: .5rem;
+    margin-top: 0;
+}
+
+.iniciar:hover {
+    background-color: var(--color-dark-blue);
+    color: white;
+}
+
+.check_accept {
+    display: inline-block;
+    width: 70%;
+ }
+ 
+ .check_accept .checkbox  label {
+     width: 40%;
+     color: var(--color-dark-blue);
+ }
+ 
+ .check_accept .checkbox  label:hover {
+     color: var(--color-medium-blue);
+ }
+ 
+ 
+ .check_accept .checkbox input[type="checkbox"] {
+     visibility: visible; 
+     border: .2em solid var(--color-dark-blue);   
+     width: .5em;
+     margin: 0;
+ }
+ 
+ .check_accept .checkbox input[type="checkbox"]:checked {
+     background-color: var(--color-dark-blue);
+ }
+
+/*Register view mobile screen */
+@media screen and (max-width: 768px){
+    .check_accept .checkbox  label {
+        width: 40%;
+        color: white;
+    }
+    
+    .check_accept .checkbox  label:hover {
+        color: var(--color-dark-blue);
+    }
+
+    .check_accept .checkbox input[type="checkbox"] {
+        visibility: visible; 
+        border: .2em solid var(--color-dark-blue);   
+        background-color: white;
+        width: .5em;
+        margin: 0;
+    }
+    
+    .check_accept .checkbox input[type="checkbox"]:checked {
+        background-color: var(--color-dark-blue);
     }
 }

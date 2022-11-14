@@ -256,6 +256,7 @@ input[type="submit"]:hover {
     background-color: var(--color-dark-blue);
 }
 
+/*Register view mobile screen */
 @media screen and (max-width: 768px){
     .check_accept .checkbox  label {
         width: 40%;
