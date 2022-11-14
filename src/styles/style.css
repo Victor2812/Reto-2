@@ -17,14 +17,16 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: var(--color-light-grey);
 }
 
-/*
-    HEADER
-*/
+/* ------------------------------------------------- */
+                    /* HEADER */
+/* ------------------------------------------------- */
 
 header {
     width: 100%;
+    background-color: white;
 }
 
 header img.logo {
@@ -103,28 +105,221 @@ header .navigation .rightnav .user button svg {
     color: white;
 }
 
-@media screen and (min-width: 900px) {
-    header img.logo {
-        max-width: 35rem;
-    }
+/* ------------------------------------------------- */
+                    /* CONTENT */
+/* ------------------------------------------------- */
 
-    header .navigation {
-        flex-direction: row;
-    }
+.content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: "l m m m r";
+    column-gap: 1rem;
 
-    header .navigation nav {
-        margin-top: 0;
-        justify-content: flex-start;
-    }
-
-    header .navigation nav ul li {
-        padding-right: 2rem;
-    }
+    width: 90%;
+    min-height: 100%;
+    margin: 1rem auto 0;
 }
 
-/*
-    LOGIN
-*/
+.content aside.sidebar-left {
+    grid-area: l;
+}
+
+.content aside.sidebar-right {
+    grid-area: r;
+}
+
+.content main {
+    grid-area: m;
+}
+
+/* ------------------------------------------------- */
+                    /* CONTENT NEW POST */
+/* ------------------------------------------------- */
+
+.content-new-post {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: "main main main main rig";
+    column-gap: 1rem;
+
+    width: 90%;
+    min-height: 100%;
+    margin: 1rem auto;
+    background-color: var(--color-light-grey);
+}
+
+.content-new-post aside.sidebar-right {
+    background-color: white;
+    grid-area: rig;
+}
+
+.content-new-post main {
+    padding: 2rem;
+    background-color: white;
+    grid-area: main;
+}
+
+.new-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.new-post-form label {
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.new-post-form input[type="text"],
+.new-post-form textarea {
+    width: 100%;
+    box-shadow: 0;
+    background: transparent;
+    border: 0.15rem solid lightgrey;
+    margin-bottom: 1rem;
+}
+
+.new-post-form input[type="text"] {
+    height: 2.1rem;
+    font-family: 'Roboto';
+    color: grey;
+    padding: 1rem;
+}
+
+.new-post-form textarea {
+    padding: 1rem;
+    font-family: 'Roboto';
+    color: grey;
+}
+
+.new-post-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+
+
+/* ------------------------------------------------- */
+                    /* UPLOAD FILE */
+/* ------------------------------------------------- */
+
+input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+label[for="new-post-upload"] {
+    background-color: grey;
+    font-size: 1rem;
+    font-family: 'Roboto';
+    display: inline-block;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    color: white;
+    transition: all 0.1s ease-in;
+    width: fit-content;
+}
+
+label[for="new-post-upload"] svg{
+    width: 1rem;
+    margin-right: 0.5rem;
+}
+
+/* ------------------------------------------------- */
+                    /* SELECT CATEGORY */
+/* ------------------------------------------------- */
+
+.select-category {
+    border: 0.15rem solid lightgrey;
+    height: 2.1rem;
+    overflow: hidden;
+    width: 16rem;
+    position:relative;
+}
+select {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    padding-left: 0.5rem;
+    padding-bottom: 0.35rem;
+    height: 2.1rem;
+    width: 16rem;
+}
+select:focus{ outline: none;}
+
+.select-category::after{
+    content:"\025be";
+    display:table-cell;
+    padding-top:7px;
+    text-align:center;
+    width:30px;
+    height:30px;
+    background-color: lightgrey;
+    position:absolute;
+    top:0;
+    right:0px;	
+    pointer-events: none;
+    color: white;
+}
+
+
+
+
+
+
+
+/* ------------------------------------------------- */
+                    /* BUTTTONS */
+/* ------------------------------------------------- */
+
+.button-blue,
+.button-white {
+    text-decoration: none;
+    font-size: 1rem;
+    font-family: 'Roboto';
+    display: inline-block;
+
+    border-radius: 0.25rem;
+
+    overflow: hidden;
+    padding: 0.5rem 1rem;
+    margin: 0;
+
+    transition: all 0.1s ease-in;
+}
+
+.button-blue,
+.button-white:hover {
+    color: white;
+
+    border: 0.1rem solid var(--color-medium-blue);
+    background-color: var(--color-medium-blue);
+}
+
+.button-white,
+.button-blue:hover {
+    color: var(--color-medium-blue);
+
+    border: 0.1rem solid var(--color-medium-blue);
+    background-color: white;
+}
+
+.button-blue i,
+.button-white i {
+    padding-right: 0.5rem;
+    color: inherit;
+}
+
+/* ------------------------------------------------- */
+                    /* LOGIN */
+/* ------------------------------------------------- */
 
 .login-wrapper {
     background-color: var(--color-dark-blue);
@@ -236,6 +431,60 @@ header .navigation .rightnav .user button svg {
     width: 40%;
     appearance: none;
     margin: 2em;
+}
+
+/* ------------------------------------------------- */
+                    /* FOOTER */
+/* ------------------------------------------------- */
+
+footer {
+    background-color: var(--color-dark-blue);
+    padding: 1em;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 70%;
+    margin-top: 2rem;
+}
+
+footer .logo-footer {
+    max-width: 35%;
+    padding: 0.5rem;
+}
+
+/* ------------------------------------------------- */
+                    /* QUERYS */
+/* ------------------------------------------------- */
+
+
+@media screen and (min-width: 900px) {
+    header img.logo {
+        max-width: 35rem;
+    }
+
+    header .navigation {
+        flex-direction: row;
+    }
+
+    header .navigation nav {
+        margin-top: 0;
+        justify-content: flex-start;
+    }
+
+    header .navigation nav ul li {
+        padding-right: 2rem;
+    }
+
+    footer {
+        font-size: small;
+    }
+
+    footer .logo-footer {
+        max-width: 18rem;
+        padding: 0.5rem;
+    }
 }
 
 /*Mobile login screen*/

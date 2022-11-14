@@ -6,7 +6,7 @@ needs_authentication();
 
 include_views([
     "views/header.view.php",
-    "views/small-post.html",
-    "views/comentario.html"
+    "views/new_post.view.php",
+    "views/footer.view.php"
 ]);
 ?>
