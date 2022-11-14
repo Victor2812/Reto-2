@@ -1,0 +1,28 @@
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	viewBox="0 0 1119 1000">
+<style type="text/css">
+	.st0{fill:#F2F2F2;}
+	.st1{clip-path:url(#SVGID_1_);}
+	.st2{fill:#B5B5B5;}
+</style>
+<g>
+	<circle class="st0" cx="559.5" cy="500" r="500"/>
+	<g>
+		<defs>
+			<circle id="SVGID_3_" cx="559.5" cy="500" r="500"/>
+		</defs>
+		<clipPath id="SVGID_1_">
+			<use xlink:href="#SVGID_3_"  style="overflow:visible;"/>
+		</clipPath>
+		<g class="st1">
+			<g>
+				<path class="st2" d="M562.1,999.7c-109.5,0-219-0.7-328.5,0.3c-54.9,0.5-76.8-23.5-65-77.5c29.1-133.9,101.5-236.3,224-299.4
+					c17.9-9.2,46.7-8.7,66.2-1.5c69,25.5,135.5,25.8,205.3,1.7c23.1-8,56.7-7,77.9,4.2c117,62.3,187.2,162.3,215,291.1
+					c13.3,61.7-2.4,80.2-66.4,80.8C781.1,1000.5,671.6,999.7,562.1,999.7z"/>
+				<path class="st2" d="M562.8,581.1C447.2,581.3,354.1,489.4,353,374c-1-117.8,94.9-213.6,212.2-211.9
+					c114.7,1.7,207.5,96.3,206.9,211C771.5,488,678,580.9,562.8,581.1z"/>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>
