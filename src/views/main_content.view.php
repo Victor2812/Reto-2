@@ -7,7 +7,7 @@
 
     </aside>
     <main>
-        <a id="newpostbtn" class="button-blue" href="#"><i>#</i> Nuevo post</a>
+        <a id="newpostbtn" class="button-blue" href="/post_new.php"><i>#</i> Nuevo post</a>
         <div class="post-container">
             <div class="post-partial"></div>
         </div>

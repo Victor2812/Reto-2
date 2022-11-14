@@ -1,5 +1,5 @@
 <header>
-    <img class="logo" src="img/aerbide-logo.svg" alt="logo-aerbide">
+    <a href="/index.php"><img class="logo" src="img/aerbide-logo.svg" alt="logo-aerbide"></a>
     <div class="navigation">
         <nav>
             <ul>
