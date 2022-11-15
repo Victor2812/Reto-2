@@ -1,3 +1,7 @@
+<?php
+    include "partials/user_banner.php";
+?>
+
 <div class="content">
     <aside class="sidebar-left">
 

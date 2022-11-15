@@ -269,11 +269,63 @@ select:focus{ outline: none;}
     color: white;
 }
 
+/* ------------------------------------------------- */
+                    /* USER BANNER */
+/* ------------------------------------------------- */
 
+#user-banner {
+    width: 100%;
+    background-color: var(--color-dark-blue);
+    padding: 0.75rem 2rem;
+    color: white;
 
+    display: none;
+}
 
+#user-banner.shown {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
+#user-banner .user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
+#user-banner .user-info img {
+    display: block;
+    width: 7.5rem;
+    height: 7.5rem;
+    padding-right: 1rem;
+}
+
+#user-banner .user-info .user-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 0.25rem;
+}
+
+#user-banner .user-info .user-data .user-date {
+    font-size: 0.8rem;
+}
+
+#user-banner .user-actions {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#user-banner .user-actions li {
+    margin: 0.25rem 0;
+}
+
+#user-banner .user-actions a {
+    color: white;
+}
 
 /* ------------------------------------------------- */
                     /* BUTTTONS */
@@ -315,6 +367,10 @@ select:focus{ outline: none;}
 .button-white i {
     padding-right: 0.5rem;
     color: inherit;
+}
+
+button {
+    cursor: pointer;
 }
 
 /* ------------------------------------------------- */

@@ -24,3 +24,4 @@
         </div>
     </div>
 </header>
+<script src="js/userbanner.js"></script>

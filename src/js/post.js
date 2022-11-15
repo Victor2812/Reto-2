@@ -1,6 +1,6 @@
 const LAST_POST_URL = '/post_api.php';
 
-window.onload = () => {
+window.addEventListener('load', () => {
     let cantidadCargada = 0;
 
     async function getLastPostsData() {
@@ -48,4 +48,4 @@ window.onload = () => {
 
     //primera ejecucion
     addSmallPosts();
-}
+});
