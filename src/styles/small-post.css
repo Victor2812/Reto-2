@@ -1,7 +1,9 @@
 .small-post {
     width: 100%;
     margin: 1.5rem;
-    padding: 0.5rem;    
+    padding: 0.5rem;
+
+    background-color: white;
 }
 
 .small-post .post-head {
