@@ -6,13 +6,18 @@ abstract class UserRepository {
 
         $sql = "INSERT INTO users (username, name, surname, job, passwd) VALUES (:uname, :name, :surname, :job, :passwd)";
         $statement = $db->prepare($sql);
-        $statement->execute([
-            ':uname' => $username,
-            ':name' => $name,
-            ':surname' => $surname,
-            ':job' => $job,
-            ':passwd' => $passwd
-        ]);
+
+        try {
+            $statement->execute([
+                ':uname' => $username,
+                ':name' => $name,
+                ':surname' => $surname,
+                ':job' => $job,
+                ':passwd' => $passwd
+            ]);
+        } catch (Exception $ex) {
+            return null;
+        }
 
         if (($newUserId = $db->lastInsertId())) {
             return self::getUserById($newUserId);

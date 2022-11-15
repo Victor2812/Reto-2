@@ -46,8 +46,8 @@ class PostEntity {
             $this->text = $text;
             $this->category = $category;
 
-            $this->date = new DateTime();
-            $this->date->setTimeStamp($date);
+            $this->creation_date = new DateTime();
+            $this->creation_date->setTimeStamp($date);
 
             $this->author = $author;
             $this->tags = $tags;
@@ -98,7 +98,7 @@ class PostEntity {
      * @return CategoryEntity Categoría
      */
     public function getCategory(): CategoryEntity {
-        return $this->categroy;
+        return $this->category;
     }
 
     /**
@@ -114,7 +114,7 @@ class PostEntity {
      * @return DateTime Fecha
      */
     public function getCreationDate(): DateTime {
-        return $this->date;
+        return $this->creation_date;
     }
 
     /**

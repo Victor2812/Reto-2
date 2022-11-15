@@ -4,9 +4,8 @@ require_once "app/__include.inc.php";
 
 needs_authentication();
 
-include_views([
-    "views/header.view.php",
-    "views/main_content.view.php",
-    "views/footer.view.php"
-]);
-?>
+// Eliminar autenticación
+$session->authenticate(null);
+
+// Volver al login
+redirect(LOGIN_ROUTE);

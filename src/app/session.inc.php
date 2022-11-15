@@ -104,7 +104,7 @@ class SessionManager {
 
     /**
      * Obtiene una variable de la sesión
-     * @param $key El nombre de la variable
+     * @param string $key El nombre de la variable
      * @return mixed El valor de la variable
      */
 
@@ -150,6 +150,7 @@ class SessionManager {
     public function authenticate(UserEntity|null $user) {
         if ($user != null && is_int($user->getId())) {
             $this->set('_uid', $user->getId()); // debería ser crítico, pero está bug
+            $this->currentUser = $user;
         } else {
             $this->del('_uid');                 // debería ser crítico, pero está bug
         }

@@ -57,6 +57,8 @@ abstract class PostRepository {
                 $tags
             );
         }
+
+        return null;
     }
 
     /**
@@ -106,7 +108,7 @@ abstract class PostRepository {
             }
         }
 
-        return null;
+        return $posts;
     }
 
     /**
