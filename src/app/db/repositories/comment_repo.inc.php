@@ -122,6 +122,25 @@ abstract class CommentRepository {
         return $comments;
     }
 
+
+
+    public static function getPostCommentNum(PostEntity $post): int {
+        global $db;
+
+        $sql = "SELECT count(id) FROM comments WHERE post = :p";
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':p' => $post->getId()
+        ]);
+
+        if ($data = $statement->fetch()) {
+            return $data[0];
+        }
+
+        return 0;
+    }
+
     /**
      * Obtiene los subcomentarios de los comentarios
      * @param CommentEntity $comment Comentario padre

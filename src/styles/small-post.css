@@ -24,13 +24,18 @@
     margin-bottom: 0.25rem;
 }
 
+.small-post .post-head .post-info .post-title a {
+    color: black;
+    text-decoration: none;
+}
+
 .small-post .post-head .post-info .post-data {
     margin-bottom: 0.25rem;
 }
 
 .small-post .post-head .post-info .post-data a {
     color: grey;
-    font-weight: 900;
+    font-weight: 600;
     text-decoration: none;
 }
 

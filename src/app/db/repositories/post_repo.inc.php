@@ -213,4 +213,20 @@ abstract class PostRepository {
             ':post' =>          $post->getId()
         ]);
     }
+
+    public static function isPostBookmarked(UserEntity $user, PostEntity $post): bool {
+        global $db;
+
+        $posts = [];
+
+        $sql = 'SELECT post FROM bookmarks b WHERE b.user = :user AND b.post = :p LIMIT 1';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':user' =>         $user->getId(),
+            ':p' =>            $post->getId(),
+        ]);
+
+        return $statement->fetch() != null;
+    }
 }
