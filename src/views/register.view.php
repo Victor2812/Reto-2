@@ -4,7 +4,7 @@
                 <img src="../img/aerbide-logo.svg" alt="logo">
             </div>
             <div class="form-login">
-                <form action="<?php echo current_file(); ?>" method="POSTs">
+                <form action="<?php echo current_file(); ?>" method="POST">
                         <div class="txt">
                             <p>Crea tu cuenta</p>
                         </div>
