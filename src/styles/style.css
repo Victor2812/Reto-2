@@ -1,0 +1,565 @@
+:root {
+    --color-dark-blue: #05059d;
+    --color-medium-blue: #0158f8;
+    --color-light-blue: #00a2db;
+
+    --color-search-blue: #679bfb;
+
+    --color-light-grey: #f2f2f2;
+    --color-dark-grey: #b5b5b5;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--color-light-grey);
+}
+
+/* ------------------------------------------------- */
+                    /* HEADER */
+/* ------------------------------------------------- */
+
+header {
+    width: 100%;
+    background-color: white;
+}
+
+header img.logo {
+    display: block;
+    max-width: 60%;
+
+    padding: 1.25rem 0;
+    margin: 0 auto;
+}
+
+header .navigation {
+    background-color: var(--color-medium-blue);
+    color: white;
+    display: flex;
+
+    flex-direction: column-reverse;
+    justify-content: space-between;
+
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+}
+
+header .navigation nav {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .navigation nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+header .navigation nav ul li a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header .navigation nav ul li a:hover,
+header .navigation nav ul li.selected a {
+    text-decoration: underline;
+}
+
+header .navigation .rightnav {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+}
+header .navigation .rightnav .search {
+    flex-grow: 1;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+header .navigation .rightnav .search input[type=text] {
+    background-color: var(--color-search-blue);
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+}
+
+header .navigation .rightnav .user button {
+    background: none;
+    border: none;
+    padding-left: 0.5rem;
+}
+
+header .navigation .rightnav .user button svg {
+    width: 2rem;
+    height: 2rem;
+    color: white;
+}
+
+/* ------------------------------------------------- */
+                    /* CONTENT */
+/* ------------------------------------------------- */
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: "l m m m r";
+    column-gap: 1rem;
+
+    width: 90%;
+    min-height: 100%;
+    margin: 1rem auto 0;
+}
+
+.content aside.sidebar-left {
+    grid-area: l;
+}
+
+.content aside.sidebar-right {
+    grid-area: r;
+}
+
+.content main {
+    grid-area: m;
+}
+
+/* ------------------------------------------------- */
+                    /* CONTENT NEW POST */
+/* ------------------------------------------------- */
+
+.content-new-post {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: "main main main main rig";
+    column-gap: 1rem;
+
+    width: 90%;
+    min-height: 100%;
+    margin: 1rem auto;
+    background-color: var(--color-light-grey);
+}
+
+.content-new-post aside.sidebar-right {
+    background-color: white;
+    grid-area: rig;
+}
+
+.content-new-post main {
+    padding: 2rem;
+    background-color: white;
+    grid-area: main;
+}
+
+.new-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.new-post-form label {
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.new-post-form input[type="text"],
+.new-post-form textarea {
+    width: 100%;
+    box-shadow: 0;
+    background: transparent;
+    border: 0.15rem solid lightgrey;
+    margin-bottom: 1rem;
+}
+
+.new-post-form input[type="text"] {
+    height: 2.1rem;
+    font-family: 'Roboto';
+    color: grey;
+    padding: 1rem;
+}
+
+.new-post-form textarea {
+    padding: 1rem;
+    font-family: 'Roboto';
+    color: grey;
+}
+
+.new-post-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+
+
+/* ------------------------------------------------- */
+                    /* UPLOAD FILE */
+/* ------------------------------------------------- */
+
+/*input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}*/
+
+label[for="new-post-upload"] {
+    background-color: grey;
+    font-size: 1rem;
+    font-family: 'Roboto';
+    display: inline-block;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    color: white;
+    transition: all 0.1s ease-in;
+    width: fit-content;
+}
+
+label[for="new-post-upload"] svg{
+    width: 1rem;
+    margin-right: 0.5rem;
+}
+
+/* ------------------------------------------------- */
+                    /* SELECT CATEGORY */
+/* ------------------------------------------------- */
+
+.select-category {
+    border: 0.15rem solid lightgrey;
+    height: 2.1rem;
+    overflow: hidden;
+    width: 16rem;
+    position:relative;
+}
+select {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    padding-left: 0.5rem;
+    padding-bottom: 0.35rem;
+    height: 2.1rem;
+    width: 16rem;
+}
+select:focus{ outline: none;}
+
+.select-category::after{
+    content:"\025be";
+    display:table-cell;
+    padding-top:7px;
+    text-align:center;
+    width:30px;
+    height:30px;
+    background-color: lightgrey;
+    position:absolute;
+    top:0;
+    right:0px;	
+    pointer-events: none;
+    color: white;
+}
+
+
+
+
+
+
+
+/* ------------------------------------------------- */
+                    /* BUTTTONS */
+/* ------------------------------------------------- */
+
+.button-blue,
+.button-white {
+    text-decoration: none;
+    font-size: 1rem;
+    font-family: 'Roboto';
+    display: inline-block;
+
+    border-radius: 0.25rem;
+
+    overflow: hidden;
+    padding: 0.5rem 1rem;
+    margin: 0;
+
+    transition: all 0.1s ease-in;
+}
+
+.button-blue,
+.button-white:hover {
+    color: white;
+
+    border: 0.1rem solid var(--color-medium-blue);
+    background-color: var(--color-medium-blue);
+}
+
+.button-white,
+.button-blue:hover {
+    color: var(--color-medium-blue);
+
+    border: 0.1rem solid var(--color-medium-blue);
+    background-color: white;
+}
+
+.button-blue i,
+.button-white i {
+    padding-right: 0.5rem;
+    color: inherit;
+}
+
+/* ------------------------------------------------- */
+                    /* LOGIN */
+/* ------------------------------------------------- */
+
+.login-wrapper {
+    background-color: var(--color-dark-blue);
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: larger;
+}
+
+.login-container .logo > img  {
+    max-width: 60%;
+}
+
+.login-container p {
+    color: var(--color-medium-blue);
+    font-size: x-large;
+    font-weight: bold;
+    margin: 1em 0;
+}
+
+.login-container {
+    background-image: url("../img/shape-desktop-login.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    overflow: hidden;
+    width: 65%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.login-container .login {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+}
+
+.login-container .login .in {
+    width: 40%;
+}
+
+.login-container .login .in input[type="text"] {
+    width: 70%;
+    background: transparent;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: medium;
+    color: var(--color-dark-blue);
+}
+
+.login-container .login .in input[type="text"]::placeholder {
+    color: var(--color-medium-blue);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.login-container .login .in::after {
+    content: '';
+    background-color: var(--color-dark-blue);
+    position: absolute;
+    height: .5rem;
+    width: 60%;
+    left: 20%;
+    bottom: 0;
+}
+
+.login-container .register {
+    display: flex;
+    justify-content:center;
+}
+
+.login-container .register > a{
+    color: var(--color-dark-blue)
+}
+
+.login-container .register > a:hover {
+    color: var(--color-medium-blue);
+}
+
+.login-container .icon svg{
+    height: 2rem;
+    width: 2rem;
+    color: var(--color-dark-blue);
+    fill: currentColor;
+}
+
+.login-container input[type="submit"] {
+    background-color: var(--color-dark-blue);
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: var(--color-medium-blue);
+}
+
+.login-container .form-login  input {
+    padding: .5em;
+    width: 40%;
+    appearance: none;
+    margin: 2em;
+}
+
+/* ------------------------------------------------- */
+                    /* FOOTER */
+/* ------------------------------------------------- */
+
+footer {
+    background-color: var(--color-dark-blue);
+    padding: 1em;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 70%;
+    margin-top: 2rem;
+}
+
+footer .logo-footer {
+    max-width: 35%;
+    padding: 0.5rem;
+}
+
+/* ------------------------------------------------- */
+                    /* QUERYS */
+/* ------------------------------------------------- */
+
+
+@media screen and (min-width: 900px) {
+    header img.logo {
+        max-width: 35rem;
+    }
+
+    header .navigation {
+        flex-direction: row;
+    }
+
+    header .navigation nav {
+        margin-top: 0;
+        justify-content: flex-start;
+    }
+
+    header .navigation nav ul li {
+        padding-right: 2rem;
+    }
+
+    footer {
+        font-size: small;
+    }
+
+    footer .logo-footer {
+        max-width: 18rem;
+        padding: 0.5rem;
+    }
+}
+
+/*Mobile login screen*/
+@media screen and (max-width: 768px) {
+    .login-container {
+        background-image: none;
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        background-color: var(--color-medium-blue);
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 40%, 60%;
+        grid-template-areas: 
+        "logo"
+        "form";
+    }
+    
+    .login-container p, 
+    .login-container .register > a{
+        color: white;
+    }
+
+    .login-container .icon svg{
+        color: white;
+    }
+
+    .login-container .register > a:hover {
+        color: var(--color-dark-blue);
+    }
+
+    .login-container .login-container > div {
+        padding: 2em;
+    }
+    
+    .login-container .logo {
+        background-image: url("../img/shape-movil-login.svg");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        grid-area: logo;
+    }
+
+    .login-container .form-login {
+        grid-area: form;
+    }
+
+    .login-container input[type="submit"] {
+        background-color: white;
+        color: var(--color-dark-blue);
+        padding: .5em;
+    }
+
+    .login-container input[type="submit"]:hover {
+        background-color: var(--color-medium-blue);
+        color: white;
+    }
+
+    .login-container .login .in::after {
+        content: '';
+        background-color: white;
+        position: absolute;
+        height: .5rem;
+        width: 60%;
+        left: 20%;
+        bottom: 0;
+    }
+
+    .login-container .login .in input[type="text"] {
+        color: white;
+    }
+
+    .login-container .login .in input[type="text"]::placeholder {
+        color: white;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+}
