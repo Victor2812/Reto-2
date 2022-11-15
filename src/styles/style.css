@@ -580,7 +580,7 @@ footer .logo-footer {
     background-color: white;
 }
 
-.titulo{
+.sidebar-left .titulo{
     height: 50%;
     width: 80%;
     margin-left: 10%;
@@ -588,26 +588,26 @@ footer .logo-footer {
 }
 
 
-.titulo2{
+.sidebar-left .titulo2{
     border-bottom: solid black 1px;
     padding-bottom: 0.5em;
     margin-bottom: 0.5em;
 }
 
-.listaDepart{
+.sidebar-left .listaDepart{
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.listaD{
+.sidebar-left .listaD{
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     width: 100%;
     padding-left: 15%;
 }
 
-.listaTag{
+.sidebar-left .listaTag{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -617,18 +617,18 @@ footer .logo-footer {
     margin-top: 2em;
 }
 
-.listaT{
+.sidebar-left .listaT{
     border: none;
     border-radius: 15%;
     background-color: #00a2db;
     padding: 5px;
 }
 
-il.listaD:hover {
+.sidebar-left il.listaD:hover {
     background-color: lightgrey;
     font-weight: bold;
 }
 
-il.listaT:hover {
+.sidebar-left il.listaT:hover {
     background-color: #0158f8;
 }
