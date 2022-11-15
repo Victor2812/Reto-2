@@ -21,9 +21,9 @@ function getLastPosts(int $offset): array {
             'title' => $post->getTitle(),
             'category' => $post->getCategory()->getName(),
             'author' => $post->getAuthor()->getUsername(),
-            'author_url' => '#',
+            'author_id' => $post->getAuthor()->getId(),
             'date' => $post->getCreationDate()->format('Y-m-d H:i:s'),
-            'favs' => 0,
+            'favs' => PostRepository::getPostBookmarkCount($post),
             'comments' => CommentRepository::getPostCommentNum($post)
         ];
     }
@@ -41,9 +41,9 @@ function getLastComments(int $postId, int $offset): array {
             $salida[] = [
                 'id' => $comment->getId(),
                 'author' => $comment->getAuthor()->getUsername(),
-                'author_url' => '#',
+                'author_id' => $comment->getAuthor()->getId(),
                 'date' => $comment->getCreationDate()->format('Y-m-d H:i:s'),
-                'favs' => 0,
+                'favs' => CommentRepository::getCommentVotes($comment),
                 'subcomments_num' => CommentRepository::getCommentSubcommentNum($comment)
             ];
         }
