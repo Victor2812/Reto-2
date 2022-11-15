@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db
--- Tiempo de generación: 09-11-2022 a las 11:26:58
+-- Tiempo de generación: 15-11-2022 a las 15:19:40
 -- Versión del servidor: 10.9.3-MariaDB-1:10.9.3+maria~ubu2204
 -- Versión de PHP: 8.0.25
 
@@ -54,7 +54,7 @@ CREATE TABLE `comments` (
   `author` int(11) NOT NULL,
   `post` int(11) DEFAULT NULL,
   `comment` int(11) DEFAULT NULL,
-  `creation_date` int(11) NOT NULL DEFAULT current_timestamp()
+  `creation_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -109,7 +109,7 @@ CREATE TABLE `posts` (
   `title` varchar(255) NOT NULL,
   `text` text NOT NULL,
   `category` int(11) NOT NULL,
-  `creation_date` date NOT NULL DEFAULT current_timestamp(),
+  `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `author` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -155,6 +155,18 @@ CREATE TABLE `users` (
   `points` int(11) NOT NULL DEFAULT 0,
   `job` varchar(64) DEFAULT NULL,
   `passwd` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `votes`
+--
+
+DROP TABLE IF EXISTS `votes`;
+CREATE TABLE `votes` (
+  `user` int(11) NOT NULL,
+  `comment` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -229,6 +241,13 @@ ALTER TABLE `tags`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indices de la tabla `votes`
+--
+ALTER TABLE `votes`
+  ADD PRIMARY KEY (`user`,`comment`),
+  ADD KEY `comment` (`comment`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -320,4 +339,11 @@ ALTER TABLE `posts`
 ALTER TABLE `tagged`
   ADD CONSTRAINT `tagged_ibfk_1` FOREIGN KEY (`tag`) REFERENCES `tags` (`id`),
   ADD CONSTRAINT `tagged_ibfk_2` FOREIGN KEY (`post`) REFERENCES `posts` (`id`);
+
+--
+-- Filtros para la tabla `votes`
+--
+ALTER TABLE `votes`
+  ADD CONSTRAINT `votes_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `votes_ibfk_2` FOREIGN KEY (`comment`) REFERENCES `comments` (`id`);
 COMMIT;
