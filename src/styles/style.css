@@ -160,10 +160,6 @@ header .navigation .rightnav .user button svg {
     grid-area: r;
 }
 
-.content main {
-    grid-area: m;
-}
-
 /* ------------------------------------------------- */
                     /* CONTENT NEW POST */
 /* ------------------------------------------------- */

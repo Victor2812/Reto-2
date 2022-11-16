@@ -5,8 +5,6 @@
         <div class="post-container">
         </div>
     </main>
-    <aside class="sidebar-right">
-
-    </aside>
+    <?php include "partials/sidebar_right.php"; ?>
 </div>
 <script src="js/post.js"></script>
