@@ -108,6 +108,21 @@ abstract class UserRepository {
         ]);
     }
 
+    public static function getFollowersInfo(UserEntity $user) {
+        global $db;
+
+        $sql = 'SELECT u.username FROM u users, f followers WHERE u.id = f.source AND u.id = :id';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            'id' => $user->getId()
+        ]);
+
+        $data[] = $statement->fetch();
+
+        return $data;
+    }
+
     public static function getFollowersCount(UserEntity $user) {
         global $db;
 
