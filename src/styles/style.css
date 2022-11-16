@@ -24,6 +24,10 @@ body {
     background-color: var(--color-light-grey);
 }
 
+h2 {
+    margin-bottom: 0.3rem;
+}
+
 h3 {
     margin-bottom: 2rem;
 }
@@ -77,30 +81,44 @@ header .navigation nav ul li a {
     text-decoration: none;
 }
 
-header .navigation nav ul li a .selected {
+header .navigation nav ul li .selected,
+header .navigation nav ul li .unselected {
     position: relative;
-
 }
 
-header .navigation nav ul li a .selected:after {
+header .navigation nav ul li .unselected:after {
+
     content: "";
     position: absolute;
     right: 0;
-    bottom: 0;
-    height: 1rem;
+    bottom: -0.2rem;
+    height: 0.2rem;
     width: 100%;
     background-color: white;
-
+    
     transform-origin: right;
     transform: scaleX(0);
 
 }
 
-header .navigation nav ul li a .selected:hover:after {
+header .navigation nav ul li .unselected:hover:after {
     transform-origin: left;
     transform: scaleX(1);
     transition: transform 0.2s ease-in-out;
 }
+
+header .navigation nav ul li .selected:after {
+
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -0.2rem;
+    height: 0.2rem;
+    width: 100%;
+    background-color: white;
+}
+
+
 
 header .navigation .rightnav {
     display: flex;
@@ -188,7 +206,7 @@ header .navigation .rightnav .user button svg {
 }
 
 /* ------------------------------------------------- */
-                    /* CONTENT NEW POST */
+                    /* CONTENT NEW COMMENT */
 /* ------------------------------------------------- */
 
 .new-comment .new-comment-author {
@@ -212,6 +230,8 @@ header .navigation .rightnav .user button svg {
     display: flex;
     flex-direction: column;
     gap: 1em;
+    background-color: white;
+    padding: 1rem;
 }
 
 .new-post-form label {
@@ -568,6 +588,9 @@ footer {
     align-items: center;
     font-size: 70%;
     margin-top: 2rem;
+    /*position: absolute;
+    bottom: 0;
+    width: 100%;*/
 }
 
 footer .logo-footer {
@@ -587,6 +610,7 @@ footer .logo-footer {
 
     header .navigation {
         flex-direction: row;
+        justify-content: space-around;
         font-size: 1rem;
     }
 
@@ -597,6 +621,16 @@ footer .logo-footer {
 
     header .navigation nav ul li {
         padding-right: 2rem;
+    }
+
+    header .navigation nav ul li .unselected:after {
+        bottom: -0.5rem;
+        height: 0.3rem;
+    }
+    
+    header .navigation nav ul li .selected:after {
+        bottom: -0.5rem;
+        height: 0.3rem;   
     }
 
     footer {

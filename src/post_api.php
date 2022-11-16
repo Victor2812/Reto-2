@@ -40,6 +40,7 @@ function getLastComments(int $postId, int $offset): array {
         foreach ($comments as $comment) {
             $salida[] = [
                 'id' => $comment->getId(),
+                'text' => $comment->getText(),
                 'author' => $comment->getAuthor()->getUsername(),
                 'author_id' => $comment->getAuthor()->getId(),
                 'date' => $comment->getCreationDate()->format('Y-m-d H:i:s'),
