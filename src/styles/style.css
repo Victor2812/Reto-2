@@ -24,6 +24,10 @@ body {
     background-color: var(--color-light-grey);
 }
 
+h2 {
+    margin-bottom: 0.3rem;
+}
+
 h3 {
     margin-bottom: 2rem;
 }
@@ -192,7 +196,7 @@ header .navigation .rightnav .user button svg {
 }
 
 /* ------------------------------------------------- */
-                    /* CONTENT NEW POST */
+                    /* CONTENT NEW COMMENT */
 /* ------------------------------------------------- */
 
 .new-comment .new-comment-author {
@@ -216,6 +220,8 @@ header .navigation .rightnav .user button svg {
     display: flex;
     flex-direction: column;
     gap: 1em;
+    background-color: white;
+    padding: 1rem;
 }
 
 .new-post-form label {
