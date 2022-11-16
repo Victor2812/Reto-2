@@ -1,7 +1,5 @@
 <div class="content">
-    <aside class="sidebar-left">
-
-    </aside>
+    <?php include "partials/sidebar_left.php"; ?>
     <main>
         <a id="newpostbtn" class="button-blue" href="/post_new.php"><i>#</i> Nuevo post</a>
         <div class="post-container">
