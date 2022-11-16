@@ -30,7 +30,5 @@
             </form>
         </div>
     </main>
-    <aside class="sidebar-right">
-
-    </aside>
+    <?php include "partials/sidebar_right.php"; ?>
 </div>

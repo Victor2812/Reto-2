@@ -10,9 +10,6 @@ if (!$post) {
 ?>
 
 <div class="content-new-post">
-    <aside class="sidebar-left">
-
-    </aside>
     <main>
 
         <div class="box-post">
@@ -73,8 +70,6 @@ if (!$post) {
             </form>
         </div>
     </main>
-    <aside class="sidebar-right">
-
-    </aside>
+    <?php include "partials/sidebar_right.php"; ?>
 </div>
 <script src="js/comments.js"></script>
