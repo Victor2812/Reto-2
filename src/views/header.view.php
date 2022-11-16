@@ -11,7 +11,7 @@
         <div class="rightnav">
             <div class="search">
                 <form action="">
-                    <label>Buscar <input type="text" placeholder="Texto o #tag"></label>
+                    <input type="text" placeholder="Buscar ej: consulta #tag">
                 </form>
             </div>
             <div class="user">
@@ -24,3 +24,5 @@
         </div>
     </div>
 </header>
+<?php include "partials/user_banner.php"; ?>
+<script src="js/userbanner.js"></script>

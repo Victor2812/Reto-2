@@ -189,6 +189,23 @@ abstract class PostRepository {
         return $posts;
     }
 
+    public static function getPostBookmarkCount(PostEntity $post): int {
+        global $db;
+
+        $sql = 'SELECT count(post) FROM bookmarks b WHERE b.post = :p';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':p' =>            $post->getId(),
+        ]);
+
+        if ($data = $statement->fetch()) {
+            return $data[0];
+        }
+
+        return 0;
+    }
+
     public static function addPostToUserBookmark(PostEntity $post, UserEntity $user) {
         global $db;
 
@@ -212,5 +229,21 @@ abstract class PostRepository {
             ':user' =>          $user->getId(),
             ':post' =>          $post->getId()
         ]);
+    }
+
+    public static function isPostBookmarked(UserEntity $user, PostEntity $post): bool {
+        global $db;
+
+        $posts = [];
+
+        $sql = 'SELECT post FROM bookmarks b WHERE b.user = :user AND b.post = :p LIMIT 1';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':user' =>         $user->getId(),
+            ':p' =>            $post->getId(),
+        ]);
+
+        return $statement->fetch() != null;
     }
 }

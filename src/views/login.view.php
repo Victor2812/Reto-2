@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="register">
-                <a href="">¿No tienes cuenta?</a>
+                <a href="/register.php">¿No tienes cuenta?</a>
             </div>
             <div>
                 <input type="submit" value="Iniciar sesión">
