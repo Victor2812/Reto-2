@@ -19,7 +19,7 @@ if (!$post) {
             <div class="post-head">
                 <p><a href="#" class="category"><?php echo $post->getCategory()->getName(); ?></a></p>
                 <h2><?php echo $post->getTitle(); ?></h2>
-                <p>
+                <p class="post-data">
                     <?php echo $post->getCreationDate()->format('Y-m-d H:i:s');?> por 
                     <a href="#"><?php echo $post->getAuthor()->getUsername();?></a> | 
                     <?php echo CommentRepository::getPostCommentNum($post); ?> comentarios 

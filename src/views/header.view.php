@@ -3,9 +3,9 @@
     <div class="navigation">
         <nav>
             <ul>
-                <li class="selected"><a href="#">Recientes</a></li>
-                <li><a href="#">Más comentados</a></li>
-                <li><a href="#">Más valorados</a></li>
+                <li><a class="selected" href="#">Recientes</a></li>
+                <li><a class="unselected" href="#">Más comentados</a></li>
+                <li><a class="unselected" href="#">Más valorados</a></li>
             </ul>
         </nav>
         <div class="rightnav">
