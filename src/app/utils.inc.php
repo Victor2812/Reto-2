@@ -42,10 +42,16 @@ function include_views(array $views) {
     echo '</body></html>';
 }
 
+/**
+ * Obtiene el archivo de entrada
+ */
 function current_file() {
     return $_SERVER['SCRIPT_NAME'];
 }
 
+/**
+ * Obtiene el método HTTP usado
+ */
 function get_method() {
     return $_SERVER['REQUEST_METHOD'];
 }
