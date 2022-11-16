@@ -1,6 +1,6 @@
 const LAST_POST_URL = '/post_api.php';
 
-window.onload = () => {
+window.addEventListener('load', () => {
     let cantidadCargada = 0;
 
     async function getLastPostsData() {
@@ -13,16 +13,16 @@ window.onload = () => {
         return [];
     }
 
-    function mockupSmallPost(title, user, userUrl, category, date, favs, comments) {
+    function mockupSmallPost(id, title, user, userid, category, date, favs, comments) {
         let post = document.createElement('div');
         post.classList.add('small-post');
 
         post.innerHTML = `<div class="post-head">
         <img src="img/user-default-image.svg" class="post-author-icon">
         <div class="post-info">
-            <h3 class="post-title">${title}</h3>
+            <h3 class="post-title"><a href="/post.php?post=${id}">${title}</a></h3>
             <p class="post-data">por
-                <a class="post-author" href="${userUrl}">${user}</a>
+                <a class="post-author" href="/user.php?user=${userid}">${user}</a>
                 en <a class="post-category" href="#">${category}</a></span>
                 <span class="post-date">${date}</span>
             </p>
@@ -41,11 +41,11 @@ window.onload = () => {
         let datos = await getLastPostsData();
 
         datos.forEach(post => {
-            mockupSmallPost(post.title, post.author, post.author_url, post.category, post.date, post.favs, post.comments);
+            mockupSmallPost(post.id, post.title, post.author, post.author_id, post.category, post.date, post.favs, post.comments);
             cantidadCargada += 1;
         });
     }
 
     //primera ejecucion
     addSmallPosts();
-}
+});

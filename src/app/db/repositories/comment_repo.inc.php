@@ -96,6 +96,68 @@ abstract class CommentRepository {
         return null;
     }
 
+    public static function getCommentVotes(CommentEntity $comment): int {
+        global $db;
+
+        $sql = "SELECT count(id) FROM votes WHERE comment = :c";
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':c' => $comment->getId()
+        ]);
+
+        if ($data = $statement->fetch()) {
+            return $data[0];
+        }
+
+        return 0;
+    }
+
+    public static function addCommentVote(CommentEntity $comment, UserEntity $user): bool {
+        global $db;
+
+        // Esta sentencia actualiza el bookmark, y si ya existe, no hace nada
+        $sql = 'INSERT INTO votes (user, comment) VALUES (:u, :c) ON DUPLICATE KEY UPDATE comment=:c';
+
+        $statement = $db->prepare($sql);
+
+        // devuelve si la sentencia se ha ejecutado correctamente
+        return $statement->execute([
+            ':u' =>          $user->getId(),
+            ':c' =>          $comment->getId()
+        ]);
+    }
+
+    public static function removeCommentVote(CommentEntity $comment, UserEntity $user): bool {
+        global $db;
+
+        // Esta sentencia actualiza el bookmark, y si ya existe, no hace nada
+        $sql = 'DELETE FROM votes WHERE user = :u AND comment = :c';
+
+        $statement = $db->prepare($sql);
+
+        // devuelve si la sentencia se ha ejecutado correctamente
+        return $statement->execute([
+            ':u' =>          $user->getId(),
+            ':c' =>          $comment->getId()
+        ]);
+    }
+
+    public static function doesUserVotedComment(CommentEntity $comment, UserEntity $user): bool {
+        global $db;
+
+        // Esta sentencia actualiza el bookmark, y si ya existe, no hace nada
+        $sql = 'SELECT user FROM votes WHERE user = :u AND comment = :c';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':u' =>          $user->getId(),
+            ':c' =>          $comment->getId()
+        ]);
+
+        return $statement->fetch() != null;
+    }
+
     /**
      * Obtiene la lista de comentarios de un post de forma paginada
      * @param PostEntity $post El Post
@@ -120,6 +182,23 @@ abstract class CommentRepository {
         }
 
         return $comments;
+    }
+
+    public static function getPostCommentNum(PostEntity $post): int {
+        global $db;
+
+        $sql = "SELECT count(id) FROM comments WHERE post = :p";
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':p' => $post->getId()
+        ]);
+
+        if ($data = $statement->fetch()) {
+            return $data[0];
+        }
+
+        return 0;
     }
 
     /**

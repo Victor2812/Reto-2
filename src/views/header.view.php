@@ -3,15 +3,15 @@
     <div class="navigation">
         <nav>
             <ul>
-                <li class="selected"><a href="#">Recientes</a></li>
-                <li><a href="#">Más comentados</a></li>
-                <li><a href="#">Más valorados</a></li>
+                <li><a class="selected" href="#">Recientes</a></li>
+                <li><a class="unselected" href="#">Más comentados</a></li>
+                <li><a class="unselected" href="#">Más valorados</a></li>
             </ul>
         </nav>
         <div class="rightnav">
             <div class="search">
                 <form action="">
-                    <label>Buscar <input type="text" placeholder="Texto o #tag"></label>
+                    <input type="text" placeholder="Buscar ej: consulta #tag">
                 </form>
             </div>
             <div class="user">
@@ -24,3 +24,5 @@
         </div>
     </div>
 </header>
+<?php include "partials/user_banner.php"; ?>
+<script src="js/userbanner.js"></script>
