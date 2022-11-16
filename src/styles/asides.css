@@ -1,0 +1,68 @@
+aside {
+    width: 100%;
+    height: 100%;
+
+    background-color: white;
+    padding: 2rem;
+}
+
+aside > div {
+    margin-bottom: 1rem;
+}
+
+aside h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+
+    padding-bottom: 0.25rem;
+    margin-bottom: 1rem;
+
+    border-bottom: 0.1rem solid black;
+}
+
+aside ul li {
+    list-style: none;
+    margin: 0.5rem 0;
+}
+
+aside ul li button.aside-category {
+    border: none;
+
+    font-size: 1rem;
+    text-align: left;
+
+    width: 100%;
+    padding: 1rem 2rem;
+
+    background-color: transparent;
+
+    cursor: pointer;
+}
+
+aside ul li button.aside-category:hover,
+aside ul li button.aside-category.selected {
+    background-color: var(--color-light-grey);
+}
+
+aside p.points {
+    text-align: center;
+    font-size: 10em;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+aside ul li a.user {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+
+aside ul li a.user:hover {
+    font-weight: 600;
+}
+
+aside ul li a.user img {
+    height: 3em;
+    margin-right: 1em;
+}

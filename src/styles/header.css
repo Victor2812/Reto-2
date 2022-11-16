@@ -1,0 +1,149 @@
+header {
+    width: 100%;
+    background-color: white;
+}
+
+header img.logo {
+    display: block;
+    max-width: 60%;
+
+    padding: 1.25rem 0;
+    margin: 0 auto;
+}
+
+header .navigation {
+    background-color: var(--color-medium-blue);
+    color: white;
+    display: flex;
+
+    flex-direction: column-reverse;
+    justify-content: space-between;
+
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+header .navigation nav {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .navigation nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+header .navigation nav ul li a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header .navigation nav ul li .selected,
+header .navigation nav ul li .unselected {
+    position: relative;
+}
+
+header .navigation nav ul li .unselected:after {
+
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -0.2rem;
+    height: 0.2rem;
+    width: 100%;
+    background-color: white;
+    
+    transform-origin: right;
+    transform: scaleX(0);
+
+}
+
+header .navigation nav ul li .unselected:hover:after {
+    transform-origin: left;
+    transform: scaleX(1);
+    transition: transform 0.2s ease-in-out;
+}
+
+header .navigation nav ul li .selected:after {
+
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -0.2rem;
+    height: 0.2rem;
+    width: 100%;
+    background-color: white;
+}
+
+
+
+header .navigation .rightnav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+header .navigation .rightnav .search {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+header .navigation .rightnav .search label {
+    display: none;
+}
+
+header .navigation .rightnav .search input[type=text] {
+    background-color: var(--color-search-blue);
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+}
+
+header .navigation .rightnav .user button {
+    background: none;
+    border: none;
+    padding-left: 0.5rem;
+}
+
+header .navigation .rightnav .user button svg {
+    width: 2rem;
+    height: 2rem;
+    color: white;
+}
+
+@media screen and (min-width: 900px) {
+    header img.logo {
+        max-width: 35rem;
+    }
+
+    header .navigation {
+        flex-direction: row;
+        justify-content: space-around;
+        font-size: 1rem;
+    }
+
+    header .navigation nav {
+        margin-top: 0;
+        justify-content: flex-start;
+    }
+
+    header .navigation nav ul li {
+        padding-right: 2rem;
+    }
+
+    header .navigation nav ul li .unselected:after {
+        bottom: -0.5rem;
+        height: 0.3rem;
+    }
+    
+    header .navigation nav ul li .selected:after {
+        bottom: -0.5rem;
+        height: 0.3rem;   
+    }
+}

@@ -1,0 +1,35 @@
+.content {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 1rem;
+
+    width: 90%;
+    min-height: 100vh;
+    margin: 1rem auto 0;
+}
+
+.content main {
+    grid-area: m;
+}
+
+.sidebar-left {
+    grid-area: l;
+    display: none;
+}
+
+.sidebar-right {
+    grid-area: r;
+}
+
+@media screen and (min-width: 900px) {
+
+    .content {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-areas: "l m m m r";
+    }
+
+    .sidebar-left {
+        display: block;
+    }
+
+}
