@@ -15,7 +15,7 @@
 - [ ] asideleft
     - [ ] tags
 - [ ] asideright:
-    - [ ] cargar info de db
+    - [x] cargar info de db
     - [ ] mostrar asideright en otras paginas (post.php)
 
 ## ordenar
