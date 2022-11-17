@@ -56,6 +56,31 @@ abstract class TagRepository {
         return null;
     }
 
+    /***
+     * Obtener todos las categorias existentes
+     * @return array
+     */
+    public static function getAllTags(): array{
+        global $db;
+
+        $tags = [];
+        $sql = "SELECT * FROM tags ORDER BY counter DESC";
+
+        $statement = $db->prepare($sql);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute();
+
+        while ($data = $statement->fetch()) {
+            $tags[] = new TagEntity(
+                intval($data['id']),
+                $data['name'],
+                intval($data['counter'])
+            );
+        }
+
+        return $tags;
+    }
+
     public static function getTagsByPostId(int $postId): array {
         global $db;
 

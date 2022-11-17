@@ -14,10 +14,14 @@
     </div>
     <div>
         <h3>TAGS</h3>
-        <p>Obtener los tags más usados</p>
-        <p>Problema: el contador de los tags no está programado</p>
-
         <ul>
+            <?php foreach (TagRepository::getAllTags() as $tag): ?>
+                <li>
+                    <button class="tag" data-id="<?php echo $tag->getId(); ?>">
+                        <?php echo $tag->getName(); ?>
+                    </button>
+                </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </aside>
