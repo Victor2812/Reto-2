@@ -1,7 +1,6 @@
 # Cosas para hacer
 
 ## páginas
-- [ ] editar usuario propio
 - [ ] ver publicaciones de usuario
 
 ## lógica
