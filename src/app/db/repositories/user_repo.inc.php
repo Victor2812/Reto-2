@@ -111,16 +111,66 @@ abstract class UserRepository {
     public static function getFollowersInfo(UserEntity $user) {
         global $db;
 
-        $sql = 'SELECT u.username FROM u users, f followers WHERE u.id = f.source AND u.id = :id';
+        $sql = 'SELECT u.* 
+                FROM users u, followers f 
+                WHERE u.id = f.source 
+                AND f.destination = :id';
 
         $statement = $db->prepare($sql);
         $statement->execute([
             'id' => $user->getId()
         ]);
 
-        $data[] = $statement->fetch();
+        $follower = [];
 
-        return $data;
+        while (($data = $statement->fetch())) {
+            $follower[] = new UserEntity(
+                $data['id'],
+                $data['username'],
+                $data['name'],
+                $data['surname'],
+                $data['image'],
+                strtotime($data['date']),
+                $data['points'],
+                $data['job'],
+                $data['passwd']
+            );
+        }
+
+        return $follower;
+    }
+
+    public static function getFollowingInfo(UserEntity $user) {
+        global $db;
+
+        $sql = 'SELECT u.*
+                FROM users u, followers f 
+                WHERE u.id = f.destination
+                AND f.source = :id';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            'id' => $user->getId()
+        ]);
+
+        $following = [];
+
+        while (($data = $statement->fetch())) {
+            $following[] = new UserEntity(
+                $data['id'],
+                $data['username'],
+                $data['name'],
+                $data['surname'],
+                $data['image'],
+                strtotime($data['date']),
+                $data['points'],
+                $data['job'],
+                $data['passwd']
+            );
+        }
+
+        
+        return $following;
     }
 
     public static function getFollowersCount(UserEntity $user) {
