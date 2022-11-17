@@ -9,7 +9,8 @@ if (!$post) {
 
 ?>
 
-<div class="content-new-post">
+<div class="content">
+    <?php include "partials/sidebar_left.php"; ?>
     <main>
 
         <div class="box-post">
@@ -52,14 +53,14 @@ if (!$post) {
 
         </div>
         
-        <div class="new-comment">
-            <form action="<?php echo current_file(); ?>" class="new-comment-form" method="POST" enctype="multipart/form-data">
-                <div class="new-comment-author">
+        <div>
+            <form action="<?php echo current_file(); ?>" method="POST" enctype="multipart/form-data">
+                <div class="flex-container">
                     <img src="img/user-default-image.svg" class="post-author-icon">
                     <p>Añade un comentario</p>
                 </div>
                 <textarea name="text" cols="30" rows="10" placeholder="Escribe aqui" required></textarea>
-                <div class="button-box">
+                <div class="flex-container">
                     <label for="new-comment-upload">
                         <?php include "img/upload.svg"; ?>
                         Añadir adjunto

@@ -1,7 +1,7 @@
 .small-post {
     width: 100%;
-    margin: 1.5rem;
-    padding: 0.5rem;
+    margin: 0.5rem 0;
+    padding: 1rem;
 
     background-color: white;
 }
@@ -19,25 +19,12 @@
     height: 3.5rem;
 }
 
-.small-post .post-head .post-info .post-title {
-    font-weight: bold;
-    margin-bottom: 0.25rem;
-}
 
 .small-post .post-head .post-info .post-title a {
     color: black;
     text-decoration: none;
 }
 
-.small-post .post-head .post-info .post-data {
-    margin-bottom: 0.25rem;
-}
-
-.small-post .post-head .post-info .post-data a {
-    color: grey;
-    font-weight: 600;
-    text-decoration: none;
-}
 
 .small-post .post-head .post-info .post-stats {
     display: flex;

@@ -19,14 +19,13 @@ window.addEventListener('load', () => {
 
         post.innerHTML = `<div class="post-head">
         <img src="img/user-default-image.svg" class="post-author-icon">
-        <div class="post-info">
-            <h3 class="post-title"><a href="/post.php?post=${id}">${title}</a></h3>
-            <p class="post-data">por
-                <a class="post-author" href="/user.php?user=${userid}">${user}</a>
-                en <a class="post-category" href="#">${category}</a></span>
+            <h3><a href="/post.php?post=${id}">${title}</a></h3>
+            <p class="data">por
+                <a href="/user.php?user=${userid}">${user}</a>
+                en <a href="#">${category}</a></span>
                 <span class="post-date">${date}</span>
             </p>
-            <div class="post-stats">
+            <div class="flex-container">
                 <span class="post-likes"><img src="img/favourite-stroke.svg"> ${favs}</span>
                 <span class="post-comments"><img  src="img/comment-stroke.svg"> ${comments}</span>
             </div>

@@ -1,7 +1,8 @@
-<div class="content-new-post">
+
+<div class="content noleft">
     <main>
-        <div class="new-post">
-            <form action="<?php echo current_file(); ?>" class="new-post-form" method="POST" enctype="multipart/form-data">
+        <div>
+            <form action="<?php echo current_file(); ?>" method="POST" enctype="multipart/form-data">
                 <label for="new-post-category">Categoría</label>
                 <div class="select-category">
                     <select name="category" id="new-post-category">
@@ -19,7 +20,7 @@
                 <label for="new-post-tags">Tags</label>
                 <input type="text" name="tags" id="new-post-tags" placeholder="tag1, tag2 ...">
                 <textarea name="text" cols="30" rows="10" placeholder="Escribe aqui" required></textarea>
-                <div class="button-box">
+                <div class="flex-container">
                     <label for="new-post-upload">
                         <?php include "img/upload.svg"; ?>
                         Añadir adjunto

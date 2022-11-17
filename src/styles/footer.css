@@ -1,16 +1,14 @@
 footer {
-    background-color: var(--color-dark-blue);
-    padding: 1em;
-    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    background-color: var(--color-dark-blue);
+    color: white;
+
+    padding: 1em;
     font-size: 70%;
-    margin-top: 2rem;
-    /*position: absolute;
-    bottom: 0;
-    width: 100%;*/
 }
 
 footer .logo-footer {
