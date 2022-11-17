@@ -52,7 +52,7 @@ function current_file() {
 /**
  * Obtiene el método HTTP usado
  */
-function get_method() {
+function get_method(): string {
     return $_SERVER['REQUEST_METHOD'];
 }
 
@@ -60,11 +60,22 @@ function get_method() {
  * Comprueba que los nombres de los parámetros estén en el post
  * @param array $names Nombres
  */
-function check_post_data(array $names) {
+function check_post_data(array $names, $post = null) {
+    if (!$post) {
+        $post = $_POST;
+    }
+
     foreach ($names as $name) {
-        if (!isset($_POST[$name])) {
+        if (!isset($post[$name])) {
             return false;
         }
     }
     return true;
+}
+
+function get_post(string $key, mixed $default = null, $post = null): mixed {
+    if (!$post) {
+        $post = $_POST;
+    }
+    return isset($post[$key]) ? $post[$key] : $default;
 }
