@@ -108,13 +108,13 @@ abstract class UserRepository {
         ]);
     }
 
-    public static function getFollowersInfo(UserEntity $user) {
+    public static function getFollowersInfo(UserEntity $user, int $limit = 4) {
         global $db;
 
-        $sql = 'SELECT u.* 
+        $sql = "SELECT u.* 
                 FROM users u, followers f 
                 WHERE u.id = f.source 
-                AND f.destination = :id';
+                AND f.destination = :id LIMIT $limit";
 
         $statement = $db->prepare($sql);
         $statement->execute([
@@ -140,13 +140,13 @@ abstract class UserRepository {
         return $follower;
     }
 
-    public static function getFollowingInfo(UserEntity $user) {
+    public static function getFollowingInfo(UserEntity $user, int $limit = 4) {
         global $db;
 
-        $sql = 'SELECT u.*
-                FROM users u, followers f 
-                WHERE u.id = f.destination
-                AND f.source = :id';
+        $sql = "SELECT u.*
+        FROM users u, followers f 
+        WHERE u.id = f.destination
+        AND f.source = :id LIMIT $limit";
 
         $statement = $db->prepare($sql);
         $statement->execute([
