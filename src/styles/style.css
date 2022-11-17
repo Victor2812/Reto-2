@@ -387,6 +387,10 @@ select:focus{ outline: none;}
     gap: 0.25rem;
 }
 
+#user-banner .user-info .user-data .user-job {
+    font-weight: bold;
+}
+
 #user-banner .user-info .user-data .user-date {
     font-size: 0.8rem;
 }
