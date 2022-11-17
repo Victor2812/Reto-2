@@ -9,12 +9,10 @@
             <div class="user_list">
                 <ul>
                     <?php 
-                        $user =  $GLOBALS['session']->getCurrentUser();
-                        $following_data = UserRepository::getFollowingInfo($user);
-                        foreach ($following_data as $following) {
-                            $seguidos = $following->getUsername();  
-                            echo "<li><div class='icon'></div>".$seguidos."</li>";                      
-                        }
+                        $user = $GLOBALS['session']->getCurrentUser();
+                        foreach (UserRepository::getFollowingInfo($user) as $following) {
+                             echo "<li><div class='icon'></div>".$following->getUsername()."</li>";
+                        }                    
                     ?>
                 </ul>
             </div>
@@ -25,10 +23,8 @@
                 <ul>
                     <?php 
                         $user = $GLOBALS['session']->getCurrentUser();
-                        $follower_data = UserRepository::getFollowersInfo($user);
-                        foreach ($follower_data as $follower) {
-                            $seguidor = $follower->getUsername();
-                            echo "<li><div class='icon'></div>".$seguidor."</li>";
+                        foreach (UserRepository::getFollowersInfo($user) as $follower) {
+                            echo "<li><div class='icon'></div>".$follower->getUsername()."</li>";
                         }
                     ?>
                 </ul>
