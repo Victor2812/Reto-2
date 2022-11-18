@@ -1,6 +1,6 @@
-const LAST_POST_URL = '/post_api.php';
-
 window.addEventListener('load', async () => {
+    const API_URL = '/post_api.php';
+
     let cantidadCargada = 0;
 
     function getCurrentPostId() {
@@ -10,7 +10,7 @@ window.addEventListener('load', async () => {
     }
 
     async function getLastCommentData() {
-        let res = await fetch(LAST_POST_URL + `?method=comments&post=${getCurrentPostId()}&offset=${cantidadCargada}`);
+        let res = await fetch(API_URL + `?method=comments&post=${getCurrentPostId()}&offset=${cantidadCargada}`);
         if (res.ok) {
             try {
                 return res.json();
@@ -61,6 +61,4 @@ window.addEventListener('load', async () => {
 
     //primera ejecucion
     addComment();
-
-
 });

@@ -23,7 +23,6 @@ abstract class TagRepository {
             if (($newTagId = $db->lastInsertId())) {
                 return new TagEntity($newTagId, $name, 0);
             } else {
-                print_r('error');
                 return null;
             }
         } else {
@@ -54,6 +53,31 @@ abstract class TagRepository {
             );
         }
         return null;
+    }
+
+    /**
+     * Obtener todos las categorias existentes limitasdas y ordenadas
+     * @return array
+     */
+    public static function getAllTags(int $limit = 10): array{
+        global $db;
+
+        $tags = [];
+        $sql = "SELECT * FROM tags ORDER BY counter DESC LIMIT $limit";
+
+        $statement = $db->prepare($sql);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute();
+
+        while ($data = $statement->fetch()) {
+            $tags[] = new TagEntity(
+                intval($data['id']),
+                $data['name'],
+                intval($data['counter'])
+            );
+        }
+
+        return $tags;
     }
 
     public static function getTagsByPostId(int $postId): array {

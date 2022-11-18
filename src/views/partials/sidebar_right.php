@@ -5,12 +5,15 @@
             <div class="points"><?php echo $GLOBALS['session']->getCurrentUser()->getPoints() ?></div>
         </div>
         <div class="aside_div">
-            <div class="title">AMIGOS</div>
+            <div class="title">SEGUIDOS</div>
             <div class="user_list">
                 <ul>
-                    <li><img src="../img/user-default-image.svg" alt="user_img"><p>miUsusario1</p></li>
-                    <li><img src="../img/user-default-image.svg" alt="user_img"><p>miUsuario1</p></li>
-                    <li><img src="../img/user-default-image.svg" alt="user_img"><p>miUsuario1</p></li>
+                    <?php 
+                        $user = $GLOBALS['session']->getCurrentUser();
+                        foreach (UserRepository::getFollowingInfo($user) as $following) {
+                             echo "<li><div class='icon'></div>".$following->getUsername()."</li>";
+                        }                    
+                    ?>
                 </ul>
             </div>
         </div>
@@ -18,11 +21,14 @@
             <div class="title">SEGUIDORES</div>
             <div class="user_list">
                 <ul>
-                    <li><img src="../img/user-default-image.svg" alt="user_img"><p>miUsusario1</p></li>
-                    <li><img src="../img/user-default-image.svg" alt="user_img"><p>miUsuario1</p></li>
-                    <li><img src="../img/user-default-image.svg" alt="user_img"><p>miUsuario1</p></li>
-                    </ul>
-                </div>
+                    <?php 
+                        $user = $GLOBALS['session']->getCurrentUser();
+                        foreach (UserRepository::getFollowersInfo($user) as $follower) {
+                            echo "<li><div class='icon'></div>".$follower->getUsername()."</li>";
+                        }
+                    ?>
+                </ul>
             </div>
+        </div>
     </div>
 </aside>

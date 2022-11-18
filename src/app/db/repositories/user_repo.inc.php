@@ -108,6 +108,71 @@ abstract class UserRepository {
         ]);
     }
 
+    public static function getFollowersInfo(UserEntity $user, int $limit = 4) {
+        global $db;
+
+        $sql = "SELECT u.* 
+                FROM users u, followers f 
+                WHERE u.id = f.source 
+                AND f.destination = :id LIMIT $limit";
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            'id' => $user->getId()
+        ]);
+
+        $follower = [];
+
+        while (($data = $statement->fetch())) {
+            $follower[] = new UserEntity(
+                $data['id'],
+                $data['username'],
+                $data['name'],
+                $data['surname'],
+                $data['image'],
+                strtotime($data['date']),
+                $data['points'],
+                $data['job'],
+                $data['passwd']
+            );
+        }
+
+        return $follower;
+    }
+
+    public static function getFollowingInfo(UserEntity $user, int $limit = 4) {
+        global $db;
+
+        $sql = "SELECT u.*
+        FROM users u, followers f 
+        WHERE u.id = f.destination
+        AND f.source = :id LIMIT $limit";
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            'id' => $user->getId()
+        ]);
+
+        $following = [];
+
+        while (($data = $statement->fetch())) {
+            $following[] = new UserEntity(
+                $data['id'],
+                $data['username'],
+                $data['name'],
+                $data['surname'],
+                $data['image'],
+                strtotime($data['date']),
+                $data['points'],
+                $data['job'],
+                $data['passwd']
+            );
+        }
+
+        
+        return $following;
+    }
+
     public static function getFollowersCount(UserEntity $user) {
         global $db;
 

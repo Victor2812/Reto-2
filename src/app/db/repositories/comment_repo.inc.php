@@ -99,7 +99,7 @@ abstract class CommentRepository {
     public static function getCommentVotes(CommentEntity $comment): int {
         global $db;
 
-        $sql = "SELECT count(id) FROM votes WHERE comment = :c";
+        $sql = "SELECT count(comment) FROM votes WHERE comment = :c";
 
         $statement = $db->prepare($sql);
         $statement->execute([
@@ -143,7 +143,7 @@ abstract class CommentRepository {
         ]);
     }
 
-    public static function doesUserVotedComment(CommentEntity $comment, UserEntity $user): bool {
+    public static function isCommentVoted(CommentEntity $comment, UserEntity $user): bool {
         global $db;
 
         // Esta sentencia actualiza el bookmark, y si ya existe, no hace nada

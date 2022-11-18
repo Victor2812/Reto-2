@@ -26,10 +26,16 @@ abstract class PostRepository {
         if (($newPostId = $db->lastInsertId())) {
             foreach ($tags as $tag) {
                 $s = $db->prepare("INSERT INTO tagged (tag, post) VALUES (:tag, :post)");
-                $s->execute([
+                $result = $s->execute([
                     ':tag' => $tag->getId(),
                     ':post' => $newPostId
                 ]);
+
+                // sumar 1 al uso de cada TAG
+                if ($result) {
+                    $tag->addCounter(1);
+                    TagRepository::update($tag);
+                }
             }
             
             return self::getPostById($newPostId);
