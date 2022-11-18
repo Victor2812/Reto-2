@@ -1,6 +1,6 @@
 <?php
-// Esta sentencia es obligatioria en cada archivo PHP de entrada
-require_once "app/__includie.inc.php";
+// Esta sentencia es obligatoria en cada archivo PHP de entrada (no views)
+require_once "app/__include.inc.php";
 
 needs_authentication();
 
