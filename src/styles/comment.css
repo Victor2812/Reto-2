@@ -9,6 +9,14 @@
     gap: 1rem;
 }
 
+.comment div p a {
+    font-weight: 600;
+}
+
+.comment div p a:hover {
+    color: grey;
+}
+
 .comment.subcomment {
     margin-left: 4rem;
 }

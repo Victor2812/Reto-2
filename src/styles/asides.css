@@ -36,7 +36,8 @@ aside ul li button.aside-category {
 
 aside ul li button.aside-category:hover,
 aside ul li button.aside-category.selected {
-    background-color: var(--color-light-grey);
+    background-color: var(--color-light-blue);
+    color: white;
 }
 
 /* ------------------------------------------------- */
@@ -54,10 +55,11 @@ aside .flex-container {
     gap: 1rem;
     align-items: center;
     margin-top: 1.5rem;
+    font-weight: 600;
 }
 
 aside .flex-container:hover {
-    font-weight: 600;
+    color: grey;
 }
 
 /* ------------------------------------------------- */

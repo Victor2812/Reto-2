@@ -129,7 +129,7 @@ button {
     display: inline-block;
     font-weight: 400;
 
-    border: none;
+    border: 0.1rem solid white;
     border-radius: 0.25rem;
     background-color: var(--color-light-blue);
     color: white;
@@ -138,6 +138,12 @@ button {
     padding: 0.2rem 0.7rem;
     margin: 0;
 
+}
+
+.tag:hover {
+    color: var(--color-light-blue);
+    background-color: white;
+    border: 0.1rem solid var(--color-light-blue);
 }
 
 /* ------------------------------------------------- */
@@ -151,6 +157,10 @@ button {
 .data a {
     color: grey;
     font-weight: 600;
+}
+
+.data a:hover {
+    text-decoration: underline;
 }
 
 .data a:visited {
@@ -263,6 +273,7 @@ form {
     gap: 1em;
     background-color: white;
     padding: 1rem;
+    margin-top: 1.5rem;
 }
 
 form label {
