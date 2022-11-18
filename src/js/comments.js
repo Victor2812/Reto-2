@@ -1,6 +1,6 @@
-const LAST_POST_URL = '/post_api.php';
-
 window.addEventListener('load', async () => {
+    const API_URL = '/post_api.php';
+
     let cantidadCargada = 0;
 
     function getCurrentPostId() {
@@ -10,7 +10,7 @@ window.addEventListener('load', async () => {
     }
 
     async function getLastCommentData() {
-        let res = await fetch(LAST_POST_URL + `?method=comments&post=${getCurrentPostId()}&offset=${cantidadCargada}`);
+        let res = await fetch(API_URL + `?method=comments&post=${getCurrentPostId()}&offset=${cantidadCargada}`);
         if (res.ok) {
             try {
                 return res.json();
@@ -24,23 +24,21 @@ window.addEventListener('load', async () => {
         comment.classList.add('comment');
 
         comment.innerHTML = `
-        <div class="comment-head">
-            <img src="img/user-default-image.svg" class="author-image">
-            <div class="comment-info">
-                <p><a class="author" href="${author_url}">${author}</a></p>
-                <p class="comment-date">${creation_date}</p>
+        <div class="flex-container">
+            <img src="img/user-default-image.svg" class="author-icon">
+            <div>
+                <p><a href="${author_url}">${author}</a></p>
+                <p class="data">${creation_date}</p>
             </div>
         </div>
-        <div class="comment-body">
+        <div>
             <p>${text}</p>
         </div>
-        <div class="comment-controls">
+        <div class="flex-container">
             <button class="button-white">
-                <img src="img/comment-stroke.svg">
                 Añadir comentario
             </button>
             <button  class="button-blue">
-                <img src="img/like-white.svg">
                 Me gusta
             </button>
         </div>`;
@@ -61,6 +59,4 @@ window.addEventListener('load', async () => {
 
     //primera ejecucion
     addComment();
-
-
 });

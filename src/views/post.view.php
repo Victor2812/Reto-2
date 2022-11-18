@@ -32,13 +32,14 @@ if (!$post) {
                         }
                     ?>
                 </ul>
+
                 <div class="flex-container">
-                    <button class="button-blue">
+                    <button class="button-blue" id="postfavbtn">
                         <?php include "img/favourite-stroke.svg"; ?>
-                        Añadir a favoritos
+                        <span></span>
                     </button>
                     <p>
-                        <?php //contadorfavoritos ?> favoritos
+                        <span id="postbookmarkcount"></span> favoritos
                     </p>
                 </div>
                 <div class="text">
@@ -73,6 +74,5 @@ if (!$post) {
     </main>
     <?php include "partials/sidebar_right.php"; ?>
 </div>
+<script src="js/postview.js"></script>
 <script src="js/comments.js"></script>
-
-mierda mierda mierda

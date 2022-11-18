@@ -38,6 +38,7 @@ h3 a:visited {
 }
 
 a {
+    color: black;
     text-decoration: none;
 }
 
@@ -118,6 +119,7 @@ button {
 .tags-list {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
     margin: 0.3rem 0;
 }
@@ -126,8 +128,8 @@ button {
     text-decoration: none;
     display: inline-block;
     font-weight: 400;
-    font-size: small;
 
+    border: none;
     border-radius: 0.25rem;
     background-color: var(--color-light-blue);
     color: white;
@@ -135,6 +137,7 @@ button {
     overflow: hidden;
     padding: 0.2rem 0.7rem;
     margin: 0;
+
 }
 
 /* ------------------------------------------------- */
@@ -160,6 +163,10 @@ button {
 
 .author-icon {
     height: 3rem;
+}
+
+.author-icon-big {
+    height: 5rem;
 }
 
 .little-icon {

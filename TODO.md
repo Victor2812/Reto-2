@@ -1,7 +1,6 @@
 # Cosas para hacer
 
 ## páginas
-- [ ] editar usuario propio
 - [ ] ver publicaciones de usuario
 
 ## lógica
@@ -9,13 +8,13 @@
 - [ ] subir comentario
 - [ ] votar comentario
 - [ ] cargar subcomentarios
-- [ ] añadir post a favoitos
-- [ ] contar cantidad de favoritos
-- [ ] 
+- [X] añadir post a favoitos
+- [X] contar cantidad de favoritos
+
 - [ ] asideleft
-    - [ ] tags
+    - [x] tags
 - [ ] asideright:
-    - [ ] cargar info de db
+    - [x] cargar info de db
     - [ ] mostrar asideright en otras paginas (post.php)
 
 ## ordenar

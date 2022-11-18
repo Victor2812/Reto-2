@@ -116,7 +116,7 @@ class UserEntity {
      * @param string $newSurname Apellido
      */
     public function setSurname(string|null $newSurname) {
-        $this->name = $newSurname;
+        $this->surname = $newSurname;
     }
 
     /**

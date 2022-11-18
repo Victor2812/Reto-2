@@ -71,13 +71,17 @@
     display: flex;
     align-items: center;
     margin: 1em;
+    padding: .2em;
 }
 
 .sidebar-right .right_container .aside_div .user_list ul li:hover {
     background-color: lightgrey;
 }
 
-.sidebar-right .right_container .aside_div .user_list ul li img {
+.sidebar-right .right_container .aside_div .user_list ul li .icon {
     height: 3em;
+    width: 3em;
     margin-right: 1em;
+    background-image: url("../img/user-default-image.svg");
+    background-repeat: no-repeat;
 }

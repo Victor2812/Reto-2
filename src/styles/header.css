@@ -102,6 +102,11 @@ header .navigation .rightnav .search input[type=text] {
     margin: 0 0.5rem;
 }
 
+header .navigation .rightnav .search input[type=text]::placeholder {
+    color: white;
+    opacity: 0.5;
+}
+
 header .navigation .rightnav .user button {
     background: none;
     border: none;

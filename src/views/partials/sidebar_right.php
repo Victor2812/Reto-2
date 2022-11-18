@@ -1,3 +1,9 @@
+<?php
+
+    $user = $GLOBALS['session']->getCurrentUser();
+
+?>
+
 <aside class="sidebar-right">
     <div>
         <h3>puntos</h3>
@@ -6,17 +12,17 @@
     <div>
         <h3>seguidos</h3>
         <ul>
-            <li><a href="#" class="user"><img src="../img/user-default-image.svg" alt="user_img"> Nombre 1</a></li>
-            <li><a href="#" class="user"><img src="../img/user-default-image.svg" alt="user_img"> Nombre 2</a></li>
-            <li><a href="#" class="user"><img src="../img/user-default-image.svg" alt="user_img"> Nombre 3</a></li>
+            <?php foreach (UserRepository::getFollowingInfo($user) as $following): ?>
+                <li><a href="#" class="flex-container"><img src="../img/user-default-image.svg" alt="user_img" class="author-icon"> <?php echo $following->getUsername(); ?></a></li>
+            <?php endforeach; ?>
         </ul>
     </div>
     <div>
         <h3>seguidores</h3>
         <ul>
-            <li><a href="#" class="user"><img src="../img/user-default-image.svg" alt="user_img"> Nombre 1</a></li>
-            <li><a href="#" class="user"><img src="../img/user-default-image.svg" alt="user_img"> Nombre 2</a></li>
-            <li><a href="#" class="user"><img src="../img/user-default-image.svg" alt="user_img"> Nombre 3</a></li>
+            <?php foreach (UserRepository::getFollowersInfo($user) as $follower): ?>
+                <li><a href="#" class="flex-container"><img src="../img/user-default-image.svg" alt="user_img" class="author-icon"> <?php echo $follower->getUsername(); ?></a></li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </aside>
