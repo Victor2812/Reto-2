@@ -10,7 +10,7 @@
         </nav>
         <div class="rightnav">
             <div class="search">
-                <form action="">
+                <form class="form-search" action="">
                     <input type="text" placeholder="Buscar ej: consulta #tag">
                 </form>
             </div>

@@ -1,34 +1,28 @@
+<?php
+
+    $user = $GLOBALS['session']->getCurrentUser();
+
+?>
+
 <aside class="sidebar-right">
-    <div class="right_container">
-        <div class="aside_div">
-            <div class="title">PUNTOS</div>
-            <div class="points"><?php echo $GLOBALS['session']->getCurrentUser()->getPoints() ?></div>
-        </div>
-        <div class="aside_div">
-            <div class="title">SEGUIDOS</div>
-            <div class="user_list">
-                <ul>
-                    <?php 
-                        $user = $GLOBALS['session']->getCurrentUser();
-                        foreach (UserRepository::getFollowingInfo($user) as $following) {
-                             echo "<li><div class='icon'></div>".$following->getUsername()."</li>";
-                        }                    
-                    ?>
-                </ul>
-            </div>
-        </div>
-        <div class="aside_div">
-            <div class="title">SEGUIDORES</div>
-            <div class="user_list">
-                <ul>
-                    <?php 
-                        $user = $GLOBALS['session']->getCurrentUser();
-                        foreach (UserRepository::getFollowersInfo($user) as $follower) {
-                            echo "<li><div class='icon'></div>".$follower->getUsername()."</li>";
-                        }
-                    ?>
-                </ul>
-            </div>
-        </div>
+    <div>
+        <h3>puntos</h3>
+        <p class="points"><?php echo $GLOBALS['session']->getCurrentUser()->getPoints() ?></p>
+    </div>
+    <div>
+        <h3>seguidos</h3>
+        <ul>
+            <?php foreach (UserRepository::getFollowingInfo($user) as $following): ?>
+                <li><a href="#" class="flex-container"><img src="../img/user-default-image.svg" alt="user_img" class="author-icon"> <?php echo $following->getUsername(); ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div>
+        <h3>seguidores</h3>
+        <ul>
+            <?php foreach (UserRepository::getFollowersInfo($user) as $follower): ?>
+                <li><a href="#" class="flex-container"><img src="../img/user-default-image.svg" alt="user_img" class="author-icon"> <?php echo $follower->getUsername(); ?></a></li>
+            <?php endforeach; ?>
+        </ul>
     </div>
 </aside>

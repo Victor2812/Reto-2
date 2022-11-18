@@ -1,0 +1,28 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--color-dark-blue);
+    color: white;
+
+    padding: 1em;
+    font-size: 70%;
+}
+
+footer .logo-footer {
+    max-width: 35%;
+    padding: 0.5rem;
+}
+
+@media screen and (min-width: 900px) {
+    footer {
+        font-size: small;
+    }
+
+    footer .logo-footer {
+        max-width: 18rem;
+        padding: 0.5rem;
+    }
+}
