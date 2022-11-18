@@ -17,5 +17,6 @@
     <ul class="user-actions">
         <li><a href="/logout.php">Cerrar sesión</a></a>
         <li><a href="" id="useredit">Editar perfil</button></a>
+        <li><a href="/post_user.php">Mis posts</a></li>
     </ul>
 </div>

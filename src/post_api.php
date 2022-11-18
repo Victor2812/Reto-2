@@ -31,6 +31,27 @@ function getLastPosts(int $offset): array {
     return $salida;
 }
 
+function getUserPosts(int $offset): array {
+    $salida[] = [];
+    $author = $GLOBALS['session']->getCurrentUser();
+    $posts = PostRepository::getPostsByAuthor($author);
+
+    foreach ($posts as $post) {
+        $salida[] = [
+            'id' => $post->getId(),
+            'title' => $post->getTitle(),
+            'category' => $post->getCategory()->getName(),
+            'author' => $post->getAuthor()->getUsername(),
+            'author_id' => $post->getAuthor()->getId(),
+            'date' => $post->getCreationDate()->format('Y-m-d H:i:s'),
+            'favs' => PostRepository::getPostBookmarkCount($post),
+            'comments' => CommentRepository::getPostCommentNum($post)
+        ];
+    }
+
+    return $salida;
+}
+
 function getLastComments(int $postId, int $offset): array {
     $salida = [];
 
@@ -59,6 +80,9 @@ $salida = [];
 switch ($method) {
     case 'lastPosts':
         $salida = getLastPosts($offset);
+        break;
+    case 'userPosts':
+        $salida = getUserPosts($offset);
         break;
     case 'comments':
         $salida = getLastComments($postId, $offset);
