@@ -104,7 +104,7 @@ abstract class PostRepository {
 
         $posts = [];
 
-        $sql = 'SELECT * FROM posts WHERE author = :author';
+        $sql = 'SELECT * FROM posts WHERE author = :author ORDER BY creation_date DESC';
 
         $statement = $db->prepare($sql);
         $statement->setFetchMode(PDO::FETCH_ASSOC);

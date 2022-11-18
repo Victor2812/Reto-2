@@ -178,10 +178,19 @@ switch ($method) {
         $salida = getLastPosts($offset);
         break;
     case 'userPosts':
-        $salid = getUserPosts($offset);
+        $salida = getUserPosts($offset);
         break;
-    case 'comments':
-        $salida = getLastComments($post, $offset);
+    case 'getCommentData':
+        $salida = getCommentData($comment);
+        break;
+    case 'toggleCommentVote':
+        $salida = toggleCommentVote($comment);
+        break;
+    case 'getBookmark':
+        $salida = getBookmarkData($post);
+        break;
+    case 'toggleBookmark':
+        $salida = toggleBookmark($post);
         break;
     default:
         // en caso de fallo mostrar un array vacío
