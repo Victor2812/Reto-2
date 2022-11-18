@@ -23,6 +23,10 @@ abstract class PostRepository {
             ':author' => $author->getId()
         ]);
 
+        // Añadir puntos 
+        $author->addPoints(5);
+        UserRepository::update($author);
+
         if (($newPostId = $db->lastInsertId())) {
             foreach ($tags as $tag) {
                 $s = $db->prepare("INSERT INTO tagged (tag, post) VALUES (:tag, :post)");

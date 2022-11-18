@@ -202,4 +202,30 @@ abstract class UserRepository {
 
         return $data;
     }
+
+    public static function getUserRanking(int $limit = 10) {
+        global $db;
+
+        $sql = "SELECT * FROM users ORDER BY points DESC LIMIT $limit";
+        $statement = $db->prepare($sql);
+        $statement->execute();
+
+        $usuarios = [];
+
+        while (($data = $statement->fetch())) {
+            $usuarios = new UserEntity(
+                $data['id'],
+                $data['username'],
+                $data['name'],
+                $data['surname'],
+                $data['image'],
+                strtotime($data['date']),
+                $data['points'],
+                $data['job'],
+                $data['passwd']
+            );
+        }
+
+        return $usuarios;
+    }
 }
