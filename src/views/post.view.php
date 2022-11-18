@@ -78,4 +78,3 @@ if (!$post) {
     </aside>
 </div>
 <script src="js/postview.js"></script>
-<script src="js/comments.js"></script>
