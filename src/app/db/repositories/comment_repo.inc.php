@@ -62,13 +62,20 @@ abstract class CommentRepository {
                 $comment = self::getCommentById(intval($comment));
             }
 
+            // Obtener el archivp
+            $file = $data['file'];
+            if ($file) {
+                $file = FileRepository::getFileById(intval($file));
+            }
+
             return new CommentEntity(
                 intval($data['id']),
                 $data['text'],
                 $author,
                 $post,
                 $comment,
-                strtotime($data['creation_date'])
+                strtotime($data['creation_date']),
+                $file,
             );
         }
 

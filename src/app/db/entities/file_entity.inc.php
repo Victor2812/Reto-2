@@ -23,6 +23,10 @@ class FileEntity {
     }
 
     public function getPath(): string {
-        return $this->path;
+        return UPLOADS_FOLDER . '/' . $this->path;
+    }
+
+    public function getRoute(): string {
+        return UPLOADS_ROUTE . '/' . $this->path;
     }
 }

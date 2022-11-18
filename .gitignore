@@ -1,0 +1,2 @@
+# Excluir todos los archivos subidos excepto el gitkeep
+!**/uploads/.gitkeep

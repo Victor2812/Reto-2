@@ -29,4 +29,25 @@ abstract class FileRepository {
 
         return null;
     }
+
+    public static function getFileById(int $id) {
+        global $db;
+
+        $sql = 'SELECT * FROM files WHERE id = :i';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':i' => $id
+        ]);
+
+        if ($data = $statement->fetch()) {
+            return new FileEntity(
+                $data['id'],
+                $data['name'],
+                $data['path']
+            );
+        }
+
+        return null;
+    }
 }
