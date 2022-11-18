@@ -8,11 +8,11 @@
 - [ ] subir comentario
 - [ ] votar comentario
 - [ ] cargar subcomentarios
-- [ ] añadir post a favoitos
-- [ ] contar cantidad de favoritos
-- [ ] 
+- [X] añadir post a favoitos
+- [X] contar cantidad de favoritos
+
 - [ ] asideleft
-    - [ ] tags
+    - [x] tags
 - [ ] asideright:
     - [x] cargar info de db
     - [ ] mostrar asideright en otras paginas (post.php)

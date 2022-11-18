@@ -35,12 +35,12 @@ if (!$post) {
                     ?>
                 </ul>
                 <div class="box-add-favourites">
-                    <button class="button-blue">
+                    <button class="button-blue" id="postfavbtn">
                         <?php include "img/favourite-stroke.svg"; ?>
-                        Añadir a favoritos
+                        <span></span>
                     </button>
                     <p>
-                        <?php //contadorfavoritos ?> favoritos
+                        <span id="postbookmarkcount"></span> favoritos
                     </p>
                 </div>
             </div>
@@ -77,4 +77,5 @@ if (!$post) {
 
     </aside>
 </div>
+<script src="js/postview.js"></script>
 <script src="js/comments.js"></script>

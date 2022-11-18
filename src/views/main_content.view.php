@@ -7,4 +7,4 @@
     </main>
     <?php include "partials/sidebar_right.php"; ?>
 </div>
-<script src="js/post.js"></script>
+<script src="js/maincontent.js"></script>

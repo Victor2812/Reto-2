@@ -99,7 +99,7 @@ abstract class CommentRepository {
     public static function getCommentVotes(CommentEntity $comment): int {
         global $db;
 
-        $sql = "SELECT count(id) FROM votes WHERE comment = :c";
+        $sql = "SELECT count(comment) FROM votes WHERE comment = :c";
 
         $statement = $db->prepare($sql);
         $statement->execute([
