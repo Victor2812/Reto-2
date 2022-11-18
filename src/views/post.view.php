@@ -14,10 +14,10 @@ if (!$post) {
     <main>
 
         <div class="box-post">
-            <div class="post-head">
+            <div class="flex-container-column">
                 <p><a href="#" class="category"><?php echo $post->getCategory()->getName(); ?></a></p>
                 <h2><?php echo $post->getTitle(); ?></h2>
-                <p class="post-data">
+                <p class="data">
                     <?php echo $post->getCreationDate()->format('Y-m-d H:i:s');?> por 
                     <a href="#"><?php echo $post->getAuthor()->getUsername();?></a> | 
                     <?php echo CommentRepository::getPostCommentNum($post); ?> comentarios 
@@ -32,7 +32,7 @@ if (!$post) {
                         }
                     ?>
                 </ul>
-                <div class="box-add-favourites">
+                <div class="flex-container">
                     <button class="button-blue">
                         <?php include "img/favourite-stroke.svg"; ?>
                         Añadir a favoritos
@@ -41,9 +41,9 @@ if (!$post) {
                         <?php //contadorfavoritos ?> favoritos
                     </p>
                 </div>
-            </div>
-            <div class="post-body">
-                <?php echo $post->getText();?>
+                <div class="text">
+                    <?php echo $post->getText();?>
+                </div>
             </div>
         </div>
 
@@ -56,7 +56,7 @@ if (!$post) {
         <div>
             <form action="<?php echo current_file(); ?>" method="POST" enctype="multipart/form-data">
                 <div class="flex-container">
-                    <img src="img/user-default-image.svg" class="post-author-icon">
+                    <img src="img/user-default-image.svg" class="author-icon">
                     <p>Añade un comentario</p>
                 </div>
                 <textarea name="text" cols="30" rows="10" placeholder="Escribe aqui" required></textarea>
@@ -74,3 +74,5 @@ if (!$post) {
     <?php include "partials/sidebar_right.php"; ?>
 </div>
 <script src="js/comments.js"></script>
+
+mierda mierda mierda
