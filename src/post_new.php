@@ -7,34 +7,6 @@ needs_authentication();
 
 if (get_method() == 'POST') {
 
-    /*
-        array(4) {
-                ["category"]=>
-                string(1) "1"
-                ["title"]=>
-                string(3) "qwe"
-                ["tags"]=>
-                string(3) "qwe"
-                ["text"]=>
-                string(3) "qwe"
-            }
-        array(1) {
-            ["upload"]=>
-                array(5) {
-                    ["name"]=>
-                    string(11) "aerbide.sql"
-                    ["type"]=>
-                    string(24) "application/octet-stream"
-                    ["tmp_name"]=>
-                    string(14) "/tmp/phpXTNt4A"
-                    ["error"]=>
-                    int(0)
-                    ["size"]=>
-                    int(7815)
-            }
-        }
-    */
-
     if (!check_post_data(['title', 'text', 'category'])) {
         redirect(current_file());
     }
@@ -42,7 +14,7 @@ if (get_method() == 'POST') {
     $title = $_POST['title'];
     $text = $_POST['text'];
     $category = abs(intval($_POST['category'])); // siempre será un numero no negativo
-    $tags = $_POST['tags'];
+    $tags = trim($_POST['tags']);
     $upload = isset($_POST['upload']) ? $_POST['upload'] : null;
 
     //obtener objetos de la base de datos
@@ -66,6 +38,8 @@ if (get_method() == 'POST') {
             // filtra los tags por si no se han añadido a base de datos
             return $tag != null;
         });
+    } else {
+        $tags = [];
     }
 
     //TODO: implementar subida de arhcivos a Post

@@ -1,0 +1,36 @@
+.comment {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 1rem;
+}
+
+.comment.subcomment {
+    margin-left: 4rem;
+}
+
+.comment .comment-head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.comment .comment-head .author-image {
+    width: 2.5em;
+    height: 2.5em;
+    margin-right: 1rem;
+}
+
+.comment .comment-head .comment-info .author {
+    color: black;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.comment .comment-body {
+    text-justify: auto;
+    margin: 1rem 0;
+}
+
+.comment .comment-controls button{
+    margin-right: 1rem;
+}
