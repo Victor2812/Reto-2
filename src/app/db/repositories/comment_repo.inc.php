@@ -143,7 +143,7 @@ abstract class CommentRepository {
         ]);
     }
 
-    public static function doesUserVotedComment(CommentEntity $comment, UserEntity $user): bool {
+    public static function isCommentVoted(CommentEntity $comment, UserEntity $user): bool {
         global $db;
 
         // Esta sentencia actualiza el bookmark, y si ya existe, no hace nada

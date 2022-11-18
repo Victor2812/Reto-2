@@ -6,7 +6,7 @@
 ## lógica
 - [ ] archivos de comentarios y posts
 - [ ] subir comentario
-- [ ] votar comentario
+- [X] votar comentario
 - [ ] cargar subcomentarios
 - [X] añadir post a favoitos
 - [X] contar cantidad de favoritos
@@ -15,7 +15,7 @@
     - [x] tags
 - [ ] asideright:
     - [x] cargar info de db
-    - [ ] mostrar asideright en otras paginas (post.php)
+    - [X] mostrar asideright en otras paginas (post.php)
 
 ## ordenar
 - [ ] css y html
