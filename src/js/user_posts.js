@@ -17,21 +17,22 @@ window.addEventListener('load', () => {
         let post = document.createElement('div');
         post.classList.add('small-post');
 
-        post.innerHTML = `<div class="post-head">
-        <img src="img/user-default-image.svg" class="post-author-icon">
-        <div class="post-info">
-            <h3 class="post-title"><a href="/post.php?post=${id}">${title}</a></h3>
-            <p class="post-data">por
-                <a class="post-author" href="/user.php?user=${userid}">${user}</a>
-                en <a class="post-category" href="#">${category}</a></span>
-                <span class="post-date">${date}</span>
-            </p>
-            <div class="post-stats">
-                <span class="post-likes"><img src="img/favourite-stroke.svg"> ${favs}</span>
-                <span class="post-comments"><img  src="img/comment-stroke.svg"> ${comments}</span>
+        post.innerHTML = `
+        <div class="flex-container">
+            <img src="img/user-default-image.svg" class="author-icon">
+            <div class="flex-container-column">
+                <h3><a href="/post.php?post=${id}">${title}</a></h3>
+                <p class="data">por
+                    <a href="/user.php?user=${userid}">${user}</a>
+                    en <a href="#">${category}</a></span>
+                    <span>${date}</span>
+                </p>
+                <div class="flex-container">
+                    <span><img src="img/favourite-stroke.svg" class="little-icon"> ${favs}</span>
+                    <span><img  src="img/comment-stroke.svg" class="little-icon"> ${comments}</span>
+                </div>
             </div>
-        </div>
-    </div>`;
+        </div>`;
 
         let content = document.querySelector('main .post-container');
         content.appendChild(post);
