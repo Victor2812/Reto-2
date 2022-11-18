@@ -9,17 +9,15 @@ if (!$post) {
 
 ?>
 
-<div class="content-new-post">
-    <aside class="sidebar-left">
-
-    </aside>
+<div class="content">
+    <?php include "partials/sidebar_left.php"; ?>
     <main>
 
         <div class="box-post">
-            <div class="post-head">
+            <div class="flex-container-column">
                 <p><a href="#" class="category"><?php echo $post->getCategory()->getName(); ?></a></p>
                 <h2><?php echo $post->getTitle(); ?></h2>
-                <p class="post-data">
+                <p class="data">
                     <?php echo $post->getCreationDate()->format('Y-m-d H:i:s');?> por 
                     <a href="#"><?php echo $post->getAuthor()->getUsername();?></a> | 
                     <?php echo CommentRepository::getPostCommentNum($post); ?> comentarios 
@@ -34,7 +32,8 @@ if (!$post) {
                         }
                     ?>
                 </ul>
-                <div class="box-add-favourites">
+
+                <div class="flex-container">
                     <button class="button-blue" id="postfavbtn">
                         <?php include "img/favourite-stroke.svg"; ?>
                         <span></span>
@@ -43,9 +42,9 @@ if (!$post) {
                         <span id="postbookmarkcount"></span> favoritos
                     </p>
                 </div>
-            </div>
-            <div class="post-body">
-                <?php echo $post->getText();?>
+                <div class="text">
+                    <?php echo $post->getText();?>
+                </div>
             </div>
         </div>
 
@@ -55,14 +54,14 @@ if (!$post) {
 
         </div>
         
-        <div class="new-comment">
-            <form action="<?php echo current_file(); ?>" class="new-comment-form" method="POST" enctype="multipart/form-data">
-                <div class="new-comment-author">
-                    <img src="img/user-default-image.svg" class="post-author-icon">
+        <div>
+            <form action="<?php echo current_file(); ?>" method="POST" enctype="multipart/form-data">
+                <div class="flex-container">
+                    <img src="img/user-default-image.svg" class="author-icon">
                     <p>Añade un comentario</p>
                 </div>
                 <textarea name="text" cols="30" rows="10" placeholder="Escribe aqui" required></textarea>
-                <div class="button-box">
+                <div class="flex-container">
                     <label for="new-comment-upload">
                         <?php include "img/upload.svg"; ?>
                         Añadir adjunto
@@ -73,8 +72,6 @@ if (!$post) {
             </form>
         </div>
     </main>
-    <aside class="sidebar-right">
-
-    </aside>
+    <?php include "partials/sidebar_right.php"; ?>
 </div>
 <script src="js/postview.js"></script>

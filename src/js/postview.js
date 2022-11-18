@@ -111,25 +111,24 @@ window.addEventListener('load', async (e) => {
 
         // se maqueta el contenido directamente dentro de la raiz del comentario
         comment.innerHTML = `
-        <div class="comment-head">
-            <img src="img/user-default-image.svg" class="author-image">
-            <div class="comment-info">
-                <p><a class="author" href="/user.php?user=${params.author_id}">${params.author}</a></p>
-                <p class="comment-date">${params.date}</p>
+        <div class="flex-container">
+            <img src="img/user-default-image.svg" class="author-icon">
+            <div>
+                <p><a href="/user.php?user=${params.author_id}">${params.author}</a></p>
+                <p class="data">${params.date}</p>
             </div>
         </div>
-        <div class="comment-body">
+        <div>
             <p>${params.text}</p>
         </div>
-        <div class="comment-controls">
+        <div class="flex-container">
             <button class="button-white">
-                <img src="img/comment-stroke.svg">
                 Añadir comentario
             </button>
             <button class="button-blue comment-like-btn">
-                <img src="img/like-white.svg">
-                <span></span>
+                <span>Me gusta</span>
             </button>
+            <p>${params.votes} likes</p>
         </div>
         `;
 
@@ -159,7 +158,7 @@ window.addEventListener('load', async (e) => {
         // actualizar el offset para la siguiente pedida de datos
         offsets.comments += comments.length;
     }
-   
+
 
     /*
         --------------------- INICIO ----------------------
