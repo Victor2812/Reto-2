@@ -3,7 +3,7 @@ const LAST_POST_URL = '/post_api.php';
 window.addEventListener('load', () => {
     let cantidadCargada = 0;
 
-    async function getUserData() {
+    async function getUserPosts() {
         let res = await fetch(LAST_POST_URL + `?method=userPosts&offset=${cantidadCargada}`);
         if (res.ok) {
             try {
@@ -38,7 +38,7 @@ window.addEventListener('load', () => {
     }
 
     async function addUserPosts() {
-        let datos = await getUserData();
+        let datos = await getUserPosts();
 
         datos.forEach(post => {
             mockupSmallPost(post.id, post.title, post.author, post.author_id, post.category, post.date, post.favs, post.comments);
