@@ -47,6 +47,12 @@ if (!$post) {
                     <?php echo $post->getText();?>
                 </div>
 
+                <?php if ($post->getFile()): ?>
+                    <div class="flex-container files">
+                        <a class="file" href="/download.php?file=<? echo $post->getFile()->getId(); ?>" target="_blank"><?php echo $post->getFile()->getName(); ?></a>
+                    </div>
+                <?php endif; ?>
+
                 <div class="flex-container">
                     <button class="button-blue" id="postcommentbtn">
                         <?php include "img/comment-stroke.svg"; ?>

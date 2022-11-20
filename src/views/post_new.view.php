@@ -3,6 +3,18 @@
     <main>
         <div>
             <form action="<?php echo current_file(); ?>" method="POST" enctype="multipart/form-data">
+                <div class="errors">
+                    <?php
+                    
+                        if (isset($GLOBALS['form_errors'])) {
+                            foreach($GLOBALS['form_errors'] as $error) {
+                                echo "<p>$error</p>";
+                            }
+                        }
+                    
+                    ?>
+                </div>
+
                 <label for="new-post-category">Categoría</label>
                 <div class="select-category">
                     <select name="category" id="new-post-category">

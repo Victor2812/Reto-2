@@ -256,6 +256,8 @@ window.addEventListener('load', async (e) => {
         <div>
             <p>${params.text}</p>
         </div>
+        <div class="flex-container files">
+        </div>
         <div class="flex-container buttons">
             <button class="button-blue comment-like-btn">
                 <span>Me gusta</span>
@@ -310,6 +312,16 @@ window.addEventListener('load', async (e) => {
 
             // maquetar botón
             comment.querySelector('.buttons')?.prepend(b);
+        }
+
+        // comprobar si el comentario tiene archivos
+        if (params.file) {
+            let container = comment.querySelector('.files');
+            let a = document.createElement('a');
+            a.href = "/downloads.php?file=" + params.file;
+            a.className = 'file';
+            a.innerText = params.file_name;
+            container.appendChild(a);
         }
 
         // añadir funcionalidad al botón de votar

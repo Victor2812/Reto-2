@@ -11,7 +11,7 @@ abstract class FileRepository {
     public static function createNewFile(string $name, string $path): FileEntity|null {
         global $db;
 
-        $sql = 'INSERT INTO files (name, path, comment) VALUES (:n, :p, :c)';
+        $sql = 'INSERT INTO files (name, path) VALUES (:n, :p)';
 
         $statement = $db->prepare($sql);
         $statement->execute([

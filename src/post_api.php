@@ -55,6 +55,8 @@ function getLastPosts(int $offset): array {
 function parseCommentToOutput(CommentEntity $comment, UserEntity $user): array {
     $parentPost = $comment->getPost();
     $parentComment = $comment->getComment();
+    $file = $comment->getFile();
+
     return [
         'id' => $comment->getId(),
         'text' => $comment->getText(),
@@ -66,6 +68,8 @@ function parseCommentToOutput(CommentEntity $comment, UserEntity $user): array {
         'subcomments_num' => CommentRepository::getCommentSubcommentNum($comment),
         'parent_post' => $parentPost ? $parentPost->getId() : null,
         'parent_comment' => $parentComment ? $parentComment->getId() : null,
+        'file' => $file ? $file->getId() : null,
+        'file_name' => $file ? $file->getName() : null,
     ];
 }
 
@@ -121,14 +125,22 @@ function newComment(PostEntity|null $post, CommentEntity|null $comment) {
 
     if (check_post_data(['text'])) {
         $text = $_POST['text'];
-        $new = null;
-        if ($post) {
-            $new = CommentRepository::createNewComment($text, $u, $post, null);
-        } else if ($comment) {
-            $new = CommentRepository::createNewComment($text, $u, null, $comment);
+        $file = null;
+
+        // obtener archivo si se ha subido
+        if (isset($_FILES['upload'])) {
+            $file = upload_file($_FILES['upload']);
+            if (!$file) {
+                return ['error' => 'No se ha podido subir el archivo'];
+            }
         }
 
-        // TODO: comprobar archivo
+        $new = null;
+        if ($post) {
+            $new = CommentRepository::createNewComment($text, $u, $post, null, $file);
+        } else if ($comment) {
+            $new = CommentRepository::createNewComment($text, $u, null, $comment, $file);
+        }
 
         // si no se ha podido crear el comentario devolver un mensaje de error
         return $new

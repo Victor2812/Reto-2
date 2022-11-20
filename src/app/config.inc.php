@@ -36,4 +36,6 @@ define('DB_PASS', 'Jm12345');
 define('LOGIN_ROUTE', '/login.php');
 
 define('UPLOADS_ROUTE', ' /uploads');
-define('UPLOADS_FOLDER', ' /var/www/html/uploads');
+define('UPLOADS_FOLDER', '/var/www/html/uploads');
+
+define('MAX_TAGS_PER_POST', 5);
