@@ -54,7 +54,7 @@ if (!$post) {
                     </button>
                 </div>
             </div>
-            <div class="add-comment"></div>
+            <div class="add-comment-form"></div>
         </div>
 
         <h3><?php echo CommentRepository::getPostCommentNum($post); ?> comentarios</h3>
