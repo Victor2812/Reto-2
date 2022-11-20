@@ -5,9 +5,9 @@
 
 ## lógica
 - [ ] archivos de comentarios y posts
-- [ ] subir comentario
+- [X] subir comentario
 - [X] votar comentario
-- [ ] cargar subcomentarios
+- [X] cargar subcomentarios
 - [X] añadir post a favoitos
 - [X] contar cantidad de favoritos
 

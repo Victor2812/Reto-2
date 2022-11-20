@@ -19,6 +19,11 @@ window.addEventListener('load', async (e) => {
     let postBookmarkCount = document.querySelector('#postbookmarkcount');
     let commentContainer = document.querySelector('main .box-comment');
 
+
+    /*
+        --------------------- FUNCIONES ÚTILES ----------------------
+    */
+
     function setButtonText(button, text) {
         let span = button.querySelector('span');
         span.innerText = text;
@@ -31,6 +36,10 @@ window.addEventListener('load', async (e) => {
         // limpiar y añadir error
         errors.innerHTML = '';
         errors.appendChild(p);
+    }
+
+    function findCommentSubcommentContainer(commentId) {
+        return commentContainer.querySelector(`.comment[data-comment='${commentId}'] .subcomments`);
     }
 
 
@@ -149,7 +158,7 @@ window.addEventListener('load', async (e) => {
                 mockupComment(r, true);
             } else if (r.parent_comment) {
                 // buscar contenedor de subcomentarios del comentario
-                let container = commentContainer.querySelector(`.comment[data-comment='${r.parent_comment}'] .subcomments`);
+                let container = findCommentSubcommentContainer(r.parent_comment);
                 if (container) {
                     // maquetar subcomentario al final
                     mockupComment(r, false, container);
@@ -330,6 +339,12 @@ window.addEventListener('load', async (e) => {
         --------------------- CARGAR COMENTARIOS ----------------------
     */
 
+    function addCommentDataToContainer(data, container) {
+        data.forEach(c => {
+            mockupComment(c, false, container);
+        });
+    }
+
     async function loadMoreCommentSubcomments(commentId) {
         // añadir offset del comentario actual si no existe
         if (!offsets.subcomments[commentId]) {
@@ -342,10 +357,9 @@ window.addEventListener('load', async (e) => {
         if (subcomments.error) {
             console.log(subcomments.error);
         } else {
-            let container = commentContainer.querySelector(`.comment[data-comment='${commentId}'] .subcomments`);
-            subcomments.forEach(sc => {
-                mockupComment(sc, false, container);
-            });
+            container = findCommentSubcommentContainer(commentId);
+            addCommentDataToContainer(subcomments, container);
+            // actualizar el offset
             offsets.subcomments[commentId] = subcomments.length;
         }
     }
@@ -357,10 +371,7 @@ window.addEventListener('load', async (e) => {
         if (comments.error) {
             console.log(comments.error);
         } else {
-            comments.forEach(c => {
-                // maquetar cada comentario
-                mockupComment(c);
-            });
+            addCommentDataToContainer(comments, commentContainer);
             // actualizar el offset para la siguiente pedida de datos
             offsets.comments += comments.length;
         }
