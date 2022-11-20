@@ -42,10 +42,19 @@ if (!$post) {
                         <span id="postbookmarkcount"></span> favoritos
                     </p>
                 </div>
+
                 <div class="text">
                     <?php echo $post->getText();?>
                 </div>
+
+                <div class="flex-container">
+                    <button class="button-blue" id="postcommentbtn">
+                        <?php include "img/comment-stroke.svg"; ?>
+                        Comentar
+                    </button>
+                </div>
             </div>
+            <div class="add-comment"></div>
         </div>
 
         <h3><?php echo CommentRepository::getPostCommentNum($post); ?> comentarios</h3>
@@ -54,8 +63,8 @@ if (!$post) {
 
         </div>
         
-        <div>
-            <form action="<?php echo current_file(); ?>" method="POST" enctype="multipart/form-data">
+        <!--div>
+            <form action="<?php /*echo current_file();*/ ?>" method="POST" enctype="multipart/form-data">
                 <div class="flex-container">
                     <img src="img/user-default-image.svg" class="author-icon">
                     <p>Añade un comentario</p>
@@ -63,14 +72,14 @@ if (!$post) {
                 <textarea name="text" cols="30" rows="10" placeholder="Escribe aqui" required></textarea>
                 <div class="flex-container">
                     <label for="new-comment-upload">
-                        <?php include "img/upload.svg"; ?>
+                        <?php /*include "img/upload.svg";*/ ?>
                         Añadir adjunto
                     </label>
                     <input type="file" id="new-comment-upload" name="upload">
                     <input class="button-blue" type="submit" value="Publicar comentario">
                 </div>
             </form>
-        </div>
+        </div-->
     </main>
     <?php include "partials/sidebar_right.php"; ?>
 </div>

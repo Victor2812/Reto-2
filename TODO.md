@@ -25,3 +25,10 @@
 - [ ] search
 - [ ] notificaciones
 - [ ] imagen de usuarios
+
+
+
+Si el comentario se sube OK quitar el formulario y maquetar el nuevo comentario
+Para maquetar el nuevo comentario pedir de nuevo los comentarios (enteros)
+Subir subcomentarios de los comentarios
+Maquetar subcomentarios

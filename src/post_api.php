@@ -49,6 +49,8 @@ function getLastPosts(int $offset): array {
  * @return array
  */
 function parseCommentToOutput(CommentEntity $comment, UserEntity $user): array {
+    $parentPost = $comment->getPost();
+    $parentComment = $comment->getComment();
     return [
         'id' => $comment->getId(),
         'text' => $comment->getText(),
@@ -57,25 +59,30 @@ function parseCommentToOutput(CommentEntity $comment, UserEntity $user): array {
         'date' => $comment->getCreationDate()->format('Y-m-d H:i:s'),
         'votes' => CommentRepository::getCommentVotes($comment),
         'is_voted' => CommentRepository::isCommentVoted($comment, $user),
-        'subcomments_num' => CommentRepository::getCommentSubcommentNum($comment)
+        'subcomments_num' => CommentRepository::getCommentSubcommentNum($comment),
+        'parent_post' => $parentPost ? $parentPost->getId() : null,
+        'parent_comment' => $parentComment ? $parentComment->getId() : null,
     ];
 }
 
-function getLastComments(PostEntity|null $post, int $offset): array {
+function getLastComments(PostEntity|null $post, CommentEntity|null $comment, int $offset): array {
     $u = $GLOBALS['session']->getCurrentUser();
-    $salida = [];
+    $comments = [];
 
     if ($post) {
         $comments = CommentRepository::getPostComments($post, $offset);
-
-        foreach ($comments as $comment) {
-            $salida[] = parseCommentToOutput($comment, $u);
-        }
+    } else if ($comment) {
+        $comments = CommentRepository::getCommentSubcomments($comment, $offset);
     } else {
-        $salida = ['error' => 'No se ha encontrado el post'];
+       return ['error' => 'Información no especificada'];
     }
 
-    return $salida;
+    $output = [];
+    foreach ($comments as $comment) {
+        $output[] = parseCommentToOutput($comment, $u);
+    }
+
+    return $output;
 }
 
 function getCommentData(CommentEntity|null $comment) {
@@ -85,6 +92,26 @@ function getCommentData(CommentEntity|null $comment) {
     } else {
         return ['error' => 'No se ha encontrado el comentario'];
     }
+}
+
+function newComment(PostEntity|null $post, CommentEntity|null $comment) {
+    $u = $GLOBALS['session']->getCurrentUser();
+
+    if (check_post_data(['text'])) {
+        $text = $_POST['text'];
+        $new = null;
+        if ($post) {
+            $new = CommentRepository::createNewComment($text, $u, $post, null);
+        } else if ($comment) {
+            $new = CommentRepository::createNewComment($text, $u, null, $comment);
+        }
+
+        // si no se ha podido crear el comentario devolver un mensaje de error
+        return $new
+            ? parseCommentToOutput($new, $u)
+            : ['error' => 'No se ha podido crear el comentario'];
+    }
+    return ['error' => 'No se ha podido añadir el comentario'];
 }
 
 function toggleCommentVote(CommentEntity|null $comment) {
@@ -157,10 +184,13 @@ switch ($method) {
         $salida = getLastPosts($offset);
         break;
     case 'getLastComments':
-        $salida = getLastComments($post, $offset);
+        $salida = getLastComments($post, $comment, $offset);
         break;
     case 'getCommentData':
         $salida = getCommentData($comment);
+        break;
+    case 'newComment':
+        $salida = newComment($post, $comment);
         break;
     case 'toggleCommentVote':
         $salida = toggleCommentVote($comment);
