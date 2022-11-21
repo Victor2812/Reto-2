@@ -25,18 +25,4 @@
             <?php endforeach; ?>
         </ul>
     </div>
-    <div class="ranking">
-        <h3>RANKING</h3>
-        <ul>
-            <?php 
-                foreach (UserRepository::getRankingInfo() as $ranking) {
-                    echo "<li class='flex-container'>
-                        <div>".$ranking->getPoints()."</div>
-                        <div>".$ranking->getUserName()."</div>
-                        <div>".$ranking->getJob()."</div>
-                    </li>";
-                }                    
-            ?>
-        </ul>
-    </div>
 </aside>

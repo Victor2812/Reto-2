@@ -204,12 +204,12 @@ abstract class UserRepository {
     }
 
 
-    public static function getRankingInfo(int $limit = 5) {
+    public static function getRankingInfo() {
         global $db;
 
         $sql = "SELECT *
         FROM users
-        ORDER BY points DESC LIMIT $limit";
+        ORDER BY points DESC";
 
         $statement = $db->prepare($sql);
         $statement->execute();
