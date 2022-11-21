@@ -79,3 +79,22 @@ function get_post(string $key, mixed $default = null, $post = null): mixed {
     }
     return isset($post[$key]) ? $post[$key] : $default;
 }
+
+/**
+ * Sube un archivo y lo guarda en base de datos
+ * @param array $file Los datos del archivo de $_FILE
+ * @return FileEntity|null Archivo
+ */
+function upload_file(array $file): FileEntity|null {
+    // obtener los datos del archiv
+    $name = $file['name'];
+    $tmp_name = $file['tmp_name'];
+    $new_name = uniqid(more_entropy: true);
+
+    // mover y comprobar que el archivo se ha movido correctamente
+    if (move_uploaded_file($tmp_name, UPLOADS_FOLDER . '/' . $new_name)) {
+        return FileRepository::createNewFile($name, $new_name);
+    }
+
+    return null;
+}

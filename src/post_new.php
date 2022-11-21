@@ -5,6 +5,19 @@ require_once "app/__include.inc.php";
 //necesita estar logeado para poder subir un post
 needs_authentication();
 
+// variables para la view
+$form_errors = [];
+
+function render() {
+    include_views([
+        "views/header.view.php",
+        "views/post_new.view.php",
+        "views/footer.view.php"
+    ]);
+
+    die();
+}
+
 if (get_method() == 'POST') {
 
     if (!check_post_data(['title', 'text', 'category'])) {
@@ -24,15 +37,22 @@ if (get_method() == 'POST') {
         //procesar los tags si hay
         $tags = explode(',', $tags);
 
+        if (count($tags) > MAX_TAGS_PER_POST) {
+            $form_errors[] = 'Demasiados tags';
+            render();
+        }
+
         $tags = array_filter(array_map(function ($tag) {
             // obtiene el nombre sin espacioes
             $name = str_replace(' ', '_', trim($tag));
 
-            //obtiene la tag de base de datos y si no existe la crea
-            if ($tag = TagRepository::getTagByName($name)) {
-                return $tag;
-            } else {
-                return TagRepository::createNewTag($name);
+            if (strlen($name) > 0) {
+                //obtiene la tag de base de datos y si no existe la crea
+                if ($tag = TagRepository::getTagByName($name)) {
+                    return $tag;
+                } else {
+                    return TagRepository::createNewTag($name);
+                }
             }
         }, $tags), function ($tag) {
             // filtra los tags por si no se han añadido a base de datos
@@ -42,25 +62,25 @@ if (get_method() == 'POST') {
         $tags = [];
     }
 
-    //TODO: implementar subida de arhcivos a Post
-
-
-    $post = PostRepository::createNewPost($title, $text, $category, $session->getCurrentUser(), $tags);
-
-    if ($post) {
-        //TODO: redireccionar a la página para ver el POST
-    } else {
-        //mostrar un error
+    // intentar subir el archivo
+    $file = null;
+    if (isset($_FILES['upload']) && $_FILES['upload']['size'] > 0) {
+        $file = upload_file($_FILES['upload']);
+        if (!$file) {
+            $form_errors[] = 'No se ha podido subir el archivo';
+            render();
+        }
     }
 
-    // quitar esto
-    redirect('/index.php');
+    // comproabr si el post se ha creado correctamente, sino mostrar un error
+    if ($post = PostRepository::createNewPost($title, $text, $category, $session->getCurrentUser(), $tags, $file)) {
+        $id = $post->getId();
+        redirect("/post.php?post=$id");
+    } else {
+        $form_errors[] = 'No se ha podido crear el post';
+    }
     
-} else {
-    include_views([
-        "views/header.view.php",
-        "views/post_new.view.php",
-        "views/footer.view.php"
-    ]);
 }
+
+render();
 ?>

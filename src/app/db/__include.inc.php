@@ -16,6 +16,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 require_once "entities/user_entity.inc.php";
 require_once "entities/tag_entity.inc.php";
 require_once "entities/category_entity.inc.php";
+require_once "entities/file_entity.inc.php";
 require_once "entities/post_entity.inc.php";
 require_once "entities/comment_entity.inc.php";
 
@@ -24,6 +25,7 @@ require_once "entities/comment_entity.inc.php";
 require_once "repositories/user_repo.inc.php";
 require_once "repositories/tag_repo.inc.php";
 require_once "repositories/category_repo.inc.php";
+require_once "repositories/file_repo.inc.php";
 require_once "repositories/post_repo.inc.php";
 require_once "repositories/comment_repo.inc.php";
 

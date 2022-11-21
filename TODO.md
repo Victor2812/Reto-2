@@ -5,9 +5,9 @@
 
 ## lógica
 - [ ] archivos de comentarios y posts
-- [ ] subir comentario
+- [X] subir comentario
 - [X] votar comentario
-- [ ] cargar subcomentarios
+- [X] cargar subcomentarios
 - [X] añadir post a favoitos
 - [X] contar cantidad de favoritos
 
@@ -25,3 +25,10 @@
 - [ ] search
 - [ ] notificaciones
 - [ ] imagen de usuarios
+
+
+
+Si el comentario se sube OK quitar el formulario y maquetar el nuevo comentario
+Para maquetar el nuevo comentario pedir de nuevo los comentarios (enteros)
+Subir subcomentarios de los comentarios
+Maquetar subcomentarios

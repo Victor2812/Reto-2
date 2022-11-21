@@ -14,8 +14,10 @@ class CommentEntity {
 
     private $date;
 
+    private $file;
+
     public function __construct(int $id, string $text, UserEntity $author,
-        PostEntity|null $post, CommentEntity|null $comment, int $date) {
+        PostEntity|null $post, CommentEntity|null $comment, int $date, FileEntity|null $file) {
 
             // el unico tipo en común es null, por lo tanto
             // se comprueba que los dos sean nulos
@@ -32,6 +34,8 @@ class CommentEntity {
 
             $this->date = new DateTime();
             $this->date->setTimeStamp($date);
+
+            $this->file = $file;
     }
 
     public function getId(): int {
@@ -60,6 +64,10 @@ class CommentEntity {
 
     public function getCreationDate(): DateTime {
         return $this->date;
+    }
+
+    public function getFile(): FileEntity|null {
+        return $this->file;
     }
 }
 

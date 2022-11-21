@@ -16,6 +16,10 @@ footer .logo-footer {
     padding: 0.5rem;
 }
 
+/* ------------------------------------------------- */
+                    /* MEDIA QUERYS */
+/* ------------------------------------------------- */
+
 @media screen and (min-width: 900px) {
     footer {
         font-size: small;
