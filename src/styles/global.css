@@ -281,6 +281,7 @@ form label {
 }
 
 form input[type="text"],
+form input[type="password"],
 form textarea {
     width: 100%;
     box-shadow: 0;
@@ -288,7 +289,8 @@ form textarea {
     border: 0.15rem solid lightgrey;
 }
 
-form input[type="text"] {
+form input[type="text"],
+form input[type="password"] {
     height: 2.1rem;
     font-family: 'Roboto';
     color: grey;
