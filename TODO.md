@@ -21,7 +21,7 @@
 - [ ] css y html
 
 ## para la ultima semana
-- [ ] ranking
+- [x ] ranking
 - [ ] search
 - [ ] notificaciones
 - [ ] imagen de usuarios

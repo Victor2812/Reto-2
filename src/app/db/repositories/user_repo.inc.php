@@ -212,18 +212,21 @@ abstract class UserRepository {
         ORDER BY points DESC LIMIT $limit";
 
         $statement = $db->prepare($sql);
+        $statement->execute();
 
         $ranking = [];
 
         while (($data = $statement->fetch())) {
             $ranking[] = new UserEntity(
-                $data['points'],
+                $data['id'],
                 $data['username'],
                 $data['name'],
                 $data['surname'],
                 $data['image'],
                 strtotime($data['date']),
-                $data['job']
+                $data['points'],
+                $data['job'],
+                $data['passwd']
             );
         }
         return $ranking;
