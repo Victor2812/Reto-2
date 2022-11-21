@@ -23,12 +23,16 @@ $comment = isset($_GET['comment'])
 
 
 // Funciones
+/**
+ * Obtiene los Posts más recientes ordenados
+ * @param int $offset Offset para la consulta
+ */
 function getLastPosts(int $offset): array {
-    $salida = [];
+    $output = [];
     $posts = PostRepository::getLastPosts($offset);
 
     foreach($posts as $post) {
-        $salida[] = [
+        $output[] = [
             'id' => $post->getId(),
             'title' => $post->getTitle(),
             'category' => $post->getCategory()->getName(),
@@ -40,7 +44,7 @@ function getLastPosts(int $offset): array {
         ];
     }
 
-    return $salida;
+    return $output;
 }
 
 /**
@@ -49,6 +53,10 @@ function getLastPosts(int $offset): array {
  * @return array
  */
 function parseCommentToOutput(CommentEntity $comment, UserEntity $user): array {
+    $parentPost = $comment->getPost();
+    $parentComment = $comment->getComment();
+    $file = $comment->getFile();
+
     return [
         'id' => $comment->getId(),
         'text' => $comment->getText(),
@@ -57,27 +65,46 @@ function parseCommentToOutput(CommentEntity $comment, UserEntity $user): array {
         'date' => $comment->getCreationDate()->format('Y-m-d H:i:s'),
         'votes' => CommentRepository::getCommentVotes($comment),
         'is_voted' => CommentRepository::isCommentVoted($comment, $user),
-        'subcomments_num' => CommentRepository::getCommentSubcommentNum($comment)
+        'subcomments_num' => CommentRepository::getCommentSubcommentNum($comment),
+        'parent_post' => $parentPost ? $parentPost->getId() : null,
+        'parent_comment' => $parentComment ? $parentComment->getId() : null,
+        'file' => $file ? $file->getId() : null,
+        'file_name' => $file ? $file->getName() : null,
     ];
 }
 
-function getLastComments(PostEntity|null $post, int $offset): array {
+/**
+ * Obtiene los comentarios más recientes ordenados
+ * @param PostEntity|null $post Obtener los comentarios de este post
+ * @param CommentEntity|null $comment Obtener los subcomentarios de este comentario
+ * @param int $offset Offset para la consulta
+ * @return array Lista de datos
+ */
+function getLastComments(PostEntity|null $post, CommentEntity|null $comment, int $offset): array {
     $u = $GLOBALS['session']->getCurrentUser();
-    $salida = [];
+    $comments = [];
 
     if ($post) {
         $comments = CommentRepository::getPostComments($post, $offset);
-
-        foreach ($comments as $comment) {
-            $salida[] = parseCommentToOutput($comment, $u);
-        }
+    } else if ($comment) {
+        $comments = CommentRepository::getCommentSubcomments($comment, $offset);
     } else {
-        $salida = ['error' => 'No se ha encontrado el post'];
+       return ['error' => 'Información no especificada'];
     }
 
-    return $salida;
+    $output = [];
+    foreach ($comments as $comment) {
+        $output[] = parseCommentToOutput($comment, $u);
+    }
+
+    return $output;
 }
 
+/**
+ * Obtiene la información de un comentario
+ * @param CommentEntity|null $comment Comentario
+ * @return array Lista de datos
+ */
 function getCommentData(CommentEntity|null $comment) {
     $u = $GLOBALS['session']->getCurrentUser();
     if ($comment) {
@@ -87,9 +114,50 @@ function getCommentData(CommentEntity|null $comment) {
     }
 }
 
+/**
+ * Publicar un nuevo comentario
+ * @param PostEntity|null $post Comentrio de este post
+ * @param CommentEntity|null $comment Subcomentario de este comentario
+ * @return array Lista de datos
+ */
+function newComment(PostEntity|null $post, CommentEntity|null $comment) {
+    $u = $GLOBALS['session']->getCurrentUser();
+
+    if (check_post_data(['text'])) {
+        $text = $_POST['text'];
+        $file = null;
+
+        // obtener archivo si se ha subido
+        if (isset($_FILES['upload'])) {
+            $file = upload_file($_FILES['upload']);
+            if (!$file) {
+                return ['error' => 'No se ha podido subir el archivo'];
+            }
+        }
+
+        $new = null;
+        if ($post) {
+            $new = CommentRepository::createNewComment($text, $u, $post, null, $file);
+        } else if ($comment) {
+            $new = CommentRepository::createNewComment($text, $u, null, $comment, $file);
+        }
+
+        // si no se ha podido crear el comentario devolver un mensaje de error
+        return $new
+            ? parseCommentToOutput($new, $u)
+            : ['error' => 'No se ha podido crear el comentario'];
+    }
+    return ['error' => 'No se ha podido añadir el comentario'];
+}
+
+/**
+ * Actualizar el voto del usuario autenticado sobre el comentario
+ * @param CommentEntity|null $comment Comentario
+ * @return array Lista de datos
+ */
 function toggleCommentVote(CommentEntity|null $comment) {
     $u = $GLOBALS['session']->getCurrentUser();
-    $salida = [];
+    $output = [];
 
     if ($comment) {
         // comprobar si el comentario está votado
@@ -102,36 +170,46 @@ function toggleCommentVote(CommentEntity|null $comment) {
             CommentRepository::addCommentVote($comment, $u);
         }
 
-        $salida = ['is_voted' => !$v];
+        $output = ['is_voted' => !$v];
     } else {
-        $salida = ['error' => 'No se ha encontrado el comentario'];
+        $output = ['error' => 'No se ha encontrado el comentario'];
     }
 
-    return $salida;
+    return $output;
 }
 
+/**
+ * Obtener la información de favoritos del post
+ * @param PostEntity|null $post Post
+ * @return array Lista de datos
+ */
 function getBookmarkData(PostEntity|null $post): array {
     $u = $GLOBALS['session']->getCurrentUser();
-    $salida = [];
+    $output = [];
 
     if ($post) {
         $b = PostRepository::isPostBookmarked($u, $post);
         $c = PostRepository::getPostBookmarkCount($post);
 
-        $salida = [
+        $output = [
             'bookmarked' => $b,
             'count' => $c
         ];
     } else {
-        $salida = ['error' => 'No se ha encontrado el post'];
+        $output = ['error' => 'No se ha encontrado el post'];
     }
 
-    return $salida;
+    return $output;
 }
 
+/**
+ * Actualizar el favorito del usuario autenticado sobre el Post
+ * @param PostEntity|null $post Post
+ * @return array Lista de datos
+ */
 function toggleBookmark(PostEntity|null $post) {
     $u = $GLOBALS['session']->getCurrentUser();
-    $salida = [];
+    $output = [];
 
     if ($post) {
         $b = PostRepository::isPostBookmarked($u, $post);
@@ -140,42 +218,43 @@ function toggleBookmark(PostEntity|null $post) {
         } else {
             PostRepository::addPostToUserBookmark($post, $u);
         }
-        $salida = ['message' => 'ok'];
+        $output = ['message' => 'ok'];
     } else {
-        $salida = ['error' => 'No se ha encontrado el post'];
+        $output = ['error' => 'No se ha encontrado el post'];
     }
 
-    return $salida;
+    return $output;
 }
 
 
-$salida = [];
+$output = [];
 
 // Comprobar el metodo solicitado
 switch ($method) {
     case 'lastPosts':
-        $salida = getLastPosts($offset);
+        $output = getLastPosts($offset);
         break;
     case 'getLastComments':
-        $salida = getLastComments($post, $offset);
+        $output = getLastComments($post, $comment, $offset);
         break;
     case 'getCommentData':
-        $salida = getCommentData($comment);
+        $output = getCommentData($comment);
+        break;
+    case 'newComment':
+        $output = newComment($post, $comment);
         break;
     case 'toggleCommentVote':
-        $salida = toggleCommentVote($comment);
+        $output = toggleCommentVote($comment);
         break;
     case 'getBookmark':
-        $salida = getBookmarkData($post);
+        $output = getBookmarkData($post);
         break;
     case 'toggleBookmark':
-        $salida = toggleBookmark($post);
+        $output = toggleBookmark($post);
         break;
     default:
         // en caso de fallo mostrar un array vacío
         break;
 }
 
-echo json_encode($salida);
-
-
+echo json_encode($output);

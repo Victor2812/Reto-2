@@ -38,8 +38,13 @@ class PostEntity {
      */
     private $tags;
 
+    /**
+     * @var FileEntity|null
+     */
+    private $file;
+
     public function __construct(int $id, string $title, string $text, CategoryEntity $category,
-        int $date, UserEntity $author, array $tags) {
+        int $date, UserEntity $author, array $tags, FileEntity|null $file) {
 
             $this->id = $id;
             $this->title = $title;
@@ -51,6 +56,8 @@ class PostEntity {
 
             $this->author = $author;
             $this->tags = $tags;
+
+            $this->file = $file;
     }
 
     /**
@@ -139,6 +146,13 @@ class PostEntity {
      */
     public function setTags(array $tags) {
         $this->tags = $tags;
+    }
+
+    /**
+     * Obtener el archivo asociado al post
+     */
+    public function getFile(): FileEntity|null {
+        return $this->file;
     }
 }
 

@@ -11,7 +11,7 @@ abstract class CommentRepository {
      * @param CommentEntity|null $comment Comentario padre (puede ser nulo)
      */
     public static function createNewComment(string $text, UserEntity $author,
-        PostEntity|null $post, CommentEntity|null $comment): CommentEntity|null {
+        PostEntity|null $post, CommentEntity|null $comment, FileEntity|null $file = null): CommentEntity|null {
         
             global $db;
 
@@ -22,14 +22,15 @@ abstract class CommentRepository {
                 throw new Exception("Es necesario especificar un post o un comentario", 1);
             }
 
-            $sql = 'INSERT INTO comments (text, author, post, comment) VALUES (:t, :a, :p, :c)';
+            $sql = 'INSERT INTO comments (text, author, post, comment, file) VALUES (:t, :a, :p, :c, :f)';
 
             $statement = $db->prepare($sql);
             $statement->execute([
                 ':t' => $text,
                 ':a' => $author->getId(),
                 ':p' => $post ? $post->getId() : null,
-                ':c' => $comment ? $comment->getId() : null
+                ':c' => $comment ? $comment->getId() : null,
+                ':f' => $file ? $file->getId() : null
             ]);
 
             if (($commentId = $db->lastInsertId())) {
@@ -62,13 +63,20 @@ abstract class CommentRepository {
                 $comment = self::getCommentById(intval($comment));
             }
 
+            // Obtener el archivp
+            $file = $data['file'];
+            if ($file) {
+                $file = FileRepository::getFileById(intval($file));
+            }
+
             return new CommentEntity(
                 intval($data['id']),
                 $data['text'],
                 $author,
                 $post,
                 $comment,
-                strtotime($data['creation_date'])
+                strtotime($data['creation_date']),
+                $file,
             );
         }
 
@@ -170,7 +178,7 @@ abstract class CommentRepository {
 
         $comments = [];
 
-        $sql = "SELECT * FROM comments WHERE post = :p LIMIT $offset, $limit";
+        $sql = "SELECT * FROM comments WHERE post = :p ORDER BY creation_date DESC LIMIT $offset, $limit";
 
         $statement = $db->prepare($sql);
         $statement->execute([

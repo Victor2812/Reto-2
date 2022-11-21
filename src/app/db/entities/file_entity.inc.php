@@ -8,13 +8,10 @@ class FileEntity {
 
     private $path;
 
-    private $comment;
-
-    public function __construct(int $id, string $name, string $path, CommentEntity $comment) {
+    public function __construct(int $id, string $name, string $path) {
         $this->id = $id;
         $this->name = $name;
         $this->path = $path;
-        $this->comment = $comment;
     }
 
     public function getId(): int {
@@ -26,10 +23,10 @@ class FileEntity {
     }
 
     public function getPath(): string {
-        return $this->path;
+        return UPLOADS_FOLDER . '/' . $this->path;
     }
 
-    public function getComment(): CommentEntity {
-        return $this->comment;
+    public function getRoute(): string {
+        return UPLOADS_ROUTE . '/' . $this->path;
     }
 }

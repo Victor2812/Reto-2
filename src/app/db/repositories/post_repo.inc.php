@@ -11,16 +11,19 @@ abstract class PostRepository {
      * @param array $tags Tags del post
      * @return PostEntity|null
      */
-    public static function createNewPost(string $title, string $text, CategoryEntity $category, UserEntity $author, array $tags): PostEntity|null {
+    public static function createNewPost(string $title, string $text, CategoryEntity $category,
+        UserEntity $author, array $tags, FileEntity|null $file): PostEntity|null {
+
         global $db;
 
-        $sql = "INSERT INTO posts (title, text, category, author) VALUES (:title, :text, :category, :author)";
+        $sql = "INSERT INTO posts (title, text, category, author, file) VALUES (:title, :text, :category, :author, :file)";
         $statement = $db->prepare($sql);
         $statement->execute([
             ':title' => $title,
             ':text' => $text,
             ':category' => $category->getId(),
-            ':author' => $author->getId()
+            ':author' => $author->getId(),
+            ':file' => $file ? $file->getId() : null,
         ]);
 
         if (($newPostId = $db->lastInsertId())) {
@@ -51,6 +54,9 @@ abstract class PostRepository {
         $categ = CategoryRepository::getCategoryById(intval($data['category']));
         $author = UserRepository::getUserById(intval($data['author']));
         $tags = TagRepository::getTagsByPostId(intval($data['id']));
+        $file = $data['file']
+            ? $file = FileRepository::getFileById(intval($data['file']))
+            : null;
 
         if ($categ && $author) {
             return new PostEntity(
@@ -60,7 +66,8 @@ abstract class PostRepository {
                 $categ,
                 strtotime($data['creation_date']),
                 $author,
-                $tags
+                $tags,
+                $file
             );
         }
 
