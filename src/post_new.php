@@ -73,7 +73,7 @@ if (get_method() == 'POST') {
     }
 
     // comproabr si el post se ha creado correctamente, sino mostrar un error
-    if ($post = PostRepository::createNewPost($title, $text, $category, $session->getCurrentUser(), $tags, $file)) {
+    if (($post = PostRepository::createNewPost($title, $text, $category, $session->getCurrentUser(), $tags, $file))) {
         $id = $post->getId();
         redirect("/post.php?post=$id");
     } else {

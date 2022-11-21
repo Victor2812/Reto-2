@@ -47,6 +47,27 @@ function getLastPosts(int $offset): array {
     return $output;
 }
 
+function getUserPosts(int $offset): array {
+    $salida[] = [];
+    $author = $GLOBALS['session']->getCurrentUser();
+    $posts = PostRepository::getPostsByAuthor($author);
+
+    foreach ($posts as $post) {
+        $salida[] = [
+            'id' => $post->getId(),
+            'title' => $post->getTitle(),
+            'category' => $post->getCategory()->getName(),
+            'author' => $post->getAuthor()->getUsername(),
+            'author_id' => $post->getAuthor()->getId(),
+            'date' => $post->getCreationDate()->format('Y-m-d H:i:s'),
+            'favs' => PostRepository::getPostBookmarkCount($post),
+            'comments' => CommentRepository::getPostCommentNum($post)
+        ];
+    }
+
+    return $salida;
+}
+
 /**
  * Convierte un comentario en un array de datos
  * @param CommentEntity $comment Comentario
@@ -236,6 +257,8 @@ switch ($method) {
         break;
     case 'getLastComments':
         $output = getLastComments($post, $comment, $offset);
+    case 'userPosts':
+        $salida = getUserPosts($offset);
         break;
     case 'getCommentData':
         $output = getCommentData($comment);

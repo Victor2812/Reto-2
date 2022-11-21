@@ -26,6 +26,10 @@ abstract class PostRepository {
             ':file' => $file ? $file->getId() : null,
         ]);
 
+        // Añadir puntos 
+        $author->addPoints(5);
+        UserRepository::update($author);
+
         if (($newPostId = $db->lastInsertId())) {
             foreach ($tags as $tag) {
                 $s = $db->prepare("INSERT INTO tagged (tag, post) VALUES (:tag, :post)");
@@ -107,7 +111,7 @@ abstract class PostRepository {
 
         $posts = [];
 
-        $sql = 'SELECT * FROM posts WHERE author = :author';
+        $sql = 'SELECT * FROM posts WHERE author = :author ORDER BY creation_date DESC';
 
         $statement = $db->prepare($sql);
         $statement->setFetchMode(PDO::FETCH_ASSOC);

@@ -318,9 +318,10 @@ window.addEventListener('load', async (e) => {
         if (params.file) {
             let container = comment.querySelector('.files');
             let a = document.createElement('a');
-            a.href = "/downloads.php?file=" + params.file;
+            a.href = "/download.php?file=" + params.file;
             a.className = 'file';
             a.innerText = params.file_name;
+            a.target = '_blank';
             container.appendChild(a);
         }
 
