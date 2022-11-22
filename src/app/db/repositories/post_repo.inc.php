@@ -26,10 +26,6 @@ abstract class PostRepository {
             ':file' => $file ? $file->getId() : null,
         ]);
 
-        // Añadir puntos 
-        $author->addPoints(5);
-        UserRepository::update($author);
-
         if (($newPostId = $db->lastInsertId())) {
             foreach ($tags as $tag) {
                 $s = $db->prepare("INSERT INTO tagged (tag, post) VALUES (:tag, :post)");
@@ -44,10 +40,13 @@ abstract class PostRepository {
                     TagRepository::update($tag);
                 }
             }
-            
+
+            // Añadir puntos 
+            $author->addPoints(5);
+            UserRepository::update($author);
+
             return self::getPostById($newPostId);
         }
-
         return null;
     }
 
@@ -104,14 +103,16 @@ abstract class PostRepository {
     /**
      * Obtiene un post por su ID
      * @param int $id ID del post
+     * @param int $offset A partir de qué post índice se quiere cargar
+     * @param int $limit Cuántos posts se quieren cargar
      * @return PostEntity|null
      */
-    public static function getPostsByAuthor(UserEntity $author): array {
+    public static function getPostsByAuthor(UserEntity $author, int $offset, int $limit = 15): array {
         global $db;
 
         $posts = [];
 
-        $sql = 'SELECT * FROM posts WHERE author = :author ORDER BY creation_date DESC';
+        $sql = "SELECT * FROM posts WHERE author = :author ORDER BY creation_date DESC LIMIT $offset, $limit;";
 
         $statement = $db->prepare($sql);
         $statement->setFetchMode(PDO::FETCH_ASSOC);

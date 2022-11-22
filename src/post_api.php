@@ -21,8 +21,27 @@ $comment = isset($_GET['comment'])
     ? CommentRepository::getCommentById(abs(intval($_GET['comment'])))
     : null;
 
+// obtener usuario específico si se necesita
+$user = isset($_GET['user'])
+    ? UserRepository::getUserById(abs(intval($_GET['user'])))
+    : null;
+
 
 // Funciones
+
+function parsePostToOutput(PostEntity $post) {
+    return [
+        'id' => $post->getId(),
+        'title' => $post->getTitle(),
+        'category' => $post->getCategory()->getName(),
+        'author' => $post->getAuthor()->getUsername(),
+        'author_id' => $post->getAuthor()->getId(),
+        'date' => $post->getCreationDate()->format('Y-m-d H:i:s'),
+        'favs' => PostRepository::getPostBookmarkCount($post),
+        'comments' => CommentRepository::getPostCommentNum($post)
+    ];
+}
+
 /**
  * Obtiene los Posts más recientes ordenados
  * @param int $offset Offset para la consulta
@@ -32,40 +51,26 @@ function getLastPosts(int $offset): array {
     $posts = PostRepository::getLastPosts($offset);
 
     foreach($posts as $post) {
-        $output[] = [
-            'id' => $post->getId(),
-            'title' => $post->getTitle(),
-            'category' => $post->getCategory()->getName(),
-            'author' => $post->getAuthor()->getUsername(),
-            'author_id' => $post->getAuthor()->getId(),
-            'date' => $post->getCreationDate()->format('Y-m-d H:i:s'),
-            'favs' => PostRepository::getPostBookmarkCount($post),
-            'comments' => CommentRepository::getPostCommentNum($post)
-        ];
+        $output[] = parsePostToOutput($post);
     }
 
     return $output;
 }
 
-function getUserPosts(int $offset): array {
-    $salida[] = [];
-    $author = $GLOBALS['session']->getCurrentUser();
-    $posts = PostRepository::getPostsByAuthor($author);
+function getUserPosts(UserEntity|null $user, int $offset): array {
+    $output = [];
 
-    foreach ($posts as $post) {
-        $salida[] = [
-            'id' => $post->getId(),
-            'title' => $post->getTitle(),
-            'category' => $post->getCategory()->getName(),
-            'author' => $post->getAuthor()->getUsername(),
-            'author_id' => $post->getAuthor()->getId(),
-            'date' => $post->getCreationDate()->format('Y-m-d H:i:s'),
-            'favs' => PostRepository::getPostBookmarkCount($post),
-            'comments' => CommentRepository::getPostCommentNum($post)
-        ];
+    if (!$user) {
+        return ['error' => 'No se ha encontrado el usuario'];
     }
 
-    return $salida;
+    $posts = PostRepository::getPostsByAuthor($user, $offset);
+
+    foreach ($posts as $post) {
+        $output[] = parsePostToOutput($post);
+    }
+
+    return $output;
 }
 
 /**
@@ -248,17 +253,20 @@ function toggleBookmark(PostEntity|null $post) {
 }
 
 
-$output = [];
+$output = [
+    'error' => "Función $method no válida"
+];
 
 // Comprobar el metodo solicitado
 switch ($method) {
     case 'lastPosts':
         $output = getLastPosts($offset);
         break;
+    case 'userPosts':
+        $output = getUserPosts($user, $offset);
+        break;
     case 'getLastComments':
         $output = getLastComments($post, $comment, $offset);
-    case 'userPosts':
-        $salida = getUserPosts($offset);
         break;
     case 'getCommentData':
         $output = getCommentData($comment);

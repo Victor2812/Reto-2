@@ -40,11 +40,10 @@
             </div>
         </div>
 
-        <div clas="post-container" data-user="<?php echo $user->getId(); ?>">
-
+        <div class="post-container" data-user="<?php echo $user->getId(); ?>">
         </div>
     </main>
 
     <?php include 'partials/sidebar_right.php'?>
 </div>
-<script src="js/user_posts.js"></script>
+<script src="js/views/user.view.js"></script>

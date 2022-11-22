@@ -8,12 +8,14 @@
     <div>
         <h3>puntos</h3>
         <p class="points"><?php echo $GLOBALS['session']->getCurrentUser()->getPoints() ?></p>
+        
+        <a class="button-blue" href="/ranking.php">Ver ranking</a>
     </div>
     <div>
         <h3>seguidos</h3>
         <ul>
             <?php foreach (UserRepository::getFollowingInfo($user) as $following): ?>
-                <li><a href="#" class="flex-container"><img src="../img/user-default-image.svg" alt="user_img" class="author-icon"> <?php echo $following->getUsername(); ?></a></li>
+                <li><a href="/user.php?user=<?php echo $following->getId(); ?>" class="flex-container"><img src="../img/user-default-image.svg" alt="user_img" class="author-icon"> <?php echo $following->getUsername(); ?></a></li>
             <?php endforeach; ?>
         </ul>
     </div>
@@ -21,7 +23,7 @@
         <h3>seguidores</h3>
         <ul>
             <?php foreach (UserRepository::getFollowersInfo($user) as $follower): ?>
-                <li><a href="#" class="flex-container"><img src="../img/user-default-image.svg" alt="user_img" class="author-icon"> <?php echo $follower->getUsername(); ?></a></li>
+                <li><a href="/user.php?user=<?php echo $follower->getId(); ?>" class="flex-container"><img src="../img/user-default-image.svg" alt="user_img" class="author-icon"> <?php echo $follower->getUsername(); ?></a></li>
             <?php endforeach; ?>
         </ul>
     </div>

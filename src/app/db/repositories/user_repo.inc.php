@@ -213,7 +213,7 @@ abstract class UserRepository {
         $usuarios = [];
 
         while (($data = $statement->fetch())) {
-            $usuarios = new UserEntity(
+            $usuarios[] = new UserEntity(
                 $data['id'],
                 $data['username'],
                 $data['name'],

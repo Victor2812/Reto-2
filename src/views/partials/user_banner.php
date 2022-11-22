@@ -20,3 +20,4 @@
         <li><a href="/user.php">Mis posts</a></li>
     </ul>
 </div>
+<script src="js/views/partials/userbanner.js"></script>
