@@ -37,7 +37,6 @@ window.addEventListener('load', () => {
         }
 
         // las contraseñas no coinciden y el usuario ha intentado cambiarla
-        console.log(passwd);
         if (passwd && passwd != passwd2) {
             appendError('Las contraseñas no coinciden');
             return;

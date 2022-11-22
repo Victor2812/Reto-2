@@ -1,7 +1,9 @@
 const POST_API_URL = "/post_api.php";
 const USER_API_URL = "/user_api.php";
 
-async function processApiResponse(r) {
+const CACHE_LIFETIME = 5 * 60 * 1000; // 5 minutos en milisegundos
+
+function processApiResponse(r) {
     if (r.ok) {
         try {
             return r.json();
@@ -10,6 +12,32 @@ async function processApiResponse(r) {
         }
     }
     return {error: 'No es posible obtener la información'};
+}
+
+function getDataFromLocalStorage(prefix = '') {
+    let data = {};
+    for (const key in localStorage) {
+        if (localStorage.hasOwnProperty(key) && key.startsWith(prefix)) {
+            // obtener la llave original y su valor
+            let k = key.replace(prefix, '');
+            let v = localStorage.getItem(key);
+            
+            // convertir los números y valores especiales (ej. null)
+            try {
+                data[k] = JSON.parse(v);
+            } catch {
+                data[k] = v;
+            }
+        }
+    }
+    return data;
+}
+
+function setDataToLocalStorage(data, prefix = '') {
+    for (const [key, value] of Object.entries(data)) {
+        // establecer el prefijo
+        localStorage.setItem(prefix + key, value);
+    }
 }
 
 /*
@@ -65,9 +93,36 @@ async function uploadComment(type, id, data) {
     --------------------- USER ----------------------
 */
 
+async function updateUserDataFromAPI(force = false) {
+    let now = Date.now();
+    let before = getDataFromLocalStorage('_userdata_')?.time || null; // undefined no nos vale, así que usaremos null en ese caso
+
+    // jugamos con que si before es nulo, el resultado de la operación sería como (N - null = N) (ej. 7 - null = 7)
+    // por lo tanto, si los datos no están almacenados la condición siempre se cumplirá
+    if (now - before > CACHE_LIFETIME) {
+        // obtener la información desde la API
+        let r = await fetch('/user_api.php?method=getUser');
+        let data = await processApiResponse(r);
+
+        if (!data.error) {
+            data['_userdata_time'] = Date.now();
+            // establecer los datos
+            setDataToLocalStorage(data, 'userdata_');
+
+            // establecer el tiempo de vida de la caché
+            setDataToLocalStorage({_userdata_time: Date.now()});
+        } else {
+            // hay un error
+            localStorage.clear();
+            return data;
+        }
+    }
+}
+
 async function getCurrentUserData() {
-    let r = await fetch('/user_api.php?method=getUser');
-    return processApiResponse(r);
+    await updateUserDataFromAPI();
+    let data = getDataFromLocalStorage('userdata_');
+    return data;
 }
 
 async function setCurrentUserData(data) {
@@ -78,6 +133,10 @@ async function setCurrentUserData(data) {
           'Content-Type': 'application/json'
         })
     });
+
+    // forzar actualización de la caché
+    await updateUserDataFromAPI(true);
+
     return processApiResponse(r);
 }
 
