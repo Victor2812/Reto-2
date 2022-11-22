@@ -1,7 +1,7 @@
 <?php
 
 abstract class UserRepository {
-    public static function createNewUser(string $username, string $name, string|null $surname, string|null $job, string $passwd): UserEntity|null {
+    public static function createNewUser(string $username, string|null $name, string|null $surname, string|null $job, string $passwd): UserEntity|null {
         global $db;
 
         $sql = "INSERT INTO users (username, name, surname, job, passwd) VALUES (:uname, :name, :surname, :job, :passwd)";
@@ -185,7 +185,7 @@ abstract class UserRepository {
 
         $data = $statement->fetch();
 
-        return $data;
+        return $data ? $data[0] : 0;
     }
 
     public static function getFollowingCount(UserEntity $user) {
@@ -200,6 +200,32 @@ abstract class UserRepository {
 
         $data = $statement->fetch();
 
-        return $data;
+        return $data ? $data[0] : 0;
+    }
+
+    public static function getUserRanking(int $limit = 10) {
+        global $db;
+
+        $sql = "SELECT * FROM users ORDER BY points DESC LIMIT $limit";
+        $statement = $db->prepare($sql);
+        $statement->execute();
+
+        $usuarios = [];
+
+        while (($data = $statement->fetch())) {
+            $usuarios[] = new UserEntity(
+                $data['id'],
+                $data['username'],
+                $data['name'],
+                $data['surname'],
+                $data['image'],
+                strtotime($data['date']),
+                $data['points'],
+                $data['job'],
+                $data['passwd']
+            );
+        }
+
+        return $usuarios;
     }
 }

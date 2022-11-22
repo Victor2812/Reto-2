@@ -6,6 +6,12 @@ needs_authentication();
 
 // Eliminar autenticación
 $session->authenticate(null);
+?>
 
-// Volver al login
-redirect(LOGIN_ROUTE);
+<script>
+    // limpiar el local storage
+    localStorage.clear();
+
+    // redirigir al usuario
+    window.location.replace("<?php echo LOGIN_ROUTE; ?>");   
+</script>

@@ -70,4 +70,4 @@ if (!$post) {
     </main>
     <?php include "partials/sidebar_right.php"; ?>
 </div>
-<script src="js/postview.js"></script>
+<script src="js/views/post.view.js"></script>

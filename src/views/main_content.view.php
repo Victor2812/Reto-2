@@ -10,4 +10,4 @@
     </main>
     <?php include "partials/sidebar_right.php"; ?>
 </div>
-<script src="js/maincontent.js"></script>
+<script src="js/views/maincontent.view.js"></script>
