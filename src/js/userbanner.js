@@ -4,7 +4,7 @@ window.addEventListener('load', () => {
     let editBtn = document.querySelector('#useredit');
 
     // elementos
-    let banner = document.querySelector('#user-banner');
+    let banner = document.querySelector('#user-banner-container');
     let editable = document.querySelector('#user-banner #user-editable');
 
     // variables

@@ -29,7 +29,7 @@ if (get_method() == 'POST'){
     redirect(current_file());
 } else {
     include_views([
-        "views/login.view.php"
+        "views/register.view.php"
     ]);
 }
 

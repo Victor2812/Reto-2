@@ -8,7 +8,7 @@
                 <form action="<?php echo current_file(); ?>" method="POST">
                     <input type="text" name="login_user" placeholder="Usuario" required>
                     <input type="password" name="login_pass" placeholder="Contraseña" required>
-                    <input type="submit" class="button-blue" value="Login">
+                    <input type="submit" class="button-blue" value="Iniciar sesión">
                     <label for="chk" aria-hidden="true">¿No tienes cuenta?</label>
                 </form>        
             </div>
