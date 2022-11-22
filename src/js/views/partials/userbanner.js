@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
     // elementos
-    let banner = document.querySelector('#user-banner');
+    let banner = document.querySelector('#user-banner-container');
     let editable = document.querySelector('#user-banner #user-editable');
     
     // botones
@@ -62,7 +62,7 @@ window.addEventListener('load', () => {
     // Construir la información del usuario en modo estático
     function mockupUserData(info) {
         let name = document.createElement('p');
-        name.textContent = `${info.name} ${info.surname}`;
+        name.textContent = `${info.name} ${info.surname || ''}`;
 
         let job = document.createElement('p');
         job.classList.add('user-job');
@@ -87,6 +87,7 @@ window.addEventListener('load', () => {
         name.placeholder = 'Nombre';
         name.value = info.name;
         nameAndSurname.appendChild(name);
+
         let surname = document.createElement('input');
         surname.type = 'text';
         surname.name = 'surname';
