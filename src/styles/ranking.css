@@ -1,0 +1,16 @@
+ol.ranking {
+    list-style: none;
+}
+
+ol.ranking li {
+    padding: 1rem;
+}
+
+ol.ranking li:nth-child(even) {
+    background-color: pink;
+}
+
+ol.ranking li.current {
+    padding: 1rem;
+    background-color: lightblue;
+}

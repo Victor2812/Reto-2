@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db
--- Tiempo de generación: 15-11-2022 a las 15:19:40
+-- Tiempo de generación: 22-11-2022 a las 11:51:54
 -- Versión del servidor: 10.9.3-MariaDB-1:10.9.3+maria~ubu2204
 -- Versión de PHP: 8.0.25
 
@@ -29,6 +29,14 @@ CREATE TABLE `bookmarks` (
   `post` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `bookmarks`
+--
+
+INSERT INTO `bookmarks` (`user`, `post`) VALUES
+(2, 2),
+(2, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -40,6 +48,18 @@ CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'Logística'),
+(2, 'Producción'),
+(3, 'Ingeniería'),
+(4, 'Calidad'),
+(5, 'Financiero'),
+(6, 'Otros');
 
 -- --------------------------------------------------------
 
@@ -54,22 +74,41 @@ CREATE TABLE `comments` (
   `author` int(11) NOT NULL,
   `post` int(11) DEFAULT NULL,
   `comment` int(11) DEFAULT NULL,
-  `creation_date` timestamp NOT NULL DEFAULT current_timestamp()
+  `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `file` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `comments`
+--
+
+INSERT INTO `comments` (`id`, `text`, `author`, `post`, `comment`, `creation_date`, `file`) VALUES
+(1, 'De locos... Estoy orgullosa de ti!!!!\r\n\r\nBesis', 2, 2, NULL, '2022-11-22 11:38:45', NULL),
+(2, 'El foro es para cosas serias, gracias....', 1, 3, NULL, '2022-11-22 11:44:08', NULL),
+(3, 'Nada chicos, ya está, gracias por vuestra ayuda vacía....', 4, 4, NULL, '2022-11-22 11:46:16', NULL),
+(4, 'arriaga@egibide.org\r\n\r\nSon 5€ gracias.', 4, 5, NULL, '2022-11-22 11:48:46', NULL),
+(5, 'jaja, otro archivo, mira', 4, 2, NULL, '2022-11-22 11:50:18', 2);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `file`
+-- Estructura de tabla para la tabla `files`
 --
 
-DROP TABLE IF EXISTS `file`;
-CREATE TABLE `file` (
+DROP TABLE IF EXISTS `files`;
+CREATE TABLE `files` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `path` varchar(255) NOT NULL,
-  `comment` int(11) NOT NULL
+  `path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `files`
+--
+
+INSERT INTO `files` (`id`, `name`, `path`) VALUES
+(1, 'archivo.txt', '637cb48b70d532.39927949'),
+(2, 'archivo.txt', '637cb77a789883.27298034');
 
 -- --------------------------------------------------------
 
@@ -86,20 +125,6 @@ CREATE TABLE `followers` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `notifications`
---
-
-DROP TABLE IF EXISTS `notifications`;
-CREATE TABLE `notifications` (
-  `id` int(11) NOT NULL,
-  `user` int(11) NOT NULL,
-  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`data`)),
-  `viewed` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `posts`
 --
 
@@ -110,8 +135,20 @@ CREATE TABLE `posts` (
   `text` text NOT NULL,
   `category` int(11) NOT NULL,
   `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `author` int(11) NOT NULL
+  `author` int(11) NOT NULL,
+  `file` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `posts`
+--
+
+INSERT INTO `posts` (`id`, `title`, `text`, `category`, `creation_date`, `author`, `file`) VALUES
+(1, 'Mi primer post', 'Hola jaja, soy nuevo en la empresa. Me llamo Gaizka y me gusta subir Posts para subir puntos y ser el mejor.', 3, '2022-11-22 11:35:23', 1, NULL),
+(2, 'Este post tiene Archivos!!', 'Hola de nuevo, aquí os muestro unos archivos de ejemplo....', 1, '2022-11-22 11:37:47', 1, 1),
+(3, 'Problema de calidad en los aviones', 'En realidad no hay ningún problema jajjaa, soy un risas.... Nuestros aviones son los mejores del mundo.', 4, '2022-11-22 11:43:43', 3, NULL),
+(4, 'URGENTE!!!!! NECESITAMOS DINERO!!!!', '¿Cómo podemos conseguir dinero para financiar los nuevos aviones? Llevo días pensándolo y no se me ocurre nada... \r\n\r\nAYUDA!!!!!', 5, '2022-11-22 11:45:56', 4, NULL),
+(5, 'Necesitamos materiales', 'En el sector de producción nos estamos quedando sin acero valirio... Alguien me envía el email del proveedor por favor?', 2, '2022-11-22 11:48:12', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -125,6 +162,16 @@ CREATE TABLE `tagged` (
   `post` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `tagged`
+--
+
+INSERT INTO `tagged` (`tag`, `post`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -137,6 +184,16 @@ CREATE TABLE `tags` (
   `name` varchar(255) NOT NULL,
   `counter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tags`
+--
+
+INSERT INTO `tags` (`id`, `name`, `counter`) VALUES
+(1, 'primero', 1),
+(2, 'archivos', 1),
+(3, 'lmao', 1),
+(4, 'materiales', 1);
 
 -- --------------------------------------------------------
 
@@ -157,6 +214,16 @@ CREATE TABLE `users` (
   `passwd` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `name`, `surname`, `image`, `date`, `points`, `job`, `passwd`) VALUES
+(1, 'gaizka', 'Gaizka', NULL, NULL, '2022-11-22', 10, NULL, 'gaizka'),
+(2, 'tania', 'Tania', 'Hernando', NULL, '2022-11-22', 5, 'Alcantarillera', 'tania'),
+(3, 'victor', 'Victor', 'Ibáñez', NULL, '2022-11-22', 5, 'Maquetador', 'victor'),
+(4, 'imanol', 'Imanol', 'Urquijo', NULL, '2022-11-22', 5, NULL, 'imanol');
+
 -- --------------------------------------------------------
 
 --
@@ -168,6 +235,14 @@ CREATE TABLE `votes` (
   `user` int(11) NOT NULL,
   `comment` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `votes`
+--
+
+INSERT INTO `votes` (`user`, `comment`) VALUES
+(1, 3),
+(2, 3);
 
 --
 -- Índices para tablas volcadas
@@ -193,14 +268,14 @@ ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `author` (`author`),
   ADD KEY `post` (`post`),
-  ADD KEY `comment` (`comment`);
+  ADD KEY `comment` (`comment`),
+  ADD KEY `file` (`file`);
 
 --
--- Indices de la tabla `file`
+-- Indices de la tabla `files`
 --
-ALTER TABLE `file`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `comment` (`comment`);
+ALTER TABLE `files`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `followers`
@@ -210,17 +285,12 @@ ALTER TABLE `followers`
   ADD KEY `destination` (`destination`);
 
 --
--- Indices de la tabla `notifications`
---
-ALTER TABLE `notifications`
-  ADD KEY `user` (`user`);
-
---
 -- Indices de la tabla `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `category` (`category`);
+  ADD KEY `category` (`category`),
+  ADD KEY `file` (`file`);
 
 --
 -- Indices de la tabla `tagged`
@@ -257,37 +327,37 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `file`
+-- AUTO_INCREMENT de la tabla `files`
 --
-ALTER TABLE `file`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `files`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
@@ -306,13 +376,8 @@ ALTER TABLE `bookmarks`
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`author`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post`) REFERENCES `posts` (`id`),
-  ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`comment`) REFERENCES `comments` (`id`);
-
---
--- Filtros para la tabla `file`
---
-ALTER TABLE `file`
-  ADD CONSTRAINT `file_ibfk_1` FOREIGN KEY (`comment`) REFERENCES `comments` (`id`);
+  ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`comment`) REFERENCES `comments` (`id`),
+  ADD CONSTRAINT `comments_ibfk_4` FOREIGN KEY (`file`) REFERENCES `files` (`id`);
 
 --
 -- Filtros para la tabla `followers`
@@ -322,16 +387,11 @@ ALTER TABLE `followers`
   ADD CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`source`) REFERENCES `users` (`id`);
 
 --
--- Filtros para la tabla `notifications`
---
-ALTER TABLE `notifications`
-  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
-
---
 -- Filtros para la tabla `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`category`) REFERENCES `categories` (`id`);
+  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`category`) REFERENCES `categories` (`id`),
+  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`file`) REFERENCES `files` (`id`);
 
 --
 -- Filtros para la tabla `tagged`
