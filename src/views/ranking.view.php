@@ -5,8 +5,16 @@
 <div class="content noleft">
     <main>
         <div class="ranking-content">
-            <h2>Ranking de Usuarios</h2>
+            <h2  class="title">Ranking de Usuarios</h2>
             <ol class="ranking">
+            <li>
+                <div class="flex-container">
+                    <div class="title1">Posicion</div>
+                    <div class="title2">Usuario</div>
+                    <div class="title1">Nombre</div>
+                    <div class="title2">Puntos</div>
+                </div>
+            </li>
                 <?php for ($i=0; $i < count($list); $i++): ?>
                     <li class="<?php 
                             if ($GLOBALS['session']->getCurrentUser()->getId() == $list[$i]->getId()) {
