@@ -28,7 +28,7 @@
                         </p>
                     </div>
                     <div class="flex-container">
-                        <button class="button-blue" id="userfollowbtn">Seguir</button>
+                        <button class="button-blue" id="userfollowbtn"><span></span></button>
                         <p id="folllowdata"></p>
                     </div>
                 </div>
