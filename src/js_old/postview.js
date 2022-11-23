@@ -26,7 +26,11 @@ window.addEventListener('load', async (e) => {
 
     function setButtonText(button, text) {
         let span = button.querySelector('span');
-        span.innerText = text;
+        if (span) {
+            span.innerText = text;
+        } else {
+            button.innerText = text;
+        }
     }
 
     function addErrorToForm(form, error) {
@@ -318,9 +322,10 @@ window.addEventListener('load', async (e) => {
         if (params.file) {
             let container = comment.querySelector('.files');
             let a = document.createElement('a');
-            a.href = "/downloads.php?file=" + params.file;
+            a.href = "/download.php?file=" + params.file;
             a.className = 'file';
             a.innerText = params.file_name;
+            a.target = '_blank';
             container.appendChild(a);
         }
 

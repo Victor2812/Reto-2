@@ -9,4 +9,3 @@ include_views([
     "views/ranking.view.php",
     "views/footer.view.php"
 ]);
-?>

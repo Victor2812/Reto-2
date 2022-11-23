@@ -1,45 +1,16 @@
 window.addEventListener('load', () => {
+    // elementos
+    let banner = document.querySelector('#user-banner-container');
+    let editable = document.querySelector('#user-banner #user-editable');
+    
     // botones
     let userBtn = document.querySelector('#userbtn');
     let editBtn = document.querySelector('#useredit');
-
-    // elementos
-    let banner = document.querySelector('#user-banner');
-    let editable = document.querySelector('#user-banner #user-editable');
 
     // variables
     let data = {
         isEditable: false
     };
-
-    async function getUserApi() {
-        let r = await fetch('/user_api.php?method=getUser');
-        if (r.ok) {
-            return r.json();
-        } else {
-            return {'error': 'connection'};
-        }
-    }
-
-    async function setUserApi(data) {
-        let r = await fetch('/user_api.php?method=setUser', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: new Headers({
-              'Content-Type': 'application/json'
-            })
-        });
-        if (r.ok) {
-            return r.json();
-        } else {
-            return {'error': 'connection'};
-        }
-    }
-
-    // Mostrar/esconder el banner
-    userBtn.addEventListener('click', function(e) {
-        banner?.classList.toggle('shown');
-    });
 
     // cuando un usuario es editado
     async function onUserEdited(e, form) {
@@ -72,7 +43,7 @@ window.addEventListener('load', () => {
             return;
         }
 
-        let r = await setUserApi({
+        let r = await setCurrentUserData({
             name: name,
             surname: surname,
             job: job,
@@ -91,7 +62,7 @@ window.addEventListener('load', () => {
     // Construir la información del usuario en modo estático
     function mockupUserData(info) {
         let name = document.createElement('p');
-        name.textContent = `${info.name} ${info.surname}`;
+        name.textContent = `${info.name} ${info.surname || ''}`;
 
         let job = document.createElement('p');
         job.classList.add('user-job');
@@ -116,6 +87,7 @@ window.addEventListener('load', () => {
         name.placeholder = 'Nombre';
         name.value = info.name;
         nameAndSurname.appendChild(name);
+
         let surname = document.createElement('input');
         surname.type = 'text';
         surname.name = 'surname';
@@ -160,7 +132,7 @@ window.addEventListener('load', () => {
     }
 
     async function applyBanner() {
-        let info = await getUserApi();
+        let info = await getCurrentUserData();
 
         if (info.error) {
             console.log(info.error);
@@ -182,6 +154,11 @@ window.addEventListener('load', () => {
 
         data.isEditable = !data.isEditable;
         applyBanner();
+    });
+
+    // Mostrar/esconder el banner
+    userBtn.addEventListener('click', function(e) {
+        banner?.classList.toggle('shown');
     });
 
     applyBanner();

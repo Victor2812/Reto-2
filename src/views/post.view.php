@@ -35,7 +35,6 @@ if (!$post) {
 
                 <div class="flex-container">
                     <button class="button-blue" id="postfavbtn">
-                        <?php include "img/favourite-stroke.svg"; ?>
                         <span></span>
                     </button>
                     <p>
@@ -54,10 +53,7 @@ if (!$post) {
                 <?php endif; ?>
 
                 <div class="flex-container">
-                    <button class="button-blue" id="postcommentbtn">
-                        <?php include "img/comment-stroke.svg"; ?>
-                        Comentar
-                    </button>
+                    <button class="button-white" id="postcommentbtn">Comentar</button>
                 </div>
             </div>
             <div class="add-comment-form"></div>
@@ -70,4 +66,4 @@ if (!$post) {
     </main>
     <?php include "partials/sidebar_right.php"; ?>
 </div>
-<script src="js/postview.js"></script>
+<script src="js/views/post.view.js"></script>

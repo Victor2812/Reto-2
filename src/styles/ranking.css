@@ -1,0 +1,41 @@
+.ranking-content {
+    background-color: white;
+    min-height: 100vh;
+}
+
+.ranking-content h2 {
+    font-size: 1.2rem;
+    color: grey;
+    width: 6rem;
+    text-align: left;
+}
+
+.ranking-content h2:first-child  {
+    font-size: 3rem;
+    padding: 1.5rem 0 1rem 5rem;
+    color: grey;
+    width: fit-content;
+}
+
+ol.ranking {
+    list-style: none;
+    padding: 1rem;
+}
+
+ol.ranking li {
+    width: 100%;
+    padding: 1rem;
+}
+
+li .flex-container {
+    align-items: center;
+    justify-content: space-around;
+}
+
+ol.ranking li:nth-child(even) {
+    background-color: lightgrey;
+}
+
+ol.ranking li.current {
+    background-color: var(--color-light-blue);
+}
