@@ -42,7 +42,7 @@ abstract class PostRepository {
             }
 
             // Añadir puntos 
-            $author->addPoints(5);
+            $author->addPoints(POINTS_POST);
             UserRepository::update($author);
 
             return self::getPostById($newPostId);

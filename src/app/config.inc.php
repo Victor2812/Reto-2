@@ -47,3 +47,6 @@ define('LANGUAGES', [
 ]);
 
 define ('LANGUAGE_COOKIE', 'aerbidelang');
+
+define('POINTS_POST', 10);
+define('POINTS_COMMENT', 5);

@@ -34,6 +34,10 @@ abstract class CommentRepository {
             ]);
 
             if (($commentId = $db->lastInsertId())) {
+                // Añadir puntos 
+                $author->addPoints(POINTS_COMMENT);
+                UserRepository::update($author);
+
                 return self::getCommentById($commentId);
             }
 
