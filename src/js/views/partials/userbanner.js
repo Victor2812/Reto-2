@@ -76,24 +76,30 @@ window.addEventListener('load', () => {
     // Construir la información del usuario en modo edición
     function mockupUserDataForm(info) {
         let form = document.createElement('form');
+        form.className = 'form-userbanner';
 
         // añadir div para posibles errores
         form.innerHTML = '<div class="errors"></div>';
 
-        let nameAndSurname = document.createElement('p');
+        let nombre = document.createElement('p');
+        let apellido = document.createElement('p');
+
         let name = document.createElement('input');
         name.type = 'text';
         name.name = 'name';
         name.placeholder = 'Nombre';
         name.value = info.name;
-        nameAndSurname.appendChild(name);
+        nombre.appendChild(name);
+
+        //name.classList.add('clase');
+        //name.className = 'clase1 clase2 ,,,,'
 
         let surname = document.createElement('input');
         surname.type = 'text';
         surname.name = 'surname';
         surname.placeholder = 'Apellido';
         surname.value = info.surname;
-        nameAndSurname.appendChild(surname);
+        apellido.appendChild(surname);
 
         let job = document.createElement('p');
         let jobInput = document.createElement('input');
@@ -104,6 +110,8 @@ window.addEventListener('load', () => {
         job.appendChild(jobInput);
 
         let password = document.createElement('p');
+        let password2 = document.createElement('p');
+
         let pass1 = document.createElement('input');
         pass1.type = 'password';
         pass1.placeholder = 'Contraseña nueva';
@@ -113,17 +121,20 @@ window.addEventListener('load', () => {
         pass2.type = 'password';
         pass2.placeholder = 'Repetir contraseña';
         pass2.name = 'passwd2';
-        password.appendChild(pass2);
+        password2.appendChild(pass2);
 
         let submit = document.createElement('p');
         let submitInput = document.createElement('input');
         submitInput.type = 'submit';
         submitInput.value = 'Actualizar';
+        submitInput.className = 'button-dark-blue';
         submit.appendChild(submitInput);
 
-        form.appendChild(nameAndSurname);
+        form.appendChild(nombre);
+        form.appendChild(apellido);
         form.appendChild(job);
         form.appendChild(password);
+        form.appendChild(password2);
         form.appendChild(submit);
 
         form.addEventListener('submit', (e) => onUserEdited(e, form));
