@@ -7,9 +7,11 @@
 <aside class="sidebar-right">
     <div>
         <h3>puntos</h3>
-        <p class="points"><?php echo $GLOBALS['session']->getCurrentUser()->getPoints() ?></p>
-        
-        <a class="button-blue" href="/ranking.php">Ver ranking</a>
+        <div class="flex-container-column">
+            <p class="points"><?php echo $GLOBALS['session']->getCurrentUser()->getPoints() ?></p>
+            <a class="button-blue" href="/ranking.php">Ver ranking</a>
+        </div>
+       
     </div>
     <div>
         <h3>seguidos</h3>

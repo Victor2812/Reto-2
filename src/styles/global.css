@@ -188,9 +188,8 @@ button {
 /* ------------------------------------------------- */
 
 .text {
-    margin-top: 1rem;
+    margin: 1rem 0;
 }
-
 /* ------------------------------------------------- */
                 /* INPUT UPLOAD */
 /* ------------------------------------------------- */
@@ -218,6 +217,14 @@ label[for="new-comment-upload"] {
     transition: all 0.1s ease-in;
     width: fit-content;
     font-weight: 400;
+    border: 0.1rem solid grey;
+}
+
+label[for="new-post-upload"]:hover,
+label[for="new-comment-upload"]:hover {
+    background-color: white;
+    color: grey;
+    
 }
 
 label[for="new-post-upload"] svg,
@@ -304,8 +311,8 @@ form textarea {
 }
 
 form .errors {
-    color: red;
-    font-weight: 500;
+    color: lightcoral;
+    font-weight: 400;
 }
 
 /* ------------------------------------------------- */
