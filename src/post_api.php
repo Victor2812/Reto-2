@@ -26,6 +26,11 @@ $user = isset($_GET['user'])
     ? UserRepository::getUserById(abs(intval($_GET['user'])))
     : null;
 
+// obtener el tipo de filtro
+$filter = isset($_GET['filter'])
+    ? $_GET['filter']
+    : null;
+
 
 // Funciones
 
@@ -38,7 +43,10 @@ function parsePostToOutput(PostEntity $post) {
         'author_id' => $post->getAuthor()->getId(),
         'date' => $post->getCreationDate()->format('Y-m-d H:i:s'),
         'favs' => PostRepository::getPostBookmarkCount($post),
-        'comments' => CommentRepository::getPostCommentNum($post)
+        'comments' => CommentRepository::getPostCommentNum($post),
+        'tags' => array_map(function (TagEntity $tag) {
+            return $tag->getName();
+        }, TagRepository::getTagsByPostId($post->getId())),
     ];
 }
 
@@ -46,10 +54,21 @@ function parsePostToOutput(PostEntity $post) {
  * Obtiene los Posts más recientes ordenados
  * @param int $offset Offset para la consulta
  */
-function getLastPosts(int $offset): array {
-    $output = [];
-    $posts = PostRepository::getLastPosts($offset);
+function getLastPosts(int $offset, string|null $filter): array {
+    $posts = [];
+    switch ($filter) {
+        case "mostCommented":
+            $posts = PostRepository::getMostCommentedPosts($offset);
+            break;
+        case "mostLiked":
+            $posts = PostRepository::getMostLikedPosts($offset);
+            break;
+        default:    // aka. "newest"
+            $posts = PostRepository::getLastPosts($offset);
+            break;
+    }
 
+    $output = [];
     foreach($posts as $post) {
         $output[] = parsePostToOutput($post);
     }
@@ -260,7 +279,7 @@ $output = [
 // Comprobar el metodo solicitado
 switch ($method) {
     case 'lastPosts':
-        $output = getLastPosts($offset);
+        $output = getLastPosts($offset, $filter);
         break;
     case 'userPosts':
         $output = getUserPosts($user, $offset);

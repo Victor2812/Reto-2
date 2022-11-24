@@ -156,6 +156,58 @@ abstract class PostRepository {
     }
 
     /**
+     * Obtener los posts paginados y ordenados por la cantidad de favoritos
+     * @param int $offset A partir de qué post índice se quiere cargar
+     * @param int $limit Cuántos posts se quieren cargar
+     * @return array Array de posts
+     */
+    public static function getMostLikedPosts(int $offset = 0, int $limit = 15): array {
+        global $db;
+
+        $sql = "SELECT p.* FROM posts p LEFT JOIN bookmarks AS b ON b.post = p.id GROUP BY p.id ORDER BY count(b.post) DESC LIMIT $offset, $limit;";
+
+        $posts = [];
+
+        $statement = $db->prepare($sql);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute();
+
+        while (($data = $statement->fetch())) {
+            if ($p = self::getPostFromData($data)) {
+                $posts[] = $p;
+            }
+        }
+
+        return $posts;
+    }
+
+    /**
+     * Obtener los posts paginados y ordenados por la cantidad de comentarios
+     * @param int $offset A partir de qué post índice se quiere cargar
+     * @param int $limit Cuántos posts se quieren cargar
+     * @return array Array de posts
+     */
+    public static function getMostCommentedPosts(int $offset = 0, int $limit = 15): array {
+        global $db;
+
+        $sql = "SELECT p.* FROM posts p LEFT JOIN comments AS c ON c.post = p.id GROUP BY p.id ORDER BY count(c.post) DESC LIMIT $offset, $limit;";
+
+        $posts = [];
+
+        $statement = $db->prepare($sql);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute();
+
+        while (($data = $statement->fetch())) {
+            if ($p = self::getPostFromData($data)) {
+                $posts[] = $p;
+            }
+        }
+
+        return $posts;
+    }
+
+    /**
      * Actualiza el post a la base de datos
      * @param PostEntity $post Post a actulizar
      */

@@ -44,8 +44,8 @@ function setDataToLocalStorage(data, prefix = '') {
     --------------------- POST ----------------------
 */
 
-async function getLastPostsData(offset) {
-    let r = await fetch(POST_API_URL + `?method=lastPosts&offset=${offset}`);
+async function getLastPostsData(offset, filter = 'newest') {
+    let r = await fetch(POST_API_URL + `?method=lastPosts&offset=${offset}&filter=${filter}`);
     return processApiResponse(r);
 }
 
