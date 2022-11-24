@@ -101,11 +101,11 @@ abstract class PostRepository {
     }
 
     /**
-     * Obtiene un post por su ID
-     * @param int $id ID del post
+     * Obtiene un post por su autor
+     * @param UserEntity $author Autor
      * @param int $offset A partir de qué post índice se quiere cargar
      * @param int $limit Cuántos posts se quieren cargar
-     * @return PostEntity|null
+     * @return array Lista de PostEntity
      */
     public static function getPostsByAuthor(UserEntity $author, int $offset, int $limit = 15): array {
         global $db;
