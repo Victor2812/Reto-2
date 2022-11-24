@@ -1,16 +1,65 @@
-ol.ranking {
-    list-style: none;
+.ranking-content {
+    background-color: white;
+    min-height: 100vh;
 }
 
-ol.ranking li {
+.ranking-content h2 {
+    font-size: 1.2rem;
+    color: grey;
+    width: 6rem;
+    text-align: left;
+}
+
+.ranking-content ol {
+    list-style: none;
     padding: 1rem;
+}
+
+.ranking-content li {
+    padding: 0.5rem;
+}
+
+.ranking-content a {
+    font-weight: 600;
+}
+
+.ranking-content a:hover {
+    text-decoration: underline;
+}
+
+
+.ranking-content h2:first-child  {
+    font-size: 3rem;
+    padding: 1.5rem 0 1rem 5rem;
+    color: grey;
+    width: fit-content;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    justify-items: center;
+    
+}
+
+.grid-container.title {
+    margin: 0 1rem;
+    padding: 1rem 0;
+    background-color: var(--color-dark-blue);
+    color: white;
 }
 
 ol.ranking li:nth-child(even) {
-    background-color: pink;
+    background-color: lightgrey;
 }
 
 ol.ranking li.current {
-    padding: 1rem;
-    background-color: lightblue;
+    background-color: var(--color-light-blue);
+    color: white;
 }
+
+ol.ranking li.current a {
+    color: white;
+}
+

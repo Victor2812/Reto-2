@@ -5,6 +5,11 @@
 
 <div class="login-screen">
     <main>
+        <!-- divs bg son para la animación del fondo -->
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+
         <div class="login-container">
             <input type="checkbox" id="chk" aria-hidden="true">
             <img src="./img/aerbide-logo.svg" alt="logo-aerbide">

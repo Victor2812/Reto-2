@@ -21,18 +21,18 @@
                     <input type="text" placeholder="Buscar ej: consulta #tag">
                 </form>
             </div>
-            <div class="user">
-                <select id="langsel">
-                    <?php foreach (LANGUAGES as $lang => $name): ?>
+            <div class="flex-container">
+                <button id="userbtn">
+                    <img src="img/user-default-image.svg" alt="usuario activo" class="author-icon">
+                </button>
+                <select id="langsel" class="select-category">
+                    <?php foreach (LANGUAGES as $lang): ?>
                         <option 
                             value="<?php echo $lang; ?>"
                             <?php if ($lang == $currentLang) { echo 'selected'; } ?>
-                        ><?php echo $name; ?></option>
+                        ><?php echo $lang; ?></option>
                     <?php endforeach; ?>
                 </select>
-                <button id="userbtn">
-                    <?php include "img/user-default-image.svg"; ?>
-                </button>
             </div>
         </div>
     </div>
