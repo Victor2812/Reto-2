@@ -10,12 +10,15 @@
     text-align: left;
 }
 
+
 .ranking-content h2:first-child  {
     font-size: 3rem;
     padding: 1.5rem 0 1rem 5rem;
     color: grey;
     width: fit-content;
 }
+
+
 
 ol.ranking {
     list-style: none;
@@ -30,6 +33,34 @@ ol.ranking li {
 li .flex-container {
     align-items: center;
     justify-content: space-around;
+    width: 100%;
+}
+
+.title1{
+    font-size: 1.5rem;
+    color: var(--color-medium-blue);
+    font-weight: bolder;
+    width: 6.5rem;
+    text-align: left; 
+    margin-right: 5rem;
+}
+
+.title2{
+    font-size: 1.5rem;
+    color: var(--color-medium-blue);
+    font-weight: bolder;
+    width: 6.5rem;
+    text-align: left; 
+    padding-right: 3rem;
+    margin-right: 1rem;
+}
+
+.t1::before {
+    content: attr(data-desktop);
+}
+
+li .flex-container span{
+    width: 5rem;
 }
 
 ol.ranking li:nth-child(even) {
@@ -39,3 +70,33 @@ ol.ranking li:nth-child(even) {
 ol.ranking li.current {
     background-color: var(--color-light-blue);
 }
+
+/*
+
+@media screen and (max-width: 900px) {
+
+    .t1:before {
+        content: attr(data-movil);
+
+    }
+    
+    .title1{
+        font-size: 1.5rem;
+        color: var(--color-medium-blue);
+        font-weight: bolder;
+        width: auto;
+        text-align: left; 
+        margin-right: 0;
+    }
+
+    .title3{
+        font-size: 1.5rem;
+        color: var(--color-medium-blue);
+        font-weight: bolder;
+        width: auto;
+        text-align: left; 
+        margin-right: 0;
+    }
+}
+
+*/
