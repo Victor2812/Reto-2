@@ -44,8 +44,8 @@ function setDataToLocalStorage(data, prefix = '') {
     --------------------- POST ----------------------
 */
 
-async function getLastPostsData(offset) {
-    let r = await fetch(POST_API_URL + `?method=lastPosts&offset=${offset}`);
+async function getLastPostsData(offset, filter = 'newest') {
+    let r = await fetch(POST_API_URL + `?method=lastPosts&offset=${offset}&filter=${filter}`);
     return processApiResponse(r);
 }
 
@@ -99,7 +99,7 @@ async function updateUserDataFromAPI(force = false) {
 
     // jugamos con que si before es nulo, el resultado de la operación sería como (N - null = N) (ej. 7 - null = 7)
     // por lo tanto, si los datos no están almacenados la condición siempre se cumplirá
-    if (now - before > CACHE_LIFETIME) {
+    if (now - before > CACHE_LIFETIME || force) {
         // obtener la información desde la API
         let r = await fetch('/user_api.php?method=getUser');
         let data = await processApiResponse(r);
@@ -137,6 +137,16 @@ async function setCurrentUserData(data) {
     // forzar actualización de la caché
     await updateUserDataFromAPI(true);
 
+    return processApiResponse(r);
+}
+
+async function checkFollowingUser(userId) {
+    let r = await fetch(USER_API_URL + `?method=isFollowing&user=${userId}`);
+    return processApiResponse(r);
+}
+
+async function toggleFollowingUser(userId) {
+    let r = await fetch(USER_API_URL + `?method=toggleFollowing&user=${userId}`);
     return processApiResponse(r);
 }
 

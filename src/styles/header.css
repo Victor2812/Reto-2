@@ -82,7 +82,18 @@ header .navigation .rightnav {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
+}
+
+
+/* ------------------------------------------------- */
+                    /* BUSCADOR */
+/* ------------------------------------------------- */
+
+header .search {
+    margin-bottom: 1.8rem;
+    margin-right: 1rem;
 }
 
 header .navigation .form-search {
@@ -108,16 +119,27 @@ header .navigation .rightnav .search input[type=text]::placeholder {
     opacity: 0.5;
 }
 
-header .navigation .rightnav .user button {
-    background: none;
-    border: none;
-    margin-left: 0.5rem;
+/* ------------------------------------------------- */
+                /* SELECTOR DE IDIOMA */
+/* ------------------------------------------------- */
+
+header .select-category {
+    border: none; /*modificado*/
+    width: 3.2rem; /*modificado*/
+    color: white; /*modificado*/
+}
+header select {
+    padding: 0; /*modificado*/
+    width: 3.2rem;
 }
 
-header .navigation .rightnav .user button svg {
-    width: 2rem;
-    height: 2rem;
-    color: white;
+/* ------------------------------------------------- */
+                /* USER BUTTON - PERFIL */
+/* ------------------------------------------------- */
+
+header #userbtn {
+    background-color: var(--color-medium-blue);
+    border: none;
 }
 
 /* ------------------------------------------------- */

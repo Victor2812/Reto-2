@@ -3,7 +3,37 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: var(--color-medium-blue);
+    /*background-color: var(--color-medium-blue);*/
+}
+
+.login-screen main .bg {
+    animation:slide 3s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, var(--color-medium-blue) 50%, var(--color-dark-blue) 50%);
+    bottom:0;
+    left:-50%;
+    opacity:.5;
+    position:fixed;
+    right:-50%;
+    top:0;
+    z-index:-1;
+}
+
+.login-screen main .bg2 {
+    animation-direction:alternate-reverse;
+    animation-duration:4s;
+}
+
+.login-screen main .bg3 {
+    animation-duration:5s;
+}
+
+@keyframes slide {
+    0% {
+        transform:translateX(-25%);
+    }
+    100% {
+        transform:translateX(25%);
+    }
 }
 
 .login-container {
@@ -23,6 +53,10 @@
 .login-container form {
     padding: 0 2rem;
     margin-top: 0;
+}
+
+.login-container form .errors {
+    text-align: center;
 }
 
 .login-container label {
@@ -58,3 +92,6 @@
 #chk:checked ~ .signup label {
     transform: scale(1);
 }
+
+
+

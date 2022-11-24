@@ -44,11 +44,15 @@ aside ul li button.aside-category.selected {
                     /* ASIDE RIGHT */
 /* ------------------------------------------------- */
 
+aside a.button-blue {
+    width: fit-content;
+}
+
 aside p.points {
     text-align: center;
     font-size: 8em;
     color: grey;
-    padding: 1rem;
+    padding: 1rem 1rem 0rem 1rem;
 }
 
 aside .flex-container {
@@ -58,9 +62,16 @@ aside .flex-container {
     font-weight: 600;
 }
 
+aside .flex-container-column {
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
 aside .flex-container:hover {
     color: grey;
 }
+
 
 /* ------------------------------------------------- */
                     /* MEDIA QUERYS */

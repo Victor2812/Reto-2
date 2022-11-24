@@ -26,6 +26,20 @@ abstract class UserRepository {
         return null;
     }
 
+    private static function parseUserFromData(array $data) : UserEntity {
+        return new UserEntity(
+            $data['id'],
+            $data['username'],
+            $data['name'],
+            $data['surname'],
+            $data['image'],
+            strtotime($data['date']),
+            $data['points'],
+            $data['job'],
+            $data['passwd']
+        );
+    }
+
     /**
      * Obtiene un usuario por su ID
      * @param int $id ID del usuario
@@ -42,17 +56,7 @@ abstract class UserRepository {
         ]);
 
         if (($data = $statement->fetch())) {
-            return new UserEntity(
-                $data['id'],
-                $data['username'],
-                $data['name'],
-                $data['surname'],
-                $data['image'],
-                strtotime($data['date']),
-                $data['points'],
-                $data['job'],
-                $data['passwd']
-            );
+            return self::parseUserFromData($data);
         }
 
         return null;
@@ -74,17 +78,7 @@ abstract class UserRepository {
         ]);
 
         if (($data = $statement->fetch())) {
-            return new UserEntity(
-                $data['id'],
-                $data['username'],
-                $data['name'],
-                $data['surname'],
-                $data['image'],
-                strtotime($data['date']),
-                $data['points'],
-                $data['job'],
-                $data['passwd']
-            );
+            return self::parseUserFromData($data);
         }
 
         return null;
@@ -124,17 +118,7 @@ abstract class UserRepository {
         $follower = [];
 
         while (($data = $statement->fetch())) {
-            $follower[] = new UserEntity(
-                $data['id'],
-                $data['username'],
-                $data['name'],
-                $data['surname'],
-                $data['image'],
-                strtotime($data['date']),
-                $data['points'],
-                $data['job'],
-                $data['passwd']
-            );
+            $follower[] = self::parseUserFromData($data);
         }
 
         return $follower;
@@ -156,17 +140,7 @@ abstract class UserRepository {
         $following = [];
 
         while (($data = $statement->fetch())) {
-            $following[] = new UserEntity(
-                $data['id'],
-                $data['username'],
-                $data['name'],
-                $data['surname'],
-                $data['image'],
-                strtotime($data['date']),
-                $data['points'],
-                $data['job'],
-                $data['passwd']
-            );
+            $following[] = self::parseUserFromData($data);
         }
 
         
@@ -203,6 +177,47 @@ abstract class UserRepository {
         return $data ? $data[0] : 0;
     }
 
+    public static function isUserFollowingUser(UserEntity $source, UserEntity $destination) {
+        global $db;
+
+        $sql = 'SELECT "a" FROM followers WHERE source = :s AND destination = :d';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':s' => $source->getId(),
+            ':d' => $destination->getId(),
+        ]);
+
+        $data = $statement->fetch();
+
+        // si $data no es nulo, significa que el usuario sigue al usuario
+        return $data != null;
+    }
+
+    public static function addUserFollow(UserEntity $source, UserEntity $destination) {
+        global $db;
+
+        $sql = 'INSERT INTO followers (source, destination) VALUES (:s, :d) ON DUPLICATE KEY UPDATE source=:s';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':s' => $source->getId(),
+            ':d' => $destination->getId(),
+        ]);
+    }
+
+    public static function removeUserFollow(UserEntity $source, UserEntity $destination) {
+        global $db;
+
+        $sql = 'DELETE FROM followers where source = :s AND destination = :d';
+
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            ':s' => $source->getId(),
+            ':d' => $destination->getId(),
+        ]);
+    }
+
     public static function getUserRanking(int $limit = 10) {
         global $db;
 
@@ -213,7 +228,27 @@ abstract class UserRepository {
         $usuarios = [];
 
         while (($data = $statement->fetch())) {
-            $usuarios[] = new UserEntity(
+            $usuarios[] = self::parseUserFromData($data);
+        }
+
+        return $usuarios;
+    }
+
+
+    public static function getRankingInfo() {
+        global $db;
+
+        $sql = "SELECT *
+        FROM users
+        ORDER BY points DESC";
+
+        $statement = $db->prepare($sql);
+        $statement->execute();
+
+        $ranking = [];
+
+        while (($data = $statement->fetch())) {
+            $ranking[] = new UserEntity(
                 $data['id'],
                 $data['username'],
                 $data['name'],
@@ -225,7 +260,6 @@ abstract class UserRepository {
                 $data['passwd']
             );
         }
-
-        return $usuarios;
+        return $ranking;
     }
 }

@@ -19,7 +19,7 @@ if (!$post) {
                 <h2><?php echo $post->getTitle(); ?></h2>
                 <p class="data">
                     <?php echo $post->getCreationDate()->format('Y-m-d H:i:s');?> por 
-                    <a href="#"><?php echo $post->getAuthor()->getUsername();?></a> | 
+                    <a href="/user.php?user=<?php echo $post->getAuthor()->getId(); ?>"><?php echo $post->getAuthor()->getUsername();?></a> | 
                     <?php echo CommentRepository::getPostCommentNum($post); ?> comentarios 
                 </p>
                 <ul class="tags-list">
@@ -35,7 +35,6 @@ if (!$post) {
 
                 <div class="flex-container">
                     <button class="button-blue" id="postfavbtn">
-                        <?php include "img/favourite-stroke.svg"; ?>
                         <span></span>
                     </button>
                     <p>
@@ -54,10 +53,7 @@ if (!$post) {
                 <?php endif; ?>
 
                 <div class="flex-container">
-                    <button class="button-blue" id="postcommentbtn">
-                        <?php include "img/comment-stroke.svg"; ?>
-                        Comentar
-                    </button>
+                    <button class="button-white" id="postcommentbtn">Comentar</button>
                 </div>
             </div>
             <div class="add-comment-form"></div>

@@ -42,7 +42,7 @@ abstract class PostRepository {
             }
 
             // Añadir puntos 
-            $author->addPoints(5);
+            $author->addPoints(POINTS_POST);
             UserRepository::update($author);
 
             return self::getPostById($newPostId);
@@ -101,11 +101,11 @@ abstract class PostRepository {
     }
 
     /**
-     * Obtiene un post por su ID
-     * @param int $id ID del post
+     * Obtiene un post por su autor
+     * @param UserEntity $author Autor
      * @param int $offset A partir de qué post índice se quiere cargar
      * @param int $limit Cuántos posts se quieren cargar
-     * @return PostEntity|null
+     * @return array Lista de PostEntity
      */
     public static function getPostsByAuthor(UserEntity $author, int $offset, int $limit = 15): array {
         global $db;
@@ -139,6 +139,58 @@ abstract class PostRepository {
         global $db;
 
         $sql = "SELECT * FROM posts ORDER BY creation_date DESC LIMIT $offset, $limit;";
+
+        $posts = [];
+
+        $statement = $db->prepare($sql);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute();
+
+        while (($data = $statement->fetch())) {
+            if ($p = self::getPostFromData($data)) {
+                $posts[] = $p;
+            }
+        }
+
+        return $posts;
+    }
+
+    /**
+     * Obtener los posts paginados y ordenados por la cantidad de favoritos
+     * @param int $offset A partir de qué post índice se quiere cargar
+     * @param int $limit Cuántos posts se quieren cargar
+     * @return array Array de posts
+     */
+    public static function getMostLikedPosts(int $offset = 0, int $limit = 15): array {
+        global $db;
+
+        $sql = "SELECT p.* FROM posts p LEFT JOIN bookmarks AS b ON b.post = p.id GROUP BY p.id ORDER BY count(b.post) DESC LIMIT $offset, $limit;";
+
+        $posts = [];
+
+        $statement = $db->prepare($sql);
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement->execute();
+
+        while (($data = $statement->fetch())) {
+            if ($p = self::getPostFromData($data)) {
+                $posts[] = $p;
+            }
+        }
+
+        return $posts;
+    }
+
+    /**
+     * Obtener los posts paginados y ordenados por la cantidad de comentarios
+     * @param int $offset A partir de qué post índice se quiere cargar
+     * @param int $limit Cuántos posts se quieren cargar
+     * @return array Array de posts
+     */
+    public static function getMostCommentedPosts(int $offset = 0, int $limit = 15): array {
+        global $db;
+
+        $sql = "SELECT p.* FROM posts p LEFT JOIN comments AS c ON c.post = p.id GROUP BY p.id ORDER BY count(c.post) DESC LIMIT $offset, $limit;";
 
         $posts = [];
 

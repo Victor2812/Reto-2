@@ -10,29 +10,29 @@
     <div class="navigation">
         <nav>
             <ul>
-                <li><a class="selected" href="#">Recientes</a></li>
-                <li><a class="unselected" href="#">Más comentados</a></li>
-                <li><a class="unselected" href="#">Más valorados</a></li>
+                <li><a class="selected" data-name="newest" href="#">Recientes</a></li>
+                <li><a class="unselected" data-name="mostCommented" href="#">Más comentados</a></li>
+                <li><a class="unselected" data-name="mostLiked" href="#">Más valorados</a></li>
             </ul>
         </nav>
         <div class="rightnav">
             <div class="search">
                 <form class="form-search" action="">
-                    <input type="text" placeholder="Buscar ej: consulta #tag">
+                    <input id="searchtext" type="text" placeholder="Buscar por palabras clave">
                 </form>
             </div>
-            <div class="user">
-                <select id="langsel">
-                    <?php foreach (LANGUAGES as $lang => $name): ?>
+            <div class="flex-container">
+                <button id="userbtn">
+                    <img src="img/user-default-image.svg" alt="usuario activo" class="author-icon">
+                </button>
+                <select id="langsel" class="select-category">
+                    <?php foreach (LANGUAGES as $lang): ?>
                         <option 
                             value="<?php echo $lang; ?>"
                             <?php if ($lang == $currentLang) { echo 'selected'; } ?>
-                        ><?php echo $name; ?></option>
+                        ><?php echo $lang; ?></option>
                     <?php endforeach; ?>
                 </select>
-                <button id="userbtn">
-                    <?php include "img/user-default-image.svg"; ?>
-                </button>
             </div>
         </div>
     </div>
