@@ -10,6 +10,23 @@
     text-align: left;
 }
 
+.ranking-content ol {
+    list-style: none;
+    padding: 1rem;
+}
+
+.ranking-content li {
+    padding: 0.5rem;
+}
+
+.ranking-content a {
+    font-weight: 600;
+}
+
+.ranking-content a:hover {
+    text-decoration: underline;
+}
+
 
 .ranking-content h2:first-child  {
     font-size: 3rem;
@@ -18,49 +35,19 @@
     width: fit-content;
 }
 
-
-
-ol.ranking {
-    list-style: none;
-    padding: 1rem;
-}
-
-ol.ranking li {
-    width: 100%;
-    padding: 1rem;
-}
-
-li .flex-container {
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
-    justify-content: space-around;
-    width: 100%;
+    justify-items: center;
+    
 }
 
-.title1{
-    font-size: 1.5rem;
-    color: var(--color-medium-blue);
-    font-weight: bolder;
-    width: 6.5rem;
-    text-align: left; 
-    margin-right: 5rem;
-}
-
-.title2{
-    font-size: 1.5rem;
-    color: var(--color-medium-blue);
-    font-weight: bolder;
-    width: 6.5rem;
-    text-align: left; 
-    padding-right: 3rem;
-    margin-right: 1rem;
-}
-
-.t1::before {
-    content: attr(data-desktop);
-}
-
-li .flex-container span{
-    width: 5rem;
+.grid-container.title {
+    margin: 0 1rem;
+    padding: 1rem 0;
+    background-color: var(--color-dark-blue);
+    color: white;
 }
 
 ol.ranking li:nth-child(even) {
@@ -69,34 +56,10 @@ ol.ranking li:nth-child(even) {
 
 ol.ranking li.current {
     background-color: var(--color-light-blue);
+    color: white;
 }
 
-/*
-
-@media screen and (max-width: 900px) {
-
-    .t1:before {
-        content: attr(data-movil);
-
-    }
-    
-    .title1{
-        font-size: 1.5rem;
-        color: var(--color-medium-blue);
-        font-weight: bolder;
-        width: auto;
-        text-align: left; 
-        margin-right: 0;
-    }
-
-    .title3{
-        font-size: 1.5rem;
-        color: var(--color-medium-blue);
-        font-weight: bolder;
-        width: auto;
-        text-align: left; 
-        margin-right: 0;
-    }
+ol.ranking li.current a {
+    color: white;
 }
 
-*/
