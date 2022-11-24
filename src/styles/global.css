@@ -153,7 +153,8 @@ button {
 
 }
 
-.tag:hover {
+.tag:hover,
+.tag.selected {
     color: var(--color-light-blue);
     background-color: white;
     border: 0.1rem solid var(--color-light-blue);
@@ -203,6 +204,22 @@ button {
 .text {
     margin: 1rem 0;
 }
+
+/* ------------------------------------------------- */
+                    /* FILES */
+/* ------------------------------------------------- */
+
+.file {
+    color: grey;
+    font-weight: 900;
+    margin-bottom: 1rem;
+}
+
+.file:hover {
+    color: var(--color-dark-grey);
+}
+
+
 /* ------------------------------------------------- */
                 /* INPUT UPLOAD */
 /* ------------------------------------------------- */

@@ -9,34 +9,36 @@
 
     <main>
         <div class="user-panel">
-            <div class="flex-container">
-                <img src="img/user-default-image.svg" alt="" class="author-icon-big">
-                <div class="user-data">
-                    <h2><?php echo $user->getUsername() ?></h2>
-                    <div>
-                        <p><?php echo $user->getName() . ' ' . $user->getSurname(); ?></p>
-                        <?php
-                            if ($job = $user->getJob()) {
-                                echo '<p>' . $job . '</p>';
-                            }
-                        ?>
-                        <p class="user-date">
-                            <?php 
-                                $date = $user->getCreationDate();
-                                echo 'Se unió el día ' . $date->format('j \d\e F \d\e\l Y');
+            <div class="flex-container user-pannel">
+                <div class="flex-container">
+                    <img src="img/user-default-image.svg" alt="" class="author-icon-big">
+                    <div class="flex-container-column">
+                        <h2><?php echo $user->getUsername() ?></h2>
+                        <div>
+                            <p><?php echo $user->getName() . ' ' . $user->getSurname(); ?></p>
+                            <?php
+                                if ($job = $user->getJob()) {
+                                    echo '<p>' . $job . '</p>';
+                                }
                             ?>
-                        </p>
-                    </div>
-                    <div class="flex-container">
-                        <button class="button-blue" id="userfollowbtn">Seguir</button>
-                        <p id="folllowdata"></p>
+                            <p class="data">
+                                <?php 
+                                    $date = $user->getCreationDate();
+                                    echo 'Se unió el día ' . $date->format('j \d\e F \d\e\l Y');
+                                ?>
+                            </p>
+                        </div>
+                        <div class="no-se-como-arreglar-esto-de-una-manera-mejor">
+                            <button class="button-blue" id="userfollowbtn">Seguir</button>
+                            <p id="folllowdata"></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="points">
-                <p><?php echo $user->getPoints() ?></p>
-                <h3>puntos</h3>
+                
+                <div class="flex-container-column">
+                    <p class="points"><?php echo $user->getPoints() ?></p>
+                    <p>puntos</p>
+                </div>
             </div>
         </div>
 
