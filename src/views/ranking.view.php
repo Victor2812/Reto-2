@@ -9,7 +9,7 @@
             <ol class="ranking">
             <li>
                 <div class="flex-container">
-                    <div class="title1">Posicion</div>
+                    <div class="title1"><span class="t1" data-desktop="Posicion" data-movil="Pos"></sapn></div>
                     <div class="title2">Imagen</div>
                     <div class="title1">Usuario</div>
                     <div class="title2">Puntos</div>
