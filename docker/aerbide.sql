@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db
--- Tiempo de generación: 22-11-2022 a las 11:51:54
--- Versión del servidor: 10.9.3-MariaDB-1:10.9.3+maria~ubu2204
--- Versión de PHP: 8.0.25
+-- Tiempo de generacion: 22-11-2022 a las 11:51:54
+-- Version del servidor: 10.9.3-MariaDB-1:10.9.3+maria~ubu2204
+-- Version de PHP: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -54,9 +54,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`) VALUES
-(1, 'Logística'),
-(2, 'Producción'),
-(3, 'Ingeniería'),
+(1, 'Logistica'),
+(2, 'Produccion'),
+(3, 'Ingenieria'),
 (4, 'Calidad'),
 (5, 'Financiero'),
 (6, 'Otros');
@@ -85,7 +85,7 @@ CREATE TABLE `comments` (
 INSERT INTO `comments` (`id`, `text`, `author`, `post`, `comment`, `creation_date`, `file`) VALUES
 (1, 'De locos... Estoy orgullosa de ti!!!!\r\n\r\nBesis', 2, 2, NULL, '2022-11-22 11:38:45', NULL),
 (2, 'El foro es para cosas serias, gracias....', 1, 3, NULL, '2022-11-22 11:44:08', NULL),
-(3, 'Nada chicos, ya está, gracias por vuestra ayuda vacía....', 4, 4, NULL, '2022-11-22 11:46:16', NULL),
+(3, 'Nada chicos, ya esta, gracias por vuestra ayuda vacia....', 4, 4, NULL, '2022-11-22 11:46:16', NULL),
 (4, 'arriaga@egibide.org\r\n\r\nSon 5€ gracias.', 4, 5, NULL, '2022-11-22 11:48:46', NULL),
 (5, 'jaja, otro archivo, mira', 4, 2, NULL, '2022-11-22 11:50:18', 2);
 
@@ -145,10 +145,10 @@ CREATE TABLE `posts` (
 
 INSERT INTO `posts` (`id`, `title`, `text`, `category`, `creation_date`, `author`, `file`) VALUES
 (1, 'Mi primer post', 'Hola jaja, soy nuevo en la empresa. Me llamo Gaizka y me gusta subir Posts para subir puntos y ser el mejor.', 3, '2022-11-22 11:35:23', 1, NULL),
-(2, 'Este post tiene Archivos!!', 'Hola de nuevo, aquí os muestro unos archivos de ejemplo....', 1, '2022-11-22 11:37:47', 1, 1),
-(3, 'Problema de calidad en los aviones', 'En realidad no hay ningún problema jajjaa, soy un risas.... Nuestros aviones son los mejores del mundo.', 4, '2022-11-22 11:43:43', 3, NULL),
-(4, 'URGENTE!!!!! NECESITAMOS DINERO!!!!', '¿Cómo podemos conseguir dinero para financiar los nuevos aviones? Llevo días pensándolo y no se me ocurre nada... \r\n\r\nAYUDA!!!!!', 5, '2022-11-22 11:45:56', 4, NULL),
-(5, 'Necesitamos materiales', 'En el sector de producción nos estamos quedando sin acero valirio... Alguien me envía el email del proveedor por favor?', 2, '2022-11-22 11:48:12', 2, NULL);
+(2, 'Este post tiene Archivos!!', 'Hola de nuevo, aqui os muestro unos archivos de ejemplo....', 1, '2022-11-22 11:37:47', 1, 1),
+(3, 'Problema de calidad en los aviones', 'En realidad no hay ningun problema jajjaa, soy un risas.... Nuestros aviones son los mejores del mundo.', 4, '2022-11-22 11:43:43', 3, NULL),
+(4, 'URGENTE!!!!! NECESITAMOS DINERO!!!!', '¿Como podemos conseguir dinero para financiar los nuevos aviones? Llevo dias pensandolo y no se me ocurre nada... \r\n\r\nAYUDA!!!!!', 5, '2022-11-22 11:45:56', 4, NULL),
+(5, 'Necesitamos materiales', 'En el sector de produccion nos estamos quedando sin acero valirio... Alguien me envia el email del proveedor por favor?', 2, '2022-11-22 11:48:12', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -221,7 +221,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `name`, `surname`, `image`, `date`, `points`, `job`, `passwd`) VALUES
 (1, 'gaizka', 'Gaizka', NULL, NULL, '2022-11-22', 10, NULL, 'gaizka'),
 (2, 'tania', 'Tania', 'Hernando', NULL, '2022-11-22', 5, 'Alcantarillera', 'tania'),
-(3, 'victor', 'Victor', 'Ibáñez', NULL, '2022-11-22', 5, 'Maquetador', 'victor'),
+(3, 'victor', 'Victor', 'Ibañez', NULL, '2022-11-22', 5, 'Maquetador', 'victor'),
 (4, 'imanol', 'Imanol', 'Urquijo', NULL, '2022-11-22', 5, NULL, 'imanol');
 
 -- --------------------------------------------------------
