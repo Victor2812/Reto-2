@@ -10,8 +10,8 @@
             <li>
                 <div class="flex-container">
                     <div class="title1">Posicion</div>
-                    <div class="title2">Usuario</div>
-                    <div class="title1">Nombre</div>
+                    <div class="title2">Imagen</div>
+                    <div class="title1">Usuario</div>
                     <div class="title2">Puntos</div>
                 </div>
             </li>
