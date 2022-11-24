@@ -43,3 +43,6 @@ define('MAX_TAGS_PER_POST', 5);
 define('LANGUAGES', ['EN', 'EUS', 'ES']);
 
 define ('LANGUAGE_COOKIE', 'aerbidelang');
+
+define('POINTS_POST', 10);
+define('POINTS_COMMENT', 5);

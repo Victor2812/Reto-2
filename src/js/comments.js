@@ -70,7 +70,7 @@ function mockupBasicComment(data) {
 }
 
 // Maquetación adicional para los comentarios padre
-function mockupParentComment(comment, data, offsets) {
+function mockupParentComment(comment, data, offsets, container) {
     // Contenedor del formulario de añadir subcomentario
     let formContainer = document.createElement('div');
     formContainer.className = 'add-comment-form';
@@ -92,27 +92,28 @@ function mockupParentComment(comment, data, offsets) {
         id = data.parent_comment || data.id;
 
         // si el form no se ha destruido, añadir funcionalidad
-        form?.addEventListener('submit', async (e) => await uploadCommentFormSubmit(e, 'comment', id, container));
+        form?.addEventListener('submit', async (e) => {
+            await uploadCommentFormSubmit(e, 'comment', id, container);
+        } );
+    });
+
+    // Botón de cargar subcomentarios
+    let loadSubcommentsButton = document.createElement('a');
+    loadSubcommentsButton.href = '#';
+    loadSubcommentsButton.classList.add('load-subcomments');
+    if (data.subcomments_num > 0) {
+        loadSubcommentsButton.classList.add('shown');
+    }
+    loadSubcommentsButton.innerText = 'Cargar más subcomentarios';
+    // funcionalidad
+    loadSubcommentsButton.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        loadMoreCommentSubcomments(data.id, offsets, subcommentsContainer);
     });
 
     // maquetar botón de cargar subcomentarios
-    if (data.subcomments_num > 0) {
-        // Botón de cargar subcomentarios
-        let loadSubcommentsButton = document.createElement('a');
-        loadSubcommentsButton.href = '#';
-        loadSubcommentsButton.className = 'load-subcomments';
-        loadSubcommentsButton.innerText = 'Cargar más subcomentarios';
-
-        // maqueta dentro del comentario
-        comment.appendChild(loadSubcommentsButton);
-
-        // funcionalidad
-        loadSubcommentsButton.addEventListener('click', async (e) => {
-            e.preventDefault();
-
-            loadMoreCommentSubcomments(data.id, offsets, subcommentsContainer);
-        });
-    }
+    comment.appendChild(loadSubcommentsButton);
 
     // maquetar contenedores
     comment.appendChild(formContainer);
@@ -123,12 +124,12 @@ function mockupParentComment(comment, data, offsets) {
 }
 
 // Maquetar un comentario completo
-function mockupComment(data, addToTop, container, offsets) {
+function mockupSingleComment(data, addToTop, container, offsets) {
     let comment = mockupBasicComment(data);
 
     // comprobar que el comentario no sea subcomentario
     if (data.parent_post) {
-        mockupParentComment(comment, data, offsets)
+        mockupParentComment(comment, data, offsets, container);
     }
 
     // comprobar si el comentario tiene archivos
@@ -164,7 +165,7 @@ function mockupComment(data, addToTop, container, offsets) {
 // Maquetar los comentarios a partir de una lista de datos
 function mockupComments(data, container, offsets) {
     data.forEach(c => {
-        mockupComment(c, false, container, offsets);
+        mockupSingleComment(c, false, container, offsets);
     });
 }
 
@@ -176,21 +177,22 @@ function mockupComments(data, container, offsets) {
 async function updateComment(id, container) {
     data = await getCommentData(id, 'getCommentData');
 
-    // si no se lo pasamos por parámetro se lo pregunt a la API
-    /*if (is_voted === null) {
-        is_voted = data.is_voted || false;
-    }*/
+    let comment = container.querySelector(`.comment[data-comment='${id}']`);
 
-    let button = container.querySelector(`.comment[data-comment='${id}'] .comment-like-btn`);
-    let likes = container.querySelector(`.comment[data-comment='${id}'] .likes`);
-
+    let button = comment.querySelector(`.comment-like-btn`);
     if (data.is_voted) {
         setButtonText(button, 'Ya no me gusta');
     } else {
         setButtonText(button, 'Me gusta');
     }
 
+    let likes = comment.querySelector(`.likes`);
     likes.innerText = data.votes;
+    
+    let loadSubcommentsButton = comment.querySelector('.load-subcomments');
+    if (data.subcomments_num > 0 && !loadSubcommentsButton.classList.contains('shown')) {
+        loadSubcommentsButton.classList.add('shown');
+    }
 }
 
 // Cargar y maquetar más comentarios de un post
@@ -199,7 +201,7 @@ async function loadMorePostComments(offsets, container, postId) {
     let comments = await getLastCommentsData('post', postId, offsets.comments);
 
     if (comments.error) {
-        console.log(comments.error);
+        console.error(comments.error);
     } else {
         mockupComments(comments, container, offsets);
         // actualizar el offset para la siguiente pedida de datos
@@ -255,20 +257,24 @@ async function uploadCommentFormSubmit(e, type, id, container) {
         addErrorToForm(e.target, r.error);
     } else {
         // r será la información del nuevo comentario
-
         // eliminar formulario
         e.target.parentNode.removeChild(e.target);
 
         // maquetar nuevo comenatio
         if (r.parent_post) {
             // maquetar comentario del post al principio
-            mockupComment(r, true, container);
-        } else if (r.parent_comment) {
-            // buscar contenedor de subcomentarios del comentario
-            if (container) {
+            mockupSingleComment(r, true, container);
+        } 
+        
+        else if (r.parent_comment) {
+            // el subcomentario no se maqueta para evitar duplicados cuando se pulsa el botón de cargar más comentarios
+            /*if (container) {
                 // maquetar subcomentario al final
-                mockupComment(r, false, container);
-            }
+                mockupSingleComment(r, false, container);
+            }*/
+
+            // actualizar el comentario padre
+            updateComment(r.parent_comment, container);
         }
     }
 }

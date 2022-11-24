@@ -8,6 +8,11 @@ needs_authentication();
 //obtener parametros del GET
 $method = isset($_GET['method']) ? $_GET['method'] : '';
 
+// obtener usuario específico si se necesita
+$user = isset($_GET['user'])
+    ? UserRepository::getUserById(abs(intval($_GET['user'])))
+    : null;
+
 // Funciones
 /**
  * Obtiene la información necesaria para el banner de usuario
@@ -24,7 +29,7 @@ function getUserInfo(): array {
 }
 
 
-function setUserInfo(): mixed {
+function setUserInfo(): array {
     $json = file_get_contents('php://input');
 
     if (strtolower(get_method()) != 'post' || !$json) {
@@ -66,6 +71,32 @@ function setUserInfo(): mixed {
     return ['ok' => 'ok'];
 }
 
+function checkFollowingUser(UserEntity $destination): array {
+    if (!$destination) {
+        return ['error' => 'Usuario no encontrado'];
+    }
+    $user = $GLOBALS['session']->getCurrentUser();
+
+    return [
+        'following' => UserRepository::isUserFollowingUser($user, $destination),
+    ];
+}
+
+function toggleFollowingUser(UserEntity $destination): array {
+    if (!$destination) {
+        return ['error' => 'Usuario no encontrado'];
+    }
+    $user = $GLOBALS['session']->getCurrentUser();
+
+    if (UserRepository::isUserFollowingUser($user, $destination)) {
+        UserRepository::removeUserFollow($user, $destination);
+    } else {
+        UserRepository::addUserFollow($user, $destination);
+    }
+
+    return checkFollowingUser($destination);
+}
+
 $salida = [];
 
 // Comprobar el metodo solicitado
@@ -75,6 +106,12 @@ switch ($method) {
         break;
     case 'setUser':
         $salida = setUserInfo();
+        break;
+    case 'isFollowing':
+        $salida = checkFollowingUser($user);
+        break;
+    case 'toggleFollowing':
+        $salida = toggleFollowingUser($user);
         break;
     default:
         // en caso de fallo mostrar un array vacío
