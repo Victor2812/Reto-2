@@ -44,6 +44,13 @@ abstract class CommentRepository {
             return null;
     }
 
+    /**
+     * Convierte un array de datos a un CommentEntity
+     * @param array $data Datos
+     * @param PostEntity|null $postParent Post padre
+     * @param CommentEntity|null $commentParent Comentario padre
+     * @return CommentEntity|null
+     */
     private static function getCommentFromData(array $data, PostEntity|null $postParent = null, CommentEntity|null $commentParent = null): CommentEntity|null {
         if ($author = UserRepository::getUserById(intval($data['author']))) {
             // Obtener el post
@@ -108,6 +115,11 @@ abstract class CommentRepository {
         return null;
     }
 
+    /**
+     * Obtiene el numero de votos de un comentario
+     * @param CommentEntity $comment Comentario
+     * @return int Cantidad de votos
+     */
     public static function getCommentVotes(CommentEntity $comment): int {
         global $db;
 
@@ -125,6 +137,12 @@ abstract class CommentRepository {
         return 0;
     }
 
+    /**
+     * Añade un voto al comentario
+     * @param CommentEntity $comment Comentario
+     * @param UserEntity $user Autor del voto
+     * @return bool Se ha añadido o no
+     */
     public static function addCommentVote(CommentEntity $comment, UserEntity $user): bool {
         global $db;
 
@@ -140,6 +158,12 @@ abstract class CommentRepository {
         ]);
     }
 
+    /**
+     * Elimina un voto del comentario
+     * @param CommentEntity $comment Comentario
+     * @param UserEntity $user Autor del voto
+     * @return bool Se ha quitado o no
+     */
     public static function removeCommentVote(CommentEntity $comment, UserEntity $user): bool {
         global $db;
 
@@ -155,6 +179,12 @@ abstract class CommentRepository {
         ]);
     }
 
+    /**
+     * Comrueba si un usuario ha votado el comentario
+     * @param CommentEntity $comment Comentario
+     * @param UserEntity $user Autor del voto
+     * @return bool Votado o no
+     */
     public static function isCommentVoted(CommentEntity $comment, UserEntity $user): bool {
         global $db;
 
@@ -196,6 +226,11 @@ abstract class CommentRepository {
         return $comments;
     }
 
+    /**
+     * Obtiene la cantidad de comentarios de un post
+     * @param PostEntity $post El Post
+     * @return int Cantidad de comentarios
+     */
     public static function getPostCommentNum(PostEntity $post): int {
         global $db;
 
@@ -239,6 +274,11 @@ abstract class CommentRepository {
         return $comments;
     }
 
+    /**
+     * Obtiene la cantidad de subcomentarios de un comentario
+     * @param CommentEntity $comment El comentario
+     * @return int Cantidad de subcomentarios
+     */
     public static function getCommentSubcommentNum(CommentEntity $comment): int {
         global $db;
 

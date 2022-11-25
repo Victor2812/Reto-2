@@ -2,18 +2,39 @@
 
 
 class CommentEntity {
+    /**
+     * @var int
+     */
     private $id;
 
+    /**
+     * @var string
+     */
     private $text;
 
+    /**
+     * @var UserEntity
+     */
     private $author;
 
+    /**
+     * @var PostEntity|null
+     */
     private $post;
 
+    /**
+     * @var CommentEntity|null
+     */
     private $comment;
 
+    /**
+     * @var DateTime
+     */
     private $date;
 
+    /**
+     * @var FileEntity|null
+     */
     private $file;
 
     public function __construct(int $id, string $text, UserEntity $author,
@@ -38,34 +59,66 @@ class CommentEntity {
             $this->file = $file;
     }
 
+    /**
+     * Obtiene el ID del comentario
+     * @return int ID
+     */
     public function getId(): int {
         return $this->id;
     }
 
+    /**
+     * Obtiene el texto del comentario
+     * @return string texto
+     */
     public function getText(): string {
         return $this->text;
     }
 
+    /**
+     * Establece el texto del comentario
+     * @param string $text Texto
+     */
     public function setText(string $text) {
         $this->text = $text;
     }
 
+    /**
+     * Obtiene el autor del comentario
+     * @return UserEntity Usuario
+     */
     public function getAuthor(): UserEntity {
         return $this->author;
     }
 
+    /**
+     * Obtiene el Post padre del comentario
+     * @return PostEntity|null Post padre del comentario
+     */
     public function getPost(): PostEntity|null {
         return $this->post;
     }
 
+    /**
+     * Obtiene el Comentario padre del comentario
+     * @return CommentEntity|null Comentario padre del comentario
+     */
     public function getComment(): CommentEntity|null {
         return $this->comment;
     }
 
+    /**
+     * Obtiene el la fecha del comentario
+     * @return DateTime Fecha
+     */
     public function getCreationDate(): DateTime {
         return $this->date;
     }
 
+    /**
+     * Obtiene el archivo subido con el comentario
+     * @return FileEntity|null Archivo
+     */
     public function getFile(): FileEntity|null {
         return $this->file;
     }

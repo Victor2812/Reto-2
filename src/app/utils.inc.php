@@ -73,7 +73,14 @@ function check_post_data(array $names, $post = null) {
     return true;
 }
 
-function get_post(string $key, mixed $default = null, $post = null): mixed {
+/**
+ * Obtiene un elemento de los datos envíados a través de POST
+ * @param string $key Clave
+ * @param mixed $default Valor por defecto
+ * @param array $post Lista de la que obtener los datos (null es $_POST)
+ * @return mixed Datos
+ */
+function get_post(string $key, mixed $default = null, array $post = null): mixed {
     if (!$post) {
         $post = $_POST;
     }

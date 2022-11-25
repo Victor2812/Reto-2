@@ -6,7 +6,7 @@ abstract class FileRepository {
      * Crea una nueva referencia de un archivo en la base de datos
      * @param string $name Nombre del archivo
      * @param string $path Ruta del archivo
-     * @return FileEntity|null Referencia
+     * @return FileEntity|null Archivo
      */
     public static function createNewFile(string $name, string $path): FileEntity|null {
         global $db;
@@ -30,7 +30,12 @@ abstract class FileRepository {
         return null;
     }
 
-    public static function getFileById(int $id) {
+    /**
+     * Obtiene un archivo con su ID
+     * @param int $id ID
+     * @return FileEntity|null Archivo
+     */
+    public static function getFileById(int $id): FileEntity|null {
         global $db;
 
         $sql = 'SELECT * FROM files WHERE id = :i';

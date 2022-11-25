@@ -237,6 +237,11 @@ abstract class PostRepository {
         }
     }
 
+    /**
+     * Obtiene la lista de Post de un usuario
+     * @param UserEntity $user El autor
+     * @return array Array de PostEntity
+     */
     public static function getUserBookmarkedPosts(UserEntity $user): array {
         global $db;
 
@@ -259,6 +264,11 @@ abstract class PostRepository {
         return $posts;
     }
 
+    /**
+     * Obtiene la lista de favoritos de un post
+     * @param PostEntity $post El post
+     * @return int Cantidad
+     */
     public static function getPostBookmarkCount(PostEntity $post): int {
         global $db;
 
@@ -276,19 +286,31 @@ abstract class PostRepository {
         return 0;
     }
 
-    public static function addPostToUserBookmark(PostEntity $post, UserEntity $user) {
+    /**
+     * Añade un post a los favoritos de un usuario
+     * @param PostEntity $post El post
+     * @param UserEntity $user El autor
+     * @return bool Si ha fallado o no
+     */
+    public static function addPostToUserBookmark(PostEntity $post, UserEntity $user): bool {
         global $db;
 
         // Esta sentencia actualiza el bookmark, y si ya existe, no hace nada
         $sql = 'INSERT INTO bookmarks (user, post) VALUES (:user, :post) ON DUPLICATE KEY UPDATE post=:post';
 
         $statement = $db->prepare($sql);
-        $statement->execute([
+        return $statement->execute([
             ':user' =>          $user->getId(),
             ':post' =>          $post->getId()
         ]);
     }
 
+    /**
+     * Elimina un post de los favoritos de un usuario
+     * @param PostEntity $post El post
+     * @param UserEntity $user El autor
+     * @return bool Si ha fallado o no
+     */
     public static function removeBookmarkedPost(PostEntity $post, UserEntity $user) {
         global $db;
 
@@ -301,6 +323,12 @@ abstract class PostRepository {
         ]);
     }
 
+    /**
+     * Comprueba si un usuairo tiene un post en los favoritos
+     * @param UserEntity $user El autor
+     * @param PostEntity $post El post
+     * @return bool Está en favoritos o no
+     */
     public static function isPostBookmarked(UserEntity $user, PostEntity $post): bool {
         global $db;
 

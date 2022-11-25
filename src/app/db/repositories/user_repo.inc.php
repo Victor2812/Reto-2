@@ -1,7 +1,16 @@
 <?php
 
 abstract class UserRepository {
-    public static function createNewUser(string $username, string|null $name, string|null $surname, string|null $job, string $passwd): UserEntity|null {
+    /**
+     * Crea un nuevo usuario
+     * @param string $username Nombre del usuario
+     * @param string $name Nombre propio del usuario
+     * @param string|null $surname Apellido del usuario
+     * @param string|null $job Puesto de trabajo
+     * @param string $passwd Contraseña del usuario
+     * @return UserEntity|null
+     */
+    public static function createNewUser(string $username, string $name, string|null $surname, string|null $job, string $passwd): UserEntity|null {
         global $db;
 
         $sql = "INSERT INTO users (username, name, surname, job, passwd) VALUES (:uname, :name, :surname, :job, :passwd)";
@@ -26,6 +35,11 @@ abstract class UserRepository {
         return null;
     }
 
+    /**
+     * Obtiene el Usuario desde un array de datos
+     * @param array $data Datos
+     * @return UserEntity
+     */
     private static function parseUserFromData(array $data) : UserEntity {
         return new UserEntity(
             $data['id'],
@@ -84,6 +98,10 @@ abstract class UserRepository {
         return null;
     }
 
+    /**
+     * Actualiza un usuario
+     * @param UserEntity $user
+     */
     public static function update(UserEntity $user) {
         global $db;
 
@@ -102,7 +120,13 @@ abstract class UserRepository {
         ]);
     }
 
-    public static function getFollowersInfo(UserEntity $user, int $limit = 4) {
+    /**
+     * Obtiene la lista de seguidores de un Usuario limitada
+     * @param UserEntity $user Usuario
+     * @param int $limit Cantidade de usuarios
+     * @return array Lista de usuarios
+     */
+    public static function getFollowersInfo(UserEntity $user, int $limit = 4): array {
         global $db;
 
         $sql = "SELECT u.* 
@@ -124,6 +148,12 @@ abstract class UserRepository {
         return $follower;
     }
 
+    /**
+     * Obtiene la lista de seguidos de un Usuario limitada
+     * @param UserEntity $user Usuario
+     * @param int $limit Cantidade de usuarios
+     * @return array Lista de usuarios
+     */
     public static function getFollowingInfo(UserEntity $user, int $limit = 4) {
         global $db;
 
@@ -147,7 +177,12 @@ abstract class UserRepository {
         return $following;
     }
 
-    public static function getFollowersCount(UserEntity $user) {
+    /**
+     * Obtiene la cantidad de seguidores de un Usuario
+     * @param UserEntity $user Usuario
+     * @return int Cantidad
+     */
+    public static function getFollowersCount(UserEntity $user): int {
         global $db;
 
         $sql = 'SELECT count(source) FROM followers WHERE destination = :id';
@@ -162,6 +197,11 @@ abstract class UserRepository {
         return $data ? $data[0] : 0;
     }
 
+    /**
+     * Obtiene la cantidad de seguidos de un Usuario
+     * @param UserEntity $user Usuario
+     * @return int Cantidad
+     */
     public static function getFollowingCount(UserEntity $user) {
         global $db;
 
@@ -177,7 +217,13 @@ abstract class UserRepository {
         return $data ? $data[0] : 0;
     }
 
-    public static function isUserFollowingUser(UserEntity $source, UserEntity $destination) {
+    /**
+     * Comprueba si un usuario está siguiendo a otro
+     * @param UserEntity $source Usuario que sigue a
+     * @param UserEntity $destination Usuario que es seguido por
+     * @return bool Source sigue a Destination
+     */
+    public static function isUserFollowingUser(UserEntity $source, UserEntity $destination): bool {
         global $db;
 
         $sql = 'SELECT "a" FROM followers WHERE source = :s AND destination = :d';
@@ -194,31 +240,48 @@ abstract class UserRepository {
         return $data != null;
     }
 
+    /**
+     * Hacer que un usuario siga a otro
+     * @param UserEntity $source Usuario que sigue a
+     * @param UserEntity $destination Usuario que es seguido por
+     * @return bool Source sigue a Destination
+     */
     public static function addUserFollow(UserEntity $source, UserEntity $destination) {
         global $db;
 
         $sql = 'INSERT INTO followers (source, destination) VALUES (:s, :d) ON DUPLICATE KEY UPDATE source=:s';
 
         $statement = $db->prepare($sql);
-        $statement->execute([
+        return $statement->execute([
             ':s' => $source->getId(),
             ':d' => $destination->getId(),
         ]);
     }
 
-    public static function removeUserFollow(UserEntity $source, UserEntity $destination) {
+    /**
+     * Eliminar el seguimiento de un usuario a otro
+     * @param UserEntity $source Usuario que sigue a
+     * @param UserEntity $destination Usuario que es seguido por
+     * @return bool Source sigue a Destination
+     */
+    public static function removeUserFollow(UserEntity $source, UserEntity $destination): bool {
         global $db;
 
         $sql = 'DELETE FROM followers where source = :s AND destination = :d';
 
         $statement = $db->prepare($sql);
-        $statement->execute([
+        return $statement->execute([
             ':s' => $source->getId(),
             ':d' => $destination->getId(),
         ]);
     }
 
-    public static function getUserRanking(int $limit = 10) {
+    /**
+     * Obtener los primeros n usuarios del ranking de puntos
+     * @param int $limit Cantidad de usuarios
+     * @return array Lista de usuarios
+     */
+    public static function getUserRanking(int $limit = 10): array {
         global $db;
 
         $sql = "SELECT * FROM users ORDER BY points DESC LIMIT $limit";
@@ -232,34 +295,5 @@ abstract class UserRepository {
         }
 
         return $usuarios;
-    }
-
-
-    public static function getRankingInfo() {
-        global $db;
-
-        $sql = "SELECT *
-        FROM users
-        ORDER BY points DESC";
-
-        $statement = $db->prepare($sql);
-        $statement->execute();
-
-        $ranking = [];
-
-        while (($data = $statement->fetch())) {
-            $ranking[] = new UserEntity(
-                $data['id'],
-                $data['username'],
-                $data['name'],
-                $data['surname'],
-                $data['image'],
-                strtotime($data['date']),
-                $data['points'],
-                $data['job'],
-                $data['passwd']
-            );
-        }
-        return $ranking;
     }
 }

@@ -80,6 +80,11 @@ abstract class TagRepository {
         return $tags;
     }
 
+    /**
+     * Obtiene los Tags desde el ID de un Post
+     * @param int $postId ID del post
+     * @return array array de TagEntity
+     */
     public static function getTagsByPostId(int $postId): array {
         global $db;
 
@@ -103,6 +108,10 @@ abstract class TagRepository {
         return $tags;
     }
 
+    /**
+     * Actaliza la información de un Tag
+     * @param TagEntity $tag
+     */
     public static function update(TagEntity $tag) {
         global $db;
 

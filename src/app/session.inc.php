@@ -11,7 +11,7 @@ class SessionManager {
      * EL tiempo que tarda una sesión en cambiar de ID
      * @var integer
      */
-    const RENEW_TIME =  15 * 60; // 15 mins
+    const RENEW_TIME =  60 * 60; // 1 hora(s)
 
     /**
      * @var UserEntity|null
@@ -73,35 +73,6 @@ class SessionManager {
         }
     }
 
-
-    // Se utiliza por motivos de seguridad sobre todo en el cambio de
-    // privilegios dentro de la aplicación.
-    /**
-     * Cambia el ID de la sesión sin eliminar la antigua
-     * @deprecated No funciona correctamente
-     */
-    public function regenerate() {
-        // Crear la sesión nueva
-        $new_id = session_create_id();
-        $this->set('_new_session', $new_id);
-
-        // Establecer la hora de destrucción a ahora
-        $this->set('_destroyed', time());
-
-        // Guardar la sesión antigua
-        session_commit();
-
-        // Cambiar de sesión
-        session_id($new_id);
-        ini_set('session.use_strict_mode', 0);
-        session_start();
-        ini_set('session.use_strict_mode', 1);
-
-        // Eliminar residuos de la sesión antigua
-        $this->del('_new_session');
-        $this->del('_destroyed');
-    }
-
     /**
      * Obtiene una variable de la sesión
      * @param string $key El nombre de la variable
@@ -116,22 +87,16 @@ class SessionManager {
      * Establece una variable dentro de la sesión. Si la variable es crítica regenera la sesión.
      * @param string $key El nombre de la variable
      * @param mixed $value El valor de la variable
-     * @param bool $critical Si la variable es crítica
      */
-    public function set(string $key, mixed $value, bool $critical = false) {
-        // Si los datos son criticos, cambiar de sesión y actualizar los datos en la nueva
-        if ($critical) $this->regenerate();
+    public function set(string $key, mixed $value) {
         $_SESSION[$key] = $value;
     }
 
     /**
      * Elimina una variable de la sesión
      * @param string $key El nombre de la variable
-     * @param bool $critical Si la variable es crítica
      */
-    public function del(string $key, bool $critical = false) {
-        // Si los datos son criticos, cambiar de sesión y actualizar los datos en la nueva
-        if ($critical) $this->regenerate();
+    public function del(string $key) {
         unset($_SESSION[$key]);
     }
 

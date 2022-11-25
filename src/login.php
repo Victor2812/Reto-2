@@ -30,8 +30,8 @@ if (get_method() == 'POST') {
             redirect(current_file());
         }
 
-        $username = $_POST['login_user'];
-        $password = $_POST['login_pass'];
+        $username = get_post('login_user');
+        $password = get_post('login_pass');
 
         // obtener usuario del repositorio y comprobar su contraseña
         if ($user = UserRepository::getUserByUsername($username)) {
@@ -51,12 +51,12 @@ if (get_method() == 'POST') {
             redirect(current_file());
         }
 
-        $username = $_POST['reg_username'];
-        $name = $_POST['reg_name'];
-        $password = $_POST['reg_pass'];
-        $password2 = $_POST['reg_rp_pass'];
+        $username = get_post('reg_username');
+        $name = get_post('reg_name');
+        $password = get_post('reg_pass');
+        $password2 = get_post('reg_rp_pass');
 
-        if ($password != $password2) {
+        if ($password !== $password2 && $password !== null) {
             $register_errors[] = 'Las contraseñas no coinciden';
             render();
         }
