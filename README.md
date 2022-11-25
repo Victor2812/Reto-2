@@ -23,6 +23,9 @@ En su defecto, con el siguiente comando sería suficiente:
 chmod -R 777 src/uploads/
 ```
 
+La base de datos tarda en iniciar, conviene esperar unos minutos tras iniciar
+los servidores.
+
 ### Base de datos
 
 Credenciales de PHPMyAdmin:
