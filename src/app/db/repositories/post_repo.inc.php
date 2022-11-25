@@ -311,13 +311,13 @@ abstract class PostRepository {
      * @param UserEntity $user El autor
      * @return bool Si ha fallado o no
      */
-    public static function removeBookmarkedPost(PostEntity $post, UserEntity $user) {
+    public static function removeBookmarkedPost(PostEntity $post, UserEntity $user): bool {
         global $db;
 
         $sql = 'DELETE FROM bookmarks WHERE user=:user AND post=:post';
 
         $statement = $db->prepare($sql);
-        $statement->execute([
+        return $statement->execute([
             ':user' =>          $user->getId(),
             ':post' =>          $post->getId()
         ]);
