@@ -15,9 +15,9 @@ if (isset($_GET['user'])) {
 }
 
 include_views([
-    "views/header.view.php",
+    "views/partials/header.view.php",
     "views/user.view.php",
-    "views/footer.view.php"
+    "views/partials/footer.view.php"
 ])
 
 ?>

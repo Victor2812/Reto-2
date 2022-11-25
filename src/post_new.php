@@ -10,9 +10,9 @@ $form_errors = [];
 
 function render() {
     include_views([
-        "views/header.view.php",
+        "views/partials/header.view.php",
         "views/post_new.view.php",
-        "views/footer.view.php"
+        "views/partials/footer.view.php"
     ]);
 
     die();

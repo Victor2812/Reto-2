@@ -38,4 +38,4 @@
     </div>
 </header>
 <script src="js/views/partials/header.js"></script>
-<?php include "partials/user_banner.php"; ?>
+<?php include "user_banner.php"; ?>

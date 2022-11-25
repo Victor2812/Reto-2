@@ -10,7 +10,7 @@ if (!isset($_GET['post'])) {
 }
 
 include_views([
-    "views/header.view.php",
+    "views/partials/header.view.php",
     "views/post.view.php",
-    "views/footer.view.php"
+    "views/partials/footer.view.php"
 ]);

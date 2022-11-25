@@ -5,7 +5,7 @@ require_once "app/__include.inc.php";
 needs_authentication();
 
 include_views([
-    "views/header.view.php",
+    "views/partials/header.view.php",
     "views/ranking.view.php",
-    "views/footer.view.php"
+    "views/partials/footer.view.php"
 ]);
