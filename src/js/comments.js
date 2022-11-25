@@ -64,6 +64,9 @@ function mockupBasicComment(data) {
         </button>
         <p><span class="likes">${data.votes}</span> likes</p>
     </div>
+    <div class="add-comment-form"></div>
+    <a class="load-subcomments" href="#">Cargar más subcomentarios</a>
+    <div class="subcomments"></div>
     `;
 
     return comment;
@@ -72,12 +75,10 @@ function mockupBasicComment(data) {
 // Maquetación adicional para los comentarios padre
 function mockupParentComment(comment, data, offsets, container) {
     // Contenedor del formulario de añadir subcomentario
-    let formContainer = document.createElement('div');
-    formContainer.className = 'add-comment-form';
+    let formContainer = comment.querySelector('div.add-comment-form');
 
     // Contenedor de subcomentarios
-    let subcommentsContainer = document.createElement('div');
-    subcommentsContainer.className = 'subcomments';
+    let subcommentsContainer = comment.querySelector('div.subcomments');
 
     // Botón de añadir subcomentario
     let addSubcommentBtn = document.createElement('button');
@@ -93,18 +94,15 @@ function mockupParentComment(comment, data, offsets, container) {
 
         // si el form no se ha destruido, añadir funcionalidad
         form?.addEventListener('submit', async (e) => {
-            await uploadCommentFormSubmit(e, 'comment', id, container);
+            await uploadCommentFormSubmit(e, 'comment', id, container, offsets);
         } );
     });
 
     // Botón de cargar subcomentarios
-    let loadSubcommentsButton = document.createElement('a');
-    loadSubcommentsButton.href = '#';
-    loadSubcommentsButton.classList.add('load-subcomments');
+    let loadSubcommentsButton = comment.querySelector('.load-subcomments')
     if (data.subcomments_num > 0) {
         loadSubcommentsButton.classList.add('shown');
     }
-    loadSubcommentsButton.innerText = 'Cargar más subcomentarios';
     // funcionalidad
     loadSubcommentsButton.addEventListener('click', async (e) => {
         e.preventDefault();
@@ -114,10 +112,6 @@ function mockupParentComment(comment, data, offsets, container) {
 
     // maquetar botón de cargar subcomentarios
     comment.appendChild(loadSubcommentsButton);
-
-    // maquetar contenedores
-    comment.appendChild(formContainer);
-    comment.appendChild(subcommentsContainer);
 
     // maquetar botón al principio de los botones
     comment.querySelector('.buttons')?.prepend(addSubcommentBtn);
@@ -211,7 +205,7 @@ async function loadMorePostComments(offsets, container, postId) {
 
 // Cargar y maquetar más subcomentarios de un comentario
 async function loadMoreCommentSubcomments(commentId, offsets, container) {
-    if (!offsets.subcomments[commentId]) {
+    if (!offsets?.subcomments[commentId]) {
         offsets.subcomments[commentId] = 0;
     }
 
@@ -247,7 +241,7 @@ async function processCommentForm(type, id, form) {
 }
 
 // Procesar respuesta de la subida de un nuevo comentario
-async function uploadCommentFormSubmit(e, type, id, container) {
+async function uploadCommentFormSubmit(e, type, id, container, offsets) {
     e.preventDefault();
 
     let r = await processCommentForm(type, id, e.target);
@@ -263,7 +257,7 @@ async function uploadCommentFormSubmit(e, type, id, container) {
         // maquetar nuevo comenatio
         if (r.parent_post) {
             // maquetar comentario del post al principio
-            mockupSingleComment(r, true, container);
+            mockupSingleComment(r, true, container, offsets);
         } 
         
         else if (r.parent_comment) {

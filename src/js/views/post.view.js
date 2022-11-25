@@ -50,7 +50,7 @@ window.addEventListener('load', async () => {
         let form = mockupNewCommentForm(formContainer);
         
         // si el form no se ha destruido, añadir funcionalidad
-        form?.addEventListener('submit', async (e) => await uploadCommentFormSubmit(e, 'post', currentPostId, commentContainer));
+        form?.addEventListener('submit', async (e) => await uploadCommentFormSubmit(e, 'post', currentPostId, commentContainer, offsets));
     });
 
     /*
