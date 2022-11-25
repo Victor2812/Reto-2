@@ -19,7 +19,7 @@ function mockupNewCommentForm(container) {
         </div>
         <div class="errors"></div>
         <textarea name="text" cols="30" rows="10" placeholder="Escribe aqui" required></textarea>
-        <div class="flex-container">
+        <div class="flex-container buttons">
             <label for="new-comment-upload">
                 <?php /*include "img/upload.svg";*/ ?>
                 Añadir adjunto

@@ -5,10 +5,9 @@
 <div class="content noleft">
     <main>
         <div class="ranking-content">
-            <h2  class="title">Ranking de Usuarios</h2>
             <div class="grid-container title">
                 <p>Posicion</p>
-                <p>Imagen</p>
+                <p class="ranking-img-title">Imagen</p>
                 <p>Usuario</p>
                 <p>Puntos</p>
             </div>
@@ -23,7 +22,7 @@
                             <span class="pos"><?php echo $i + 1; ?></span>
                             <img class="author-icon" src="img/user-default-image.svg" alt="Imágen del usuario">
                             <p><a href="user.php?user=<?php echo $list[$i]->getId(); ?>"><?php echo $list[$i]->getUsername(); ?></a></p>
-                            <span><?php echo $list[$i]->getPoints(); ?> puntos</span>
+                            <span><?php echo $list[$i]->getPoints(); ?> p.</span>
                         </div>
                            
                     </li>

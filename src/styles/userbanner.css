@@ -56,16 +56,39 @@
 .form-userbanner input[type="text"],
 .form-userbanner input[type="password"] {
     border: none;
-    border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
+    border-bottom: 0.1rem solid rgba(255, 255, 255, 0.8);
     color: rgba(255, 255, 255, 0.8);
 }
 
+/* smartphones en vertical */
+@media only screen and (max-width: 400px) {
+    #user-banner {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
 
-/*
-.form-userbanner .errors {
-    color: lightcoral;
-    font-weight: 400;
+    #user-banner ul {
+        padding: 1rem;
+    }
+
+    #user-banner .user-info {
+        text-align: center;
+        padding: 1rem 1rem 0 1rem;
+    }
+
+    #user-banner .user-info .flex-container-column {
+        justify-content: center;
+        align-items: center;
+    }
+
+    #user-banner .user-info img {
+        display: none;
+    }
+
+    #user-banner ul li {
+        text-align: center;
+    }
 }
-*/
 
 

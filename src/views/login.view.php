@@ -28,7 +28,7 @@
                         ?>
                     </div>
                     <label for="chk" aria-hidden="true">¿No tienes cuenta?</label>
-                </form>        
+                </form>       
             </div>
             <div class="signup">
                 <form action="<?php echo current_file(); ?>?action=register" method="POST">
