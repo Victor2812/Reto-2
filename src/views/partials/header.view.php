@@ -17,7 +17,7 @@
         </nav>
         <div class="rightnav">
             <div class="search">
-                <form class="form-search" action="">
+                <form class="form-search">
                     <input id="searchtext" type="text" placeholder="Buscar por palabras clave">
                 </form>
             </div>

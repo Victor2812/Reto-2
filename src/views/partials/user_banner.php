@@ -16,8 +16,8 @@
             </div>
         </div>
         <ul class="flex-container-column">
-            <li><a href="/logout.php">Cerrar sesión</a></a></li>
-            <li><a href="" id="useredit">Editar perfil</button></a></li>
+            <li><a href="/logout.php">Cerrar sesión</a></li>
+            <li><a href="" id="useredit">Editar perfil</a></li>
         </ul>
     </div>
 </div>

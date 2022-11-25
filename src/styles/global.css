@@ -316,7 +316,7 @@ form input[type="text"],
 form input[type="password"],
 form textarea {
     width: 100%;
-    box-shadow: 0;
+    box-shadow: none;
     background: transparent;
     border: 0.15rem solid lightgrey;
 }
