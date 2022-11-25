@@ -96,7 +96,7 @@ window.addEventListener('load', async () => {
 
     async function loadMorePosts(filterName, offset, onsuccess) {
         let data = await getLastPostsData(offset, filterName);
-        if (!data.error) {
+        if (!data.error && data.length > 0) { // comprobar que no hayan errores y hayan más de 0 datos desde la API
             // Guardar los posts
             let transaction = database.transaction("posts", "readwrite");
             let storage = transaction.objectStore('posts');
@@ -138,6 +138,7 @@ window.addEventListener('load', async () => {
             if ((posts.length == 0 && reload) || loadMore) {
                 // cargar más posts
                 await loadMorePosts(filterName, offset, (e) => {
+                    console.log
                     // maquetar los posts
                     getPosts(filterName, category, tag, strings, reload = false);
                 });
@@ -177,8 +178,6 @@ window.addEventListener('load', async () => {
             }
             transaction.commit();
         });
-
-        return 'a';
     }
 
     function updateFilter(loadMore = false) {

@@ -7,9 +7,15 @@
 
 
 // Variable global de la base de datos para entidades y repositorios
-$db = new PDO("mysql:host=". DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
-// Cuando ocurra un error lanzar una excepción
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db = null;
+try {
+    $db = new PDO("mysql:host=". DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
+    // Cuando ocurra un error lanzar una excepción
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (Exception $ex) {
+    echo 'Esperando conexión a base de datos... Espera un minuto y recarga la página.';
+    die();
+}
 
 
 // Incluir entidades
