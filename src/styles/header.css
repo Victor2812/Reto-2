@@ -124,13 +124,12 @@ header .navigation .rightnav .search input[type=text]::placeholder {
 /* ------------------------------------------------- */
 
 header .select-category {
-    border: none; /*modificado*/
-    width: 3.2rem; /*modificado*/
-    color: white; /*modificado*/
+    border: none; 
+    width: 2.8rem; 
+    color: white; 
 }
 header select {
-    padding: 0; /*modificado*/
-    width: 3.2rem;
+    padding: 0; 
 }
 
 /* ------------------------------------------------- */

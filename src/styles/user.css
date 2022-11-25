@@ -6,6 +6,11 @@
     background-color: white;
 }
 
+.user-panel .flex-container-column.userpoints {
+    align-items: center;
+    justify-content: center;
+}
+
 .points {
     font-size: 3rem;
     color: grey;

@@ -93,5 +93,21 @@
     transform: scale(1);
 }
 
+/* smartphones en vertical */
+@media only screen and (max-width: 400px) {
+    .login-container {
+        width: 19.68rem;
+        height: 29rem;
+        background-color: white;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 5px 20px 50px black;
+    }
+
+    #chk:checked ~ .signup {
+        transform: translateY(-29rem);
+    }
+}
+
 
 

@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 
-                <div class="flex-container-column">
+                <div class="flex-container-column userpoints">
                     <p class="points"><?php echo $user->getPoints() ?></p>
                     <p>puntos</p>
                 </div>

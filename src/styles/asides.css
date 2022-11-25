@@ -36,13 +36,17 @@ aside ul li button.aside-category {
 
 aside ul li button.aside-category:hover,
 aside ul li button.aside-category.selected {
-    background-color: var(--color-light-blue);
+    background-color: var(--color-medium-blue);
     color: white;
 }
 
 /* ------------------------------------------------- */
                     /* ASIDE RIGHT */
 /* ------------------------------------------------- */
+
+aside a {
+    color: grey;
+}
 
 aside a.button-blue {
     width: fit-content;
@@ -69,7 +73,7 @@ aside .flex-container-column {
 }
 
 aside .flex-container:hover {
-    color: grey;
+    color: var(--color-dark-grey);
 }
 
 
@@ -80,7 +84,7 @@ aside .flex-container:hover {
 @media only screen and (max-width: 400px) {
     .flex-container {
         flex-direction: row;
-    }    
+    }
 }
 
 
