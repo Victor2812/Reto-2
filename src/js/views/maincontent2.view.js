@@ -14,6 +14,7 @@ window.addEventListener('load', async () => {
     document.querySelectorAll('header .navigation nav ul a').forEach((element) => {
         filterList.push(element);
         element.addEventListener('click', (e) => {
+            e.preventDefault(); // prevenir redirección a index.php
             setCurrentFilter(e.target.getAttribute('data-name'));
             updateFilter();
         })

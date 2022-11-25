@@ -82,7 +82,7 @@ function mockupParentComment(comment, data, offsets, container) {
     // Botón de añadir subcomentario
     let addSubcommentBtn = document.createElement('button');
     addSubcommentBtn.className = 'button-white comment-subcomment-btn';
-    addSubcommentBtn.innerText = "Añadir comentario";
+    addSubcommentBtn.innerText = "Comentar";
 
     // Funcionalidad del comentario de añadir subcomentarios
     addSubcommentBtn.addEventListener('click', async (e) => {

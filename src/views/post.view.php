@@ -9,8 +9,7 @@ if (!$post) {
 
 ?>
 
-<div class="content">
-    <?php include "partials/sidebar_left.php"; ?>
+<div class="content noleft">
     <main>
 
         <div class="box-post">

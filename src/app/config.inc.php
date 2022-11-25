@@ -40,7 +40,7 @@ define('UPLOADS_FOLDER', '/var/www/html/uploads');
 
 define('MAX_TAGS_PER_POST', 5);
 
-define('LANGUAGES', ['EN', 'EUS', 'ES']);
+define('LANGUAGES', ['EN', 'EU', 'ES']);
 
 define ('LANGUAGE_COOKIE', 'aerbidelang');
 

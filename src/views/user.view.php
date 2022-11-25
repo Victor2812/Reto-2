@@ -4,9 +4,7 @@
 
 ?>
 
-<div class="content">
-    <?php include 'partials/sidebar_left.php' ?>
-
+<div class="content noleft">
     <main>
         <div class="user-panel">
             <div class="flex-container user-pannel">

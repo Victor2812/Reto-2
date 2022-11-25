@@ -10,9 +10,9 @@
     <div class="navigation">
         <nav>
             <ul>
-                <li><a class="selected" data-name="newest" href="#">Recientes</a></li>
-                <li><a class="unselected" data-name="mostCommented" href="#">Más comentados</a></li>
-                <li><a class="unselected" data-name="mostLiked" href="#">Más valorados</a></li>
+                <li><a class="selected" data-name="newest" href="/index.php">Recientes</a></li>
+                <li><a class="unselected" data-name="mostCommented" href="/index.php">Más comentados</a></li>
+                <li><a class="unselected" data-name="mostLiked" href="/index.php">Más valorados</a></li>
             </ul>
         </nav>
         <div class="rightnav">

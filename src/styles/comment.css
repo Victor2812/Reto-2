@@ -20,3 +20,17 @@
 .comment.subcomment {
     margin-left: 4rem;
 }
+
+.comment .load-subcomments {
+    display: none;
+}
+
+.comment .load-subcomments.shown {
+    display: block;
+    font-weight: 600;
+    color: grey;
+}
+
+.comment .load-subcomments.shown:hover {
+    color: var(--color-dark-grey);
+}
